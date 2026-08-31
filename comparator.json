@@ -1,6 +1,6 @@
 {
-  "challenge_module": "Palomar.EntryA.Challenge",
-  "solution_module": "Palomar.EntryA.Solution",
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
   "theorem_names": [
     "TunnellChallenge.tunnellMap_exactly_two",
     "TunnellChallenge.tunnellMap_even",

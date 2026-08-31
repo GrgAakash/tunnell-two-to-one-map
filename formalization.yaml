@@ -180,7 +180,7 @@ alignment:
   statements:
     - source: "Theorem 1.1 (Conditional two-to-one map), and the registered executable form of the map"
       lean: "TunnellChallenge.tunnellMap"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         Definition hole. The Solution defines it as
@@ -191,51 +191,51 @@ alignment:
         fallback argument.
     - source: "Theorem 1.1 (Conditional two-to-one map)"
       lean: "TunnellChallenge.tunnellMap_exactly_two"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         Hypotheses Odd n, 0 < n, Squarefree n and
         Nat.card (BRep n) = 2 * Nat.card (ARep n); conclusion: for every target
         there are exactly two distinct preimages and the fibre description is
-        exhaustive. Proved in Palomar.EntryA.Solution from
+        exhaustive. Proved in Solution from
         TunnellMap.paperTunnellMapTotal_exactly_two.
     - source: "Section 3, even branch of the map"
       lean: "TunnellChallenge.tunnellMap_even"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         The image of a source with even third coordinate is (x, y, z/2).
     - source: "Section 3, first integral quarter-turn"
       lean: "TunnellChallenge.tunnellMap_quarterTurn_one"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         Odd third coordinate and 8 | x + 2z + y, quotient q: the image is
         (4q - y, x - 2z, q).
     - source: "Section 3, second integral quarter-turn"
       lean: "TunnellChallenge.tunnellMap_quarterTurn_two"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         Odd third coordinate, 8 does not divide x + 2z + y and
         8 | y - x + 2z, quotient q: the image is (x - 2z + 4q, -x - 2z, q).
     - source: "Section 3, third integral quarter-turn"
       lean: "TunnellChallenge.tunnellMap_quarterTurn_three"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         Odd third coordinate, neither of the first two congruences and 4 | x,
         quotient q: the image is (2z, y, -q).
     - source: "Section 4, residual branch target property"
       lean: "TunnellChallenge.tunnellMap_residual_target"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         A source with odd third coordinate satisfying none of the three
         congruences is mapped to a residual target.
     - source: "Section 4, projectively ranked stable residual matching and sign lift"
       lean: "TunnellChallenge.tunnellMap_residual_stable"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         There exists a unique stable equivalence between the lexicographically
@@ -244,7 +244,7 @@ alignment:
         both signs of each source orbit is the prescribed preferred-sign lift.
     - source: "Residual forward map and inverse-by-rerun interface"
       lean: "TunnellChallenge.tunnellResidualMap, TunnellChallenge.tunnellResidualInverse, TunnellChallenge.tunnellResidualMap_agrees, TunnellChallenge.tunnellResidualInverse_left, TunnellChallenge.tunnellResidualInverse_right"
-      module: "Palomar.EntryA.Challenge"
+      module: "Challenge"
       status: "proved"
       note: >-
         The separately registered residual map agrees with the assembled map;

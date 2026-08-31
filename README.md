@@ -19,7 +19,7 @@ trace certificate, and two complete fibres.
 
 ```text
 lake build
-lake build +Palomar.EntryA.Solution
+lake build +Solution
 lake build +Palomar.EntryB.Solution
 ```
 
@@ -30,14 +30,15 @@ the compared results use only `propext`, `Quot.sound`, and
 
 ## Palomar entries
 
-The package contains two Comparator configurations from the same public
-repository commit. Entry A is the principal submission. Entry B is an optional
-finite regression entry and should be submitted separately only if Palomar
-confirms that it has independent research interest:
+The root-level Comparator configuration is the principal Palomar submission,
+following the same single-entry layout as the submitted factorial-hypergraph
+repository. Entry B remains an optional finite regression entry and should be
+submitted separately only if Palomar confirms that it has independent research
+interest:
 
 | Entry | Comparator | Metadata |
 |---|---|---|
-| General conditional map | `Palomar/EntryA/comparator.json` | `Palomar/EntryA/formalization.yaml` |
+| General conditional map | `comparator.json` | `formalization.yaml` |
 | Executable `n = 41` certificate | `Palomar/EntryB/comparator.json` | `Palomar/EntryB/formalization.yaml` |
 
 Entry A registers the explicit local branches, the residual-target property,

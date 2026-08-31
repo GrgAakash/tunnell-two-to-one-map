@@ -13,8 +13,10 @@ entries from the same commit.
 ## Entry A: general conditional map
 
 - Selected project: repository root
-- Comparator path: `Palomar/EntryA/comparator.json`
-- Metadata path: `Palomar/EntryA/formalization.yaml`
+- Comparator path: `comparator.json`
+- Metadata path: `formalization.yaml`
+- Challenge path: `Challenge.lean`
+- Solution path: `Solution.lean`
 
 ## Entry B: optional finite certificate at n = 41
 

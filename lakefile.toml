@@ -16,8 +16,8 @@ name = "TunnellMap"
 [[lean_lib]]
 name = "PalomarEntries"
 roots = [
-  "Palomar.EntryA.Challenge",
-  "Palomar.EntryA.Solution",
+  "Challenge",
+  "Solution",
   "Palomar.EntryB.Challenge",
   "Palomar.EntryB.Solution",
   "Palomar.AxiomAudit",

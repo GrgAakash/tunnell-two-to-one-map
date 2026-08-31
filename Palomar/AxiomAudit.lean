@@ -1,4 +1,4 @@
-import Palomar.EntryA.Solution
+import Solution
 import Palomar.EntryB.Solution
 
 /-!
