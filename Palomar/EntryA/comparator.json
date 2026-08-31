@@ -1,0 +1,27 @@
+{
+  "challenge_module": "Palomar.EntryA.Challenge",
+  "solution_module": "Palomar.EntryA.Solution",
+  "theorem_names": [
+    "TunnellChallenge.tunnellMap_exactly_two",
+    "TunnellChallenge.tunnellMap_even",
+    "TunnellChallenge.tunnellMap_quarterTurn_one",
+    "TunnellChallenge.tunnellMap_quarterTurn_two",
+    "TunnellChallenge.tunnellMap_quarterTurn_three",
+    "TunnellChallenge.tunnellResidualMap_agrees",
+    "TunnellChallenge.tunnellResidualInverse_left",
+    "TunnellChallenge.tunnellResidualInverse_right",
+    "TunnellChallenge.tunnellMap_residual_target",
+    "TunnellChallenge.tunnellMap_residual_stable"
+  ],
+  "definition_names": [
+    "TunnellChallenge.tunnellMap",
+    "TunnellChallenge.tunnellResidualMap",
+    "TunnellChallenge.tunnellResidualInverse"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

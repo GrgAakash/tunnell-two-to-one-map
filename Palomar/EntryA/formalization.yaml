@@ -1,0 +1,260 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4 — Palomar ENTRY A (general conditional executable map).
+version: "v0.4"
+
+project:
+  name: "A conditional two-to-one executable map between Tunnell representation sets, with its branch specification"
+  description: >-
+    For an odd positive squarefree integer n, let B(n) be the set of integer
+    triples (x,y,z) with 2x^2 + y^2 + 8z^2 = n and let A(n) be the set of
+    integer triples (u,v,w) with 2u^2 + v^2 + 32w^2 = n. Assuming the
+    cardinality balance |B(n)| = 2|A(n)| as an explicit hypothesis, this
+    formalization constructs an ordinary computable total map
+    Phi_n : B(n) -> A(n) - taking exactly those hypotheses, with no auxiliary
+    default value and no inhabitance assumption on any auxiliary set, so that
+    it is instantiable also when the residual sets are empty - and proves that
+    every element of A(n) has exactly two distinct preimages and that the fibre
+    description is exhaustive. The registered statements additionally pin the
+    map branch by branch: the even branch (x,y,2w) |-> (x,y,w) and the three
+    integral quarter-turn branches are given by explicit coordinate formulas,
+    and a source in none of those classes is proved to be sent to a residual
+    target. The residual theorem additionally fixes the family-level output:
+    on canonical antipodal representatives the map is induced by the unique
+    stable perfect matching for the primitive-midpoint projective edge ranking, and both
+    signs obey the registered preferred-sign lift. Thus the registered
+    statements exclude an arbitrary residual permutation. The repository's
+    stateful arithmetic generator and source-proposing deferred-acceptance
+    implementation are proved to compute such a matching. The registered
+    residual forward map and inverse agree with the assembled map and satisfy
+    both inverse identities. The submitted Solution computes the inverse by
+    rerunning the machine; the registered laws determine it extensionally
+    rather than recording that operational provenance. The short Challenge
+    specifies the mathematical output, not every internal machine state. The
+    balance hypothesis is the only input taken from
+    Tunnell's theorem, which is NOT formalized here; no modular-form or
+    elliptic-curve argument is used or claimed.
+  # Required nonempty list of name strings or mappings with a nonempty name.
+  authors:
+    - "Aakash Gurung"
+    - "Kyungyong Lee"
+  license: "Apache-2.0"
+  # Required nonempty list of name strings or mappings with a nonempty name.
+  responsible_maintainers:
+    - "Aakash Gurung"
+
+# `repository` is deliberately omitted: this repository is the substantive proof
+# development, not a thin wrapper around another formalization.
+
+classification:
+  arxiv: ["math.NT", "math.CO"]
+  msc2020: ["05C70", "11E25", "11D85", "68W40", "03B35"]
+
+sources:
+  - title: "Stable Matching and a Conditional Two-to-One Map for Tunnell's Ternary Forms"
+    authors:
+      - "Aakash Gurung"
+      - "Kyungyong Lee"
+    type: "paper"
+    location: "2_to_1_redacted.tex in the submitted repository"
+    relationship: "formalizes"
+    note: >-
+      The August 2026 manuscript is included as 2_to_1_redacted.tex, with its
+      identifying front matter redacted from that review copy. Its authors are
+      recorded above. FORMALIZATION_NOTES.md summarizes the claim boundary,
+      manuscript corrections, formalization conventions, and verification
+      status.
+    author_endorsement: "participated"
+  - title: "A classical Diophantine problem and modular forms of weight 3/2"
+    authors:
+      - "J. B. Tunnell"
+    type: "paper"
+    location: "Inventiones Mathematicae 72 (1983), no. 2, 323-334; https://doi.org/10.1007/BF01389327"
+    relationship: "background"
+    note: >-
+      Tunnell's theorem is the external source of the cardinality identity
+      |B(n)| = 2|A(n)| for odd positive squarefree congruent n. It is NOT
+      formalized in this repository; the identity is carried as an explicit
+      hypothesis of every registered theorem.
+
+related_formalizations: []
+
+status:
+  scope: >-
+    FORMALIZED: the definitions of B(n) and A(n); the even branch; the three
+    quarter-turn branches and their disjointness; the antipodal orbit
+    construction and the primitive-midpoint edge key; existence and uniqueness
+    of the stable matching for globally ranked pairs; the deterministic
+    orthogonal frame and its Lagrange-Gauss reduction; the stateful one-h-block
+    arithmetic generator with soundness, completeness, exactly-once emission,
+    strict key ordering, one-block storage bound, and equality with the
+    extensional incident stream; record-driven deferred acceptance with
+    termination and equality with the structural stable matching; the
+    fallback-free inverse-by-rerun and its two inverse identities; the
+    parking-function bound and its sharpness; the
+    matching-phase operation and auxiliary-storage bounds; the assembled
+    fallback-free computable map paperTunnellMapTotal and the
+    exactly-two-preimages theorem;
+    and a complete n = 41 certificate.
+    NOT FORMALIZED: Tunnell's theorem itself, the congruent-number criterion,
+    and the elliptic-curve characterisation of congruent numbers. The
+    cardinality balance |B(n)| = 2|A(n)| is an explicit hypothesis of every
+    registered theorem, so the registered result is conditional. No hypothesis
+    of the source statement was weakened; the registered computable statement
+    additionally assumes Squarefree n, exactly as the source theorem does.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: []
+      framework: "OpenAI ChatGPT, OpenAI Codex, and Aristotle (Harmonic)"
+      tool_setup: >-
+        AI-assisted formalization. The Lean 4 development, its documentation and
+        the audit files in this repository were produced with substantial
+        assistance from an automated proof assistant working against the Lean
+        compiler, under human direction. Every statement is machine-checked by
+        the Lean kernel; no proof relies on native compilation
+        (no native_decide, no Lean.ofReduceBool, no Lean.trustCompiler) and the
+        development declares no axioms of its own.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "not tracked"
+        hardware: "local macOS workstation and hosted AI services"
+      prompting_notes: >-
+        The work proceeded by decomposing each manuscript statement into named
+        Lean lemmas, building a compiling skeleton first and then discharging
+        the individual goals, with repeated re-verification by lake build and
+        by #print axioms audits.
+  spend_usd: "not tracked"
+  notes: >-
+    Human-directed, AI-assisted. Humans set the specification (the source
+    manuscript and the required shape of each statement) and reviewed the
+    resulting statements; automated assistants wrote substantial portions of
+    the Lean definitions and proofs and produced the initial traceability audit.
+    The submitted Solution modules and the complete project have been rebuilt
+    locally with the Lean kernel. Palomar's protected Comparator and NanoDa run
+    is intentionally left to the registry's mechanical verification.
+
+fidelity:
+  divergences: >-
+    (1) Two wording corrections were applied to the source manuscript, both
+    established before this run and summarized in FORMALIZATION_NOTES.md: the
+    n = 41 control-layer count is
+    "six generator advances and six proposal-processing steps, of which exactly
+    two involve a key comparison against a held record", and the complexity
+    proof asserts "at most one key comparison" per proposal rather than exactly
+    one. (2) Cardinality statements use noncomputable Fintype instances, which
+    never occur inside the executable map. (3) Literal n = 41
+    evaluations are performed by the Lean kernel on fuelled kernel-reducible
+    mirrors that are proved equal to the real definitions. (4) The Challenge
+    module restates the representation sets over ℤ × ℤ × ℤ rather than the
+    project's `Triple` structure, with explicit coordinate bridges in the
+    Solution. (5) The registered residual theorem specifies the stable matching
+    through its primitive-midpoint projective ranking and preferred-sign lift,
+    and proves uniqueness among stable perfect matchings (equivalences).
+    It does not duplicate the generator's internal queue, cursor, or held-table
+    state, or the manuscript's reduction from arbitrary stable partial
+    matchings to perfect matchings; the underlying project separately proves that the executable
+    one-block generator and deferred-acceptance run compute the specified
+    matching. (6) The one-block and auxiliary-record bounds are abstract
+    data-structure bounds, not measurements of compiled process memory. These
+    points are described in the Challenge documentation and the audit.
+    No other divergence is known.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: >-
+    A complete internal statement audit matched the manuscript's definitions,
+    theorems, algorithms, complexity claims, and worked examples to Lean
+    declarations. The whole source was scanned for sorry,
+    admit, sorryAx, axiom declarations, unsafe, opaque, extern, implemented_by,
+    Lean.ofReduceBool, Lean.trustCompiler and native_decide; and #print axioms
+    was run on the registered statements and the listed principal supporting
+    declarations. No external peer review has taken place.
+
+alignment:
+  namespace: "TunnellChallenge"
+  statements:
+    - source: "Theorem 1.1 (Conditional two-to-one map), and the registered executable form of the map"
+      lean: "TunnellChallenge.tunnellMap"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        Definition hole. The Solution defines it as
+        TunnellMap.paperTunnellMapTotal transported along the coordinate
+        equivalences bEquiv / aEquiv; paperTunnellMapTotal is an ordinary
+        computable def in TunnellMap/FallbackFreeMap.lean taking exactly the
+        hypotheses Odd n, 0 < n, Squarefree n and the Nat.card balance, with no
+        fallback argument.
+    - source: "Theorem 1.1 (Conditional two-to-one map)"
+      lean: "TunnellChallenge.tunnellMap_exactly_two"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        Hypotheses Odd n, 0 < n, Squarefree n and
+        Nat.card (BRep n) = 2 * Nat.card (ARep n); conclusion: for every target
+        there are exactly two distinct preimages and the fibre description is
+        exhaustive. Proved in Palomar.EntryA.Solution from
+        TunnellMap.paperTunnellMapTotal_exactly_two.
+    - source: "Section 3, even branch of the map"
+      lean: "TunnellChallenge.tunnellMap_even"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        The image of a source with even third coordinate is (x, y, z/2).
+    - source: "Section 3, first integral quarter-turn"
+      lean: "TunnellChallenge.tunnellMap_quarterTurn_one"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        Odd third coordinate and 8 | x + 2z + y, quotient q: the image is
+        (4q - y, x - 2z, q).
+    - source: "Section 3, second integral quarter-turn"
+      lean: "TunnellChallenge.tunnellMap_quarterTurn_two"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        Odd third coordinate, 8 does not divide x + 2z + y and
+        8 | y - x + 2z, quotient q: the image is (x - 2z + 4q, -x - 2z, q).
+    - source: "Section 3, third integral quarter-turn"
+      lean: "TunnellChallenge.tunnellMap_quarterTurn_three"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        Odd third coordinate, neither of the first two congruences and 4 | x,
+        quotient q: the image is (2z, y, -q).
+    - source: "Section 4, residual branch target property"
+      lean: "TunnellChallenge.tunnellMap_residual_target"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        A source with odd third coordinate satisfying none of the three
+        congruences is mapped to a residual target.
+    - source: "Section 4, projectively ranked stable residual matching and sign lift"
+      lean: "TunnellChallenge.tunnellMap_residual_stable"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        There exists a unique stable equivalence between the lexicographically
+        canonical residual source and target representatives for the exact
+        primitive-midpoint projective edge ranking, and the registered map on
+        both signs of each source orbit is the prescribed preferred-sign lift.
+    - source: "Residual forward map and inverse-by-rerun interface"
+      lean: "TunnellChallenge.tunnellResidualMap, TunnellChallenge.tunnellResidualInverse, TunnellChallenge.tunnellResidualMap_agrees, TunnellChallenge.tunnellResidualInverse_left, TunnellChallenge.tunnellResidualInverse_right"
+      module: "Palomar.EntryA.Challenge"
+      status: "proved"
+      note: >-
+        The separately registered residual map agrees with the assembled map;
+        the submitted inverse is both a left and a right inverse. Its rerun
+        implementation is visible in the Solution, while the registered laws
+        determine the inverse extensionally.
+
+acknowledgements: >-
+  Built on Lean 4 and Mathlib, with substantial assistance from OpenAI's
+  ChatGPT and Codex and from Aristotle (Harmonic). The work grew out of the
+  2026 IPAM Research in Industrial Projects for Students program at UCLA and
+  was supported by OpenAI's sponsorship of the RIPS project. The authors
+  reviewed the mathematical statements and take responsibility for the work.

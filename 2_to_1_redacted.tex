@@ -1,0 +1,1795 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{mathtools,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Bn}{\mathcal B_n}
+\newcommand{\An}{\mathcal A_n}
+\newcommand{\Bodd}{\mathcal B_n^{\mathrm{odd}}}
+\newcommand{\Beven}{\mathcal B_n^{\mathrm{even}}}
+\newcommand{\Boddres}{\mathcal B_{n,\circ}^{\mathrm{odd}}}
+\newcommand{\Ares}{\mathcal A_{n,\circ}}
+\newcommand{\Sn}{\mathcal S_n}
+\newcommand{\Tn}{\mathcal T_n}
+\newcommand{\Sres}{\mathcal S_n^{\circ}}
+\newcommand{\Tres}{\mathcal T_n^{\circ}}
+\newcommand{\Sbar}{\overline{\mathcal S}_n}
+\newcommand{\Tbar}{\overline{\mathcal T}_n}
+\newcommand{\Dcal}{\mathcal P_Q}
+\newcommand{\key}{\operatorname{key}}
+\newcommand{\pc}{\operatorname{pc}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\cont}{\operatorname{cont}}
+\newcommand{\Span}{\operatorname{span}_{\Z}}
+\newcommand{\Qip}[2]{\left\langle #1,#2\right\rangle_Q}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+
+\title[A conditional two-to-one map for Tunnell's forms]
+{Stable Matching and a Conditional Two-to-One Map
+for Tunnell's Ternary Forms}
+
+\author{Author metadata redacted for formalization review}
+\address{}
+\email{}
+
+\author{}
+\address{}
+\email{}
+
+\date{August 2026}
+
+\subjclass[2020]{Primary 05C70; Secondary 11E25, 11D85, 68W40}
+\keywords{globally ranked pairs, stable matching, parking function, ternary quadratic form, arithmetic correspondence}
+\hypersetup{
+  pdftitle={Stable Matching and a Conditional Two-to-One Map for Tunnell's Ternary Forms},
+  pdfauthor={Author metadata redacted},
+  pdfsubject={A conditional arithmetic map constructed by stable matching},
+  pdfkeywords={globally ranked pairs, stable matching, parking function, ternary quadratic form, arithmetic correspondence}
+}
+
+\begin{document}
+
+\begin{abstract}
+For an odd positive squarefree integer $n$, let $\Bn$ and $\An$ be the
+representation sets of $n$ by $2x^2+y^2+8z^2$ and
+$2x^2+y^2+32z^2$, respectively.  Assuming $|\Bn|=2|\An|$, we construct a
+deterministic map $\Phi_n:\Bn\to\An$ whose fibers have cardinality two.
+Halving the third coordinate gives the even branch.  On the odd branch,
+three integral quarter-turns define a partial bijection.  We complete it by
+passing the residual points to their antipodal orbits and applying stable
+matching, with preferences determined by primitive midpoint directions.
+Equal-rank edges are disjoint, so the stable matching is unique.  Its
+preference lists can be generated arithmetically from rank-two lattice cosets,
+and the proposal counts form a parking function with total at most
+$m(m+1)/2$, where $m$ is the number of residual orbits on either side.  For
+odd squarefree congruent numbers, Tunnell's theorem supplies the cardinality
+hypothesis.  The construction assumes, rather than proves, this identity.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Equalities between finite representation numbers naturally raise a finer
+combinatorial question: can the individual representations be matched in a
+structured way?  We study this question for the ternary quadratic forms that
+occur in Tunnell's work on congruent numbers.  For an odd positive integer
+$n$, let
+\begin{align}
+ \Bn&=\{(x,y,z)\in\Z^3:2x^2+y^2+8z^2=n\},\label{eq:B-def}\\
+ \An&=\{(u,v,w)\in\Z^3:2u^2+v^2+32w^2=n\}.\label{eq:A-def}
+\end{align}
+A ternary quadratic form is a homogeneous quadratic polynomial in three
+variables, and a representation of $n$ is simply an integer triple at which
+the form has value $n$.  We call $n$ \emph{squarefree} if no prime square
+divides it.  Both sets above are finite because each squared coordinate is
+bounded by $n$.
+
+A positive integer is \emph{congruent} if it is the area of a right triangle
+with rational side lengths.  Equivalently, the elliptic curve
+$y^2=x^3-n^2x$ has a rational point of infinite order; see
+\cite[Chap.~I, \S9]{Koblitz} and \cite[pp.~323--324]{Tunnell}.  A consequence
+of Tunnell's theorem is that every odd positive squarefree congruent number
+satisfies
+\begin{equation}\label{eq:Tunnell-balance}
+ |\Bn|=2|\An|.
+\end{equation}
+This consequence is the only input from Tunnell's theorem used below; no
+modular-form or elliptic-curve argument enters the construction itself.
+
+\begin{example}[The balance for $n=41$]\label{ex:balance-41}
+The equations themselves make this first example finite and elementary.  For
+$n=41$, a solution in $\mathcal B_{41}$ must satisfy
+$|x|\le4$, $|y|\le6$, and $|z|\le2$; a solution in $\mathcal A_{41}$ must
+satisfy the same first two bounds and $|w|\le1$.  Sorting by the last
+coordinate gives
+\[
+\begin{array}{c|ccccc|c}
+\mathcal B_{41}:z&0&1&-1&2&-2&\text{total}\\ \hline
+\text{number of }(x,y)&4&8&8&6&6&32
+\end{array}
+\]
+and
+\[
+\begin{array}{c|ccc|c}
+\mathcal A_{41}:w&0&1&-1&\text{total}\\ \hline
+\text{number of }(u,v)&4&6&6&16.
+\end{array}
+\]
+Thus the required $2{:}1$ balance holds.  For a single visible instance,
+\[
+ (2,-1,2)\in\mathcal B_{41},
+ \qquad
+ (2,-1,1)\in\mathcal A_{41},
+\]
+and the even-branch map simply halves the last coordinate.
+\end{example}
+
+Methods such as those of Bach and Ryan \cite{BachRyan} compute the
+representation numbers in this identity.  Our purpose is different.  We take
+\eqref{eq:Tunnell-balance} as an explicit hypothesis and seek a structured
+map between the representations that it counts.  The construction therefore
+neither proves Tunnell's identity nor supplies a new congruent-number
+criterion.
+
+Separate $\Bn$ according to the parity of its third coordinate:
+\begin{align*}
+ \Beven&=\{(x,y,z)\in\Bn:z\equiv0\pmod2\},\\
+ \Bodd&=\{(x,y,z)\in\Bn:z\equiv1\pmod2\}.
+\end{align*}
+The map
+\begin{equation}\label{eq:even-branch}
+ (x,y,2w)\longmapsto(x,y,w)
+\end{equation}
+is a bijection $\Beven\xrightarrow{\sim}\An$.  Consequently
+\eqref{eq:Tunnell-balance} is equivalent to $|\Bodd|=|\An|$, and the
+essential problem is to construct a bijection from the odd branch to the
+target set.
+
+The residual problem is naturally bipartite.  After a direct partial
+bijection is removed and the remaining points are passed to their
+$\{\pm1\}$-orbits, every source orbit is joined to every target orbit.  A
+primitive midpoint direction assigns a rank to each edge.  Both endpoints
+order their incident edges by this rank, while equal-rank edges are
+vertex-disjoint.  This is an instance of stable marriage with globally ranked
+pairs in the sense of Abraham, Levavi, Manlove, and O'Malley
+\cite{AbrahamEtAl}.  Its special edge structure forces a unique stable
+matching.
+
+Stable matching and parking functions are classical combinatorial objects
+\cite{GaleShapley,GusfieldIrving,KonheimWeiss,StanleyParking}.  Here they arise
+from the arithmetic geometry of two representation sets.  The direct edges
+come from integral orthogonal transformations, whereas the residual edge
+ranking comes from primitive midpoint lines.  Although balance alone would
+permit an arbitrary pairing, these arithmetic choices determine the map after
+the orientation conventions below have been fixed.  The construction is
+equivariant under the antipodal involution $X\mapsto-X$, and the same edge data
+determine its inverse.
+
+\begin{theorem}[Conditional two-to-one map]\label{thm:main}
+Let $n$ be an odd positive squarefree integer satisfying
+$|\Bn|=2|\An|$.  Fix the orientation and ordering conventions introduced
+below.  Then the construction defines a deterministic map
+\[
+ \Phi_n:\Bn\longrightarrow\An
+\]
+such that every element of $\An$ has exactly two preimages.  On $\Beven$, the
+map is \eqref{eq:even-branch}.  On $\Bodd$, it is the disjoint union of three
+quarter-turn branches and the unique stable matching of the remaining orbit
+sets.  The later arithmetic generator and deferred-acceptance procedure compute
+this matching without first storing its complete edge table.
+\end{theorem}
+
+Here a \emph{fiber} is the set of all source points mapping to one target.  The
+architecture of the theorem is the following.  The top row gives one preimage
+of every target, and the bottom row gives the other:
+\begin{equation}\label{eq:master-map}
+\begin{gathered}
+ \Beven\xrightarrow[\text{bijection}]{\ (x,y,2w)\mapsto(x,y,w)\ }\An,
+ \\[4pt]
+ \Bodd=D_n\sqcup\Boddres
+ \xrightarrow[\text{bijection}]{\ \Lambda_n\,\sqcup\,\Psi_n^{\circ}\ }
+ I_n\sqcup\Ares=\An.
+\end{gathered}
+\end{equation}
+The residual arrow in the bottom row is built through
+\begin{equation}\label{eq:residual-flow}
+ \Boddres\xrightarrow{\ \iota_B\ }\Sres
+ \longrightarrow\Sbar
+ \xrightarrow{\ \overline M_n\ }\Tbar
+ \longrightarrow\Tres
+ \xrightarrow{\ \iota_A^{-1}\ }\Ares.
+\end{equation}
+The unlabeled arrows pass to antipodal orbits and then lift back with a
+specified sign.  The cardinality hypothesis is used to prove that
+$\overline M_n$ is perfect; it is not used to choose the edge ranks.
+
+\begin{corollary}\label{cor:congruent}
+Theorem~\ref{thm:main} applies to every odd positive squarefree congruent
+number $n$.
+\end{corollary}
+
+Section~\ref{sec:coordinates} introduces the two coordinate models, and
+Section~\ref{sec:quarter-turn} constructs the direct branches.
+Section~\ref{sec:projective} constructs the unique residual matching, and
+Section~\ref{sec:assembly} immediately assembles the two-to-one map.
+Sections~\ref{sec:affine-stream}--\ref{sec:complexity} then show how to compute
+the residual matching and bound its proposal phase.  We finish with the full
+$n=41$ residual table and two further questions.
+
+The examples at $n=41$ follow two complementary lanes, not one point through
+both odd-branch mechanisms:
+\[
+\begin{array}{c|c|c|c}
+\text{lane}&\text{odd source}&\text{target}&\text{even source}\\ \hline
+\text{direct quarter-turn}&(-4,-1,1)&(2,-1,1)&(2,-1,2)\\
+\text{residual matching}&(-2,-5,1)&(4,-3,0)&(4,-3,0).
+\end{array}
+\]
+Each lane therefore ends in a complete two-element fiber, but the two odd
+mechanisms act on disjoint subsets.
+
+\section{Coordinate models for the direct and residual constructions}
+\label{sec:coordinates}
+
+We use one coordinate model for the direct local branches and another for
+midpoint directions.  They are parallel descriptions of the original sets,
+not successive changes of coordinates:
+\[
+\begin{array}{ccccc}
+\Bodd&\xleftrightarrow[\ e_B^{-1}\ ]{\ e_B\ }&L_1(n)
+&\xrightarrow{\ J_1,J_2,J_3\ }&L_0(n)
+\xleftrightarrow[\ e_A\ ]{\ e_A^{-1}\ }\An,\\[5pt]
+\Bodd&\xleftrightarrow[\ \iota_B^{-1}\ ]{\ \iota_B\ }&\Sn
+&\xleftrightarrow[\text{midpoint lines}]{}&\Tn
+\xleftrightarrow[\ \iota_A\ ]{\ \iota_A^{-1}\ }\An.
+\end{array}
+\]
+The first row makes quarter-turns integral.  The second puts sources and
+targets on the same quadratic surface so that their half-sums and
+half-differences are integral.
+
+For reference, the main set and map symbols used below are collected here:
+\begin{center}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}c p{0.70\textwidth}@{}}
+$D_n,I_n,\Lambda_n$&direct odd-source domain, its target image, and the
+quarter-turn bijection between them;\\
+$\Boddres,\Ares,\Psi_n^\circ$&points left after the direct layer and their
+residual bijection;\\
+$\Sn,\Tn$&midpoint-coordinate lifts of the odd source and target sets;\\
+$\Sbar,\Tbar$&antipodal residual orbit sets;\\
+$\Dcal$&canonically oriented primitive midpoint directions;\\
+$\Psi_n,\Phi_n$&the full odd-branch bijection and the final two-to-one map.
+\end{tabular}
+\end{center}
+
+\subsection{Sum-of-three-squares coordinates for the direct map}
+For $\epsilon\in\{0,1\}$, put
+\[
+ \begin{aligned}
+ L_\epsilon(n)=\{(a,b,c)\in\Z^3:
+ &\ a^2+b^2+c^2=n,\\
+ &\ a\equiv b\pmod4,\quad
+ \frac{a-b}{4}\equiv\epsilon\pmod2\}.
+ \end{aligned}
+\]
+
+\begin{lemma}[Sum-of-three-squares coordinates]\label{lem:pure-coordinates}
+The maps
+\[
+ e_B(x,y,z)=(x+2z,x-2z,y),
+ \qquad
+ e_A(u,v,w)=(u+4w,u-4w,v)
+\]
+are bijections
+\[
+ e_B:\Bodd\xrightarrow{\sim}L_1(n),
+ \qquad
+ e_A:\An\xrightarrow{\sim}L_0(n),
+\]
+with inverses
+\[
+ e_B^{-1}(a,b,c)=\left(\frac{a+b}{2},c,\frac{a-b}{4}\right),
+\]
+\[
+ e_A^{-1}(a,b,c)=\left(\frac{a+b}{2},c,\frac{a-b}{8}\right).
+\]
+\end{lemma}
+
+\begin{proof}
+The norm identities are immediate:
+\[
+ (x+2z)^2+(x-2z)^2+y^2=2x^2+y^2+8z^2,
+\]
+\[
+ (u+4w)^2+(u-4w)^2+v^2=2u^2+v^2+32w^2.
+\]
+The congruence conditions record whether $(a-b)/4$ is odd or even.
+Conversely, if $(a,b,c)\in L_1(n)$, then $(a+b)/2$ and $(a-b)/4$ are
+integral, the latter is odd, and the first norm identity gives a point of
+$\Bodd$.  If $(a,b,c)\in L_0(n)$, then $(a-b)/8$ is integral and the second
+identity gives a point of $\An$.  The displayed inverse formulas therefore
+give inverses on both sides.
+\end{proof}
+
+\begin{example}[The two coordinate changes at $n=41$]
+\label{ex:coordinates-41}
+Consider the odd source $X=(-4,-1,1)\in\mathcal B_{41}^{\mathrm{odd}}$.
+Lemma~\ref{lem:pure-coordinates} sends it to
+\[
+ e_B(X)=(-2,-6,-1),
+ \qquad
+ (-2)^2+(-6)^2+(-1)^2=41.
+\]
+Here $(-2)-(-6)=4$, so $(a-b)/4=1$ is odd, as required for $L_1(41)$.
+Likewise, for $Y=(2,-1,1)\in\mathcal A_{41}$,
+\[
+ e_A(Y)=(6,-2,-1),
+ \qquad
+ 6^2+(-2)^2+(-1)^2=41,
+\]
+and $(6-(-2))/4=2$ is even, as required for $L_0(41)$.  The inverse formulas
+recover $X$ and $Y$ from these triples.
+\end{example}
+
+\subsection{Midpoint coordinates for the residual graph}
+Put
+\[
+ Q(X_1,X_2,X_3)=2X_1^2+X_2^2+2X_3^2
+\]
+and write
+\[
+ \Qip{X}{Y}=2X_1Y_1+X_2Y_2+2X_3Y_3
+\]
+for its associated bilinear form.  Thus
+$Q(X+Y)=Q(X)+2\Qip{X}{Y}+Q(Y)$.  Define
+\begin{align*}
+ \Sn&=\{E\in\Z^3:Q(E)=n,\ E_3\equiv2\pmod4\},\\
+ \Tn&=\{F\in\Z^3:Q(F)=n,\ F_3\equiv0\pmod4\}.
+\end{align*}
+The lifts
+\[
+ \iota_B(x,y,z)=(x,y,2z),
+ \qquad
+ \iota_A(u,v,w)=(u,v,4w)
+\]
+identify $\Bodd$ with $\Sn$ and $\An$ with $\Tn$.
+
+\begin{lemma}[Midpoint parity]\label{lem:midpoint-parity}
+If $E\in\Sn$ and $F\in\Tn$, then
+\[
+ \frac{E+F}{2},\qquad \frac{E-F}{2}
+\]
+are integral vectors with odd third coordinate.
+\end{lemma}
+
+\begin{proof}
+Since $n$ is odd, the second coordinates of both $E$ and $F$ are odd.  Their
+third coordinates are congruent to $2$ and $0$ modulo $4$, respectively.
+Consequently, modulo $8$ one has
+\[
+ n\equiv2E_1^2+1\equiv2F_1^2+1,
+\]
+so $E_1$ and $F_1$ have the same parity.  The second-coordinate halves are
+integral because both entries are odd, and the third-coordinate halves are
+odd because $E_3\equiv2\pmod4$ and $F_3\equiv0\pmod4$.  Thus both displayed
+vectors are integral and have odd third coordinate.
+\end{proof}
+
+For $0\ne v\in\Z^3$, define
+\[
+ \cont(v)=\gcd(|v_1|,|v_2|,|v_3|).
+\]
+Call $v$ \emph{primitive} if $\cont(v)=1$.  Let $\Dcal$ contain the unique
+representative, with first nonzero coordinate positive, of every pair
+$\{d,-d\}$ of primitive vectors with $d_3$ odd.  Order $\Dcal$
+lexicographically by
+\begin{equation}\label{eq:direction-key}
+ \key(d)=\bigl(Q(d),d_1,d_2,d_3\bigr).
+\end{equation}
+This direction convention differs from the point-orbit convention used later:
+directions have first nonzero coordinate positive, whereas an antipodal point
+orbit is represented by its lexicographically smaller point.  Keeping the two
+rules explicit prevents their signs from being confused.
+
+\begin{lemma}[Primitive generator of the midpoint line]
+\label{lem:midpoint-direction}
+For every $E\in\Sn$ and $F\in\Tn$, there are unique $d\in\Dcal$ and a
+nonzero odd integer $q$ such that
+\[
+ \frac{E+F}{2}=qd.
+\]
+They satisfy
+\[
+ \Qip{E}{d}=qQ(d),
+ \qquad
+ F=-E+2qd.
+\]
+For a fixed $d$, the edges $E\leftrightarrow F$ obtained in this way are
+pairwise disjoint.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:midpoint-parity}, the midpoint is a nonzero integral vector
+with odd third coordinate.  Dividing by its content and applying the
+orientation convention gives $q$ and $d$, with $q$ odd.  If
+$h=(E-F)/2$, equality of the norms gives $\Qip{d}{h}=0$, and hence
+$\Qip{E}{d}=qQ(d)$ and $F=-E+2qd$.  Uniqueness follows from the unique
+sign-normalized primitive generator of
+$\mathbb Q(E+F)\cap\mathbb Z^3$, the integer points on the rational line
+spanned by $E+F$.  For fixed $E$ and $d$, the identity
+$q=\Qip{E}{d}/Q(d)$ determines $q$, and then the formula determines $F$.
+Interchanging the roles of the endpoints gives the same conclusion at a
+target.  Hence the edges belonging to a fixed direction are pairwise
+disjoint.
+\end{proof}
+
+\begin{example}[A midpoint direction at $n=41$]
+\label{ex:midpoint-41}
+Take the lifted residual points
+\[
+ E=(-2,-5,2)\in\mathcal S_{41},
+ \qquad
+ F=(4,-3,0)\in\mathcal T_{41}.
+\]
+Both have $Q$-value $41$.  Their half-sum and half-difference are
+\[
+ \frac{E+F}{2}=(1,-4,1),
+ \qquad
+ \frac{E-F}{2}=(-3,-1,1),
+\]
+so Lemma~\ref{lem:midpoint-parity} is visible directly: both vectors are
+integral and have odd third coordinate.  The first vector is already
+primitive and canonically oriented, hence $q=1$ and
+$d=(1,-4,1)$.  Moreover,
+\[
+ Q(d)=20,
+ \qquad
+ \Qip{E}{d}=20=qQ(d),
+ \qquad
+ -E+2d=F.
+\]
+The other midpoint line is generated, after sign normalization, by
+$e=(3,1,-1)$, whose key begins with $Q(e)=21$.  Thus the key of $d$ is the
+smaller of the two, explaining which representative-level edge is preferred
+when the construction later passes to antipodal orbits.
+Thus the midpoint line determines this edge exactly as in
+Lemma~\ref{lem:midpoint-direction}.
+\end{example}
+
+\section{A direct quarter-turn correspondence}\label{sec:quarter-turn}
+
+Define three integral rotations in the sum-of-three-squares model by
+\[
+ J_1(a,b,c)=(a,-c,b),
+ \qquad
+ J_2(a,b,c)=(c,b,-a),
+ \qquad
+ J_3(a,b,c)=(-b,a,c).
+\]
+Each is an element of $\operatorname{SO}_3(\Z)$: it is an integer matrix that
+preserves squared length and orientation.  Geometrically, $J_i$ fixes one
+coordinate axis and rotates the other two coordinates through a right angle.
+
+\begin{proposition}[Quarter-turn domains]\label{prop:quarter-turn-domains}
+Let $(a,b,c)\in L_1(n)$.  Then
+\begin{align*}
+ J_1(a,b,c)\in L_0(n)&\iff a+c\equiv0\pmod8,\\
+ J_2(a,b,c)\in L_0(n)&\iff c-b\equiv0\pmod8,\\
+ J_3(a,b,c)\in L_0(n)&\iff a+b\equiv0\pmod8.
+\end{align*}
+At most one of these three congruences holds.
+\end{proposition}
+
+\begin{proof}
+The differences between the first two coordinates of the three images are
+$a+c$, $c-b$, and $-(a+b)$, respectively.  Membership in $L_0(n)$ is
+therefore equivalent to the stated divisibility by $8$.
+
+In original odd-source coordinates, $c=y$ is odd and
+$a-b=4z\equiv4\pmod8$.  If any two of the displayed congruences held, then,
+after eliminating $a$ or $b$, one would obtain
+\[
+ a-b\equiv -2c\pmod8.
+\]
+Since $c$ is odd, the right-hand side is $2$ or $6$ modulo $8$, contradicting
+$a-b\equiv4\pmod8$.  Hence the three domains are pairwise disjoint.
+\end{proof}
+
+Transferring the rotations back to the original coordinates gives the
+following partial map.  For $(x,y,z)\in\Bodd$ with
+$x+2z+y\equiv0\pmod8$, set
+\begin{equation}\label{eq:Lambda1}
+ \Lambda_1(x,y,z)=
+ \left(\frac{x+2z-y}{2},\ x-2z,\ \frac{x+2z+y}{8}\right).
+\end{equation}
+If $y-x+2z\equiv0\pmod8$, set
+\begin{equation}\label{eq:Lambda2}
+ \Lambda_2(x,y,z)=
+ \left(\frac{x-2z+y}{2},\ -x-2z,\ \frac{y-x+2z}{8}\right).
+\end{equation}
+Finally, if $x\equiv0\pmod4$, set
+\begin{equation}\label{eq:Lambda3}
+ \Lambda_3(x,y,z)=\left(2z,\ y,\ -\frac{x}{4}\right).
+\end{equation}
+The domains are pairwise disjoint by Proposition~\ref{prop:quarter-turn-domains}.
+
+\begin{theorem}[Direct partial bijection]\label{thm:direct-layer}
+The formulas \eqref{eq:Lambda1}--\eqref{eq:Lambda3} define a partial
+bijection
+\[
+ \Lambda_n:D_n\xrightarrow{\sim}I_n
+\]
+from a subset $D_n\subseteq\Bodd$ to a subset $I_n\subseteq\An$.  Its inverse
+is determined from a target $(u,v,w)\in\An$ by the following mutually
+exclusive conditions and formulas:
+\begin{align*}
+ u+4w-v\equiv4\pmod8:
+ &\quad
+ \left(\frac{u+4w+v}{2},-u+4w,\frac{u+4w-v}{4}\right),\\
+ u-4w+v\equiv4\pmod8:
+ &\quad
+ \left(\frac{u-4w-v}{2},u+4w,\frac{4w-u-v}{4}\right),\\
+ u\equiv2\pmod4:
+ &\quad
+ \left(-4w,v,\frac{u}{2}\right).
+\end{align*}
+Moreover, $\Lambda_n$ is equivariant under the antipodal involution
+$X\mapsto-X$.
+\end{theorem}
+
+\begin{proof}
+The construction is $e_A^{-1}J_i e_B$ on each branch, so norm preservation and
+integrality follow from Proposition~\ref{prop:quarter-turn-domains}.  The
+inverse formulas are $e_B^{-1}J_i^{-1}e_A$.  Their conditions state exactly
+that the inverse image lies in $L_1(n)$.  They are mutually exclusive: the first
+two cannot both hold because $v$ is odd, and either of them is incompatible
+with $u\equiv2\pmod4$ by parity.  Direct composition gives the two identity
+maps.  Negation equivariance follows because each $J_i$ is linear and each
+domain predicate is sign invariant.
+\end{proof}
+
+\begin{example}[The three quarter-turn branches]
+\label{ex:quarter-turn-41}
+The first two branches already occur at $n=11$; the direct construction does
+not require the cardinality hypothesis.  Direct substitution gives
+\[
+\begin{array}{c|c|c|c}
+\text{branch}&X&e_B(X)&\Lambda_i(X)\\ \hline
+\Lambda_1&(-1,-1,1)&(1,-3,-1)&(1,-3,0)\\
+\Lambda_2&(-1,1,-1)&(-3,1,1)&(1,3,0).
+\end{array}
+\]
+For the first row, $a+c=1-1=0$, so $J_1$ applies and
+$J_1(1,-3,-1)=(1,1,-3)=e_A(1,-3,0)$.  For the second row,
+$c-b=1-1=0$, so $J_2$ applies and
+$J_2(-3,1,1)=(1,1,3)=e_A(1,3,0)$.  These calculations exhibit the first two
+domain tests and their images.
+
+For the $n=41$ direct lane, continue with $X=(-4,-1,1)$ from
+Example~\ref{ex:coordinates-41}.  Its
+sum-of-three-squares coordinates are $(a,b,c)=(-2,-6,-1)$.  Since
+\[
+ a+b=-8\equiv0\pmod8,
+\]
+Proposition~\ref{prop:quarter-turn-domains} selects $J_3$ and neither of the
+other two quarter-turns.  Indeed,
+\[
+ J_3(-2,-6,-1)=(6,-2,-1)=e_A(2,-1,1).
+\]
+In the original coordinates this is exactly
+\[
+ \Lambda_3(-4,-1,1)=(2,-1,1).
+\]
+The inverse condition is $u\equiv2\pmod4$, and the third inverse formula gives
+$(-4w,v,u/2)=(-4,-1,1)$.
+\end{example}
+
+Set
+\[
+ \Boddres=\Bodd\setminus D_n,
+ \qquad
+ \Ares=\An\setminus I_n,
+\]
+and let $\Sres=\iota_B(\Boddres)$ and
+$\Tres=\iota_A(\Ares)$.
+Under the hypothesis of Theorem~\ref{thm:main},
+\begin{equation}\label{eq:residual-balance}
+ |\Sres|=|\Tres|.
+\end{equation}
+Indeed, $|\Bodd|=|\An|$ and $\Lambda_n$ removes equally many points from the
+two sides.
+
+\section{Globally ranked stable matching on antipodal orbits}
+\label{sec:projective}
+
+The residual sets are invariant under the antipodal involution $X\mapsto-X$.
+Since $n>0$, no point in either set equals its negative; this is what it means
+here for the action of $\{\pm1\}$ to be free.  Define the corresponding
+orbit sets
+\[
+ \Sbar=\Sres/\{\pm1\},
+ \qquad
+ \Tbar=\Tres/\{\pm1\}.
+\]
+By \eqref{eq:residual-balance}, these sets have the same cardinality; write
+\[
+ |\Sbar|=|\Tbar|=m.
+\]
+Each orbit is an antipodal pair $[X]=\{X,-X\}$.  Choose the lexicographically
+smaller of $X$ and $-X$ as its canonical representative $\pc([X])$.  Let
+\[
+ G_n=K_{\Sbar,\Tbar}
+\]
+be the complete bipartite graph on the two orbit sets.
+
+Fix $[E]\in\Sbar$ and $[F]\in\Tbar$, with canonical representatives $E$ and
+$F$.  Apply Lemma~\ref{lem:midpoint-direction} to the two edges between
+chosen representatives
+$E\leftrightarrow F$ and $E\leftrightarrow -F$.  Let their direction keys be
+$k_+(E,F)$ and $k_-(E,F)$.
+
+\begin{lemma}[Edge ranking on antipodal orbits]\label{lem:projective-key}
+The two keys $k_+(E,F)$ and $k_-(E,F)$ are distinct.  The quantity
+\[
+ \kappa([E],[F])=\min\{k_+(E,F),k_-(E,F)\}
+\]
+is independent of the chosen representatives.  There is a unique sign
+\[
+ \eta([E],[F])\in\{\pm1\}
+\]
+such that the representative-level edge
+\[
+ E\longleftrightarrow \eta([E],[F])F
+\]
+has key $\kappa([E],[F])$.
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+ \frac{E+F}{2}=qd,
+ \qquad
+ \frac{E-F}{2}=ce
+\]
+with primitive oriented directions $d,e$.  Equality of the norms gives
+$\Qip{d}{e}=0$.  The vectors are nonzero, so positive definiteness implies
+$d\ne e$ and hence the keys are distinct.  Replacing either representative by
+its negative interchanges the two signed midpoint lines, so their unordered
+pair of keys is unchanged.  The smaller one determines the unique sign.
+\end{proof}
+
+\begin{example}[Choosing and lifting one signed orbit edge]
+\label{ex:signed-orbit-41}
+Take the canonical representatives
+\[
+ E=(-2,-5,-2),
+ \qquad
+ F=(-4,-3,0)
+\]
+of the orbits later denoted by $s_1$ and $t_1$.  There are two
+representative-level choices.  For $E\leftrightarrow F$, the midpoint is
+\[
+ \frac{E+F}{2}=(-3,-4,-1)=-(3,4,1),
+\]
+so its oriented primitive direction has key $(36,3,4,1)$.  For
+$E\leftrightarrow -F$, the midpoint is
+\[
+ \frac{E-F}{2}=(1,-1,-1),
+\]
+whose key is $(5,1,-1,-1)$.  The second key is smaller.  Therefore
+\[
+ \kappa([E],[F])=(5,1,-1,-1),
+ \qquad
+ \eta([E],[F])=-1,
+\]
+and the canonical source representative lifts to
+\[
+ E\longmapsto-F=(4,3,0).
+\]
+For the other source point $-E$, multiplying both endpoints by $-1$ gives the
+other lift $-E\mapsto F$.  Thus the orbit edge encodes both point-level edges
+and their inverse signs.
+\end{example}
+
+If the actual source is $\sigma E$, where $\sigma\in\{\pm1\}$, the lift of an
+orbit edge is
+\begin{equation}\label{eq:sign-lift}
+ \sigma E\longmapsto \sigma\eta([E],[F])F.
+\end{equation}
+The same rule, read from the target, recovers the source.
+
+\begin{proposition}[Equal-key classes are matchings]
+\label{prop:key-class-matching}
+For a fixed key $k$, the edges of $G_n$ with key $k$ form a matching: no two
+share a source or target orbit.
+\end{proposition}
+
+\begin{proof}
+At a fixed signed endpoint, a primitive direction determines at most one
+opposite signed endpoint by Lemma~\ref{lem:midpoint-direction}.  It remains to
+check that the two signs of an endpoint do not create two orbits.  If a fixed
+direction sends $F$ to $E=-F+2qd$, then at the endpoint $-F$ the multiplier is
+$-q$ and the partner is
+\[
+ -(-F)+2(-q)d=-E.
+\]
+Thus changing the sign of one endpoint changes the sign of the other and does
+not change its orbit.  Hence a fixed key occurs at most once at either
+endpoint of $G_n$.
+\end{proof}
+
+\begin{example}[Two disjoint edges with the same key]
+\label{ex:equal-key-41}
+The key
+\[
+ (5,1,-1,-1)
+\]
+occurs on the edge $(s_1,t_1)$ computed in
+Example~\ref{ex:signed-orbit-41}.  For a second edge, take
+\[
+ E'=(-2,5,-2)=\pc(s_3),
+ \qquad
+ F'=(0,-3,4)=\pc(t_4).
+\]
+Their midpoint is $(-1,1,1)=-(1,-1,-1)$, so this edge has the same key.
+The sources $s_1,s_3$ and targets $t_1,t_4$ are distinct.  Hence the two
+equal-key edges are disjoint, exactly as
+Proposition~\ref{prop:key-class-matching} requires.
+\end{example}
+
+Every vertex ranks its incident edges by increasing $\kappa$.
+Proposition~\ref{prop:key-class-matching} implies that equal-key edges are
+vertex-disjoint, so every vertex has a strict preference order.  A pair
+$(s,t)\notin M$ \emph{blocks} a matching $M$ if both $s$ and $t$ prefer each
+other to their partners in $M$, with being unmatched least preferred.  A
+matching with no blocking pair is \emph{stable}.  Thus $G_n$ is a
+stable-marriage instance with globally ranked pairs
+\cite{GaleShapley,GusfieldIrving,AbrahamEtAl}: the two preference systems are
+induced by one global ranking of edges.
+
+\begin{proposition}[Unique stable matching]\label{prop:unique-stable}
+The graph $G_n$ has a unique stable matching.  It is obtained by processing
+the edge keys in increasing order and selecting every edge whose two
+endpoints are still unmatched.  Since $|\Sbar|=|\Tbar|$, this stable matching
+is perfect.
+\end{proposition}
+
+\begin{proof}
+First run the stated greedy procedure.  If an edge is not selected, then at
+least one of its endpoints was already matched when that edge was processed.
+The selected edge at that endpoint has smaller key; equality is impossible
+by Proposition~\ref{prop:key-class-matching}.  Thus an unselected edge cannot
+block, and the greedy matching is stable.  It is also perfect: otherwise
+balance would leave an unmatched source and an unmatched target, but the edge
+joining them would have been selected when it was processed.
+
+It remains to prove uniqueness.  Consider the least key among the edges whose
+endpoints have not already been removed.  Every edge of that key is forced in
+any stable matching: neither endpoint has a smaller edge in the remaining
+graph, so omission would make the two endpoints a blocking pair.
+Proposition~\ref{prop:key-class-matching} says that these edges have disjoint
+endpoints, and hence they can be selected and removed simultaneously.
+A removed endpoint prefers its selected edge to every edge processed later,
+and the restriction of a stable matching to the remaining vertices is stable.
+Induction therefore shows that every stable matching agrees with the greedy
+matching.
+\end{proof}
+
+\begin{example}[A two-by-two globally ranked instance]
+\label{ex:ranked-2x2}
+Before returning to the arithmetic graph, consider two sources
+$s_1,s_2$ and two targets $t_1,t_2$.  Give the four edges the global ranks
+\[
+\begin{array}{c|cc}
+ &t_1&t_2\\ \hline
+s_1&1&3\\
+s_2&2&4
+\end{array}
+\]
+with smaller ranks preferred.  The greedy rule first selects $(s_1,t_1)$.
+The edges of ranks $2$ and $3$ then meet an already matched vertex, so the
+next selected edge is $(s_2,t_2)$.  Hence
+\[
+ M=\{(s_1,t_1),(s_2,t_2)\}.
+\]
+The only other perfect matching is not stable, because $(s_1,t_1)$ blocks it.
+This is the simplest instance of Proposition~\ref{prop:unique-stable}.
+\end{example}
+
+\section{Assembly of the two-to-one map}\label{sec:assembly}
+
+Let
+\[
+ \overline M_n:\Sbar\xrightarrow{\sim}\Tbar
+\]
+be the unique stable matching of Proposition~\ref{prop:unique-stable}.  Lift it
+to residual points using \eqref{eq:sign-lift}, and transfer back to the original
+coordinates.  Denote the resulting residual bijection by
+\[
+ \Psi_n^{\circ}:\Boddres\xrightarrow{\sim}\Ares.
+\]
+Define the odd-branch bijection
+\[
+ \Psi_n(X)=
+ \begin{cases}
+  \Lambda_n(X),&X\in D_n,\\
+  \Psi_n^{\circ}(X),&X\in\Boddres.
+ \end{cases}
+\]
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The direct layer is a bijection $D_n\to I_n$ by
+Theorem~\ref{thm:direct-layer}.  The residual orbit matching is perfect by
+Proposition~\ref{prop:unique-stable}, and the sign lift pairs the two points in
+each source orbit with the two points in the matched target orbit.  Hence
+$\Psi_n$ is a bijection $\Bodd\to\An$.
+
+Define
+\[
+ \Phi_n(x,y,z)=
+ \begin{cases}
+  (x,y,z/2),&z\text{ even},\\
+  \Psi_n(x,y,z),&z\text{ odd}.
+ \end{cases}
+\]
+For $(u,v,w)\in\An$, the even branch contributes the preimage $(u,v,2w)$,
+and the odd branch contributes the unique preimage $\Psi_n^{-1}(u,v,w)$.
+They are distinct because their third coordinates have opposite parity, and
+there are no further preimages on either branch.  Thus every fiber has
+cardinality two.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:congruent}]
+For an odd squarefree congruent number $n$, Tunnell's theorem gives
+\eqref{eq:Tunnell-balance}, so Theorem~\ref{thm:main} applies.
+\end{proof}
+
+\begin{remark}[Role of cardinality]\label{rem:cardinality}
+The formulas defining the direct layer and edge keys make sense without
+\eqref{eq:Tunnell-balance}.  The equality is used only to make the two residual
+orbit sets equally large; Proposition~\ref{prop:unique-stable} then makes their
+stable matching perfect.  The later generator and deferred-acceptance
+procedure compute this already defined matching.
+\end{remark}
+
+\begin{example}[The direct $n=41$ fiber]
+\label{ex:fiber-41}
+Let $Y=(2,-1,1)\in\mathcal A_{41}$.  The even branch gives
+\[
+ (2,-1,2)\longmapsto(2,-1,1),
+\]
+while Example~\ref{ex:quarter-turn-41} gives the odd preimage
+\[
+ (-4,-1,1)\longmapsto(2,-1,1).
+\]
+Their last coordinates have opposite parity, so
+\[
+ \Phi_{41}^{-1}(2,-1,1)
+ =\{(2,-1,2),(-4,-1,1)\}.
+\]
+This is the complete fiber in the direct lane announced in the introduction.
+\end{example}
+
+\section{Arithmetic generation of preference lists}\label{sec:affine-stream}
+
+The main theorem is now proved.  The remaining sections make its residual
+matching computable without storing all $m^2$ edges.  We first bound the
+direction search and then generate one source's neighbors in preference order
+from a rank-two affine lattice.
+
+\begin{lemma}[Bound for the preferred midpoint generator]
+\label{lem:projective-half-bound}
+If $d$ is the direction realizing the smaller signed orientation of a
+residual orbit edge, then
+\[
+ Q(d)\le\frac{n-1}{2}.
+\]
+\end{lemma}
+
+\begin{proof}
+With notation as in the proof of Lemma~\ref{lem:projective-key}, orthogonality
+and the two midpoint decompositions give
+\[
+ E=qd+ce,
+ \qquad
+ F=qd-ce.
+\]
+Therefore
+\[
+ n=q^2Q(d)+c^2Q(e).
+\]
+The chosen orientation gives $\key(d)<\key(e)$, hence $Q(d)\le Q(e)$.  Since
+$q$ and $c$ are nonzero,
+\[
+ n\ge Q(d)+Q(e)\ge2Q(d).
+\]
+The claim follows because $n$ is odd.
+\end{proof}
+
+\begin{example}[The midpoint bound is attained]
+In Example~\ref{ex:midpoint-41}, the preferred direction satisfies
+\[
+ Q(d)=20=\frac{41-1}{2}.
+\]
+Thus the bound in Lemma~\ref{lem:projective-half-bound} can be an equality.
+\end{example}
+
+\subsection{An orthogonal-complement lattice}
+
+Define the following isometric embedding of lattices:
+\[
+ \tau(X_1,X_2,X_3)=(X_1+X_3,X_2,X_1-X_3).
+\]
+Then
+\[
+ \|\tau(X)\|^2=Q(X),
+ \qquad
+ \tau(X)\cdot\tau(Y)=\Qip{X}{Y}.
+\]
+The image of $\tau$ is the index-two lattice
+\begin{equation}\label{eq:tau-lattice}
+ \mathcal L_\tau=\{r\in\Z^3:r_1\equiv r_3\pmod2\},
+ \qquad
+ \tau^{-1}(r)=
+ \left(\frac{r_1+r_3}{2},r_2,\frac{r_1-r_3}{2}\right).
+\end{equation}
+Fix a residual source orbit, let $E$ be its canonical lifted representative,
+and put $p=\tau(E)$.  Since
+$\|p\|^2=n$ and $n$ is squarefree, $p$ is primitive: a common divisor of
+its coordinates would have its square dividing $n$.
+
+The geometric search is simple to state before introducing coordinates.  If
+$h=Q(d)$ and $t=qh$, then $r=\tau(d)$ must be an integer point in
+\begin{equation}\label{eq:plane-sphere}
+ \underbrace{\{r:p\cdot r=t\}}_{\text{an affine plane}}
+ \ \cap\ 
+ \underbrace{\{r:\|r\|^2=h\}}_{\text{a sphere}}
+ \ \cap\ \mathcal L_\tau.
+\end{equation}
+The integer points parallel to the plane form the rank-two lattice
+$p^\perp\cap\Z^3$.  The next lemma chooses coordinates on that lattice; the
+following subsection turns the plane-sphere intersection into a quadratic
+equation in two integers.
+
+\begin{lemma}[Oriented kernel basis and B\'ezout vector]
+\label{lem:orthogonal-frame}
+There are deterministically computable vectors $e_1,e_2,z_0\in\Z^3$ such that
+\[
+ e_1\times e_2=p,
+ \qquad
+ p\cdot z_0=1.
+\]
+The pair $e_1,e_2$ is an oriented basis of $p^\perp\cap\Z^3$ and may be
+Lagrange--Gauss reduced while preserving $e_1\times e_2=p$.
+\end{lemma}
+
+\begin{proof}
+Primitivity of $p$ gives a B\'ezout vector $z_0$ with $p\cdot z_0=1$.  A
+Smith-normal-form computation for the row vector $p$ gives an integral basis
+$e_1,e_2$ of its kernel.  Every $x\in\Z^3$ then has the unique decomposition
+\[
+ x=\bigl(x-(p\cdot x)z_0\bigr)+(p\cdot x)z_0.
+\]
+Thus $e_1,e_2,z_0$ form a basis of $\Z^3$.  Since $e_1\times e_2$ is an
+integral multiple of the primitive normal vector $p$, its scalar product with
+$z_0$
+shows that this multiple is $\pm1$.  Reversing the kernel basis if necessary
+gives $e_1\times e_2=p$.  The usual integral Lagrange--Gauss steps
+\[
+ (e_1,e_2)\mapsto(e_1,e_2-me_1),
+ \qquad
+ (e_1,e_2)\mapsto(e_2,-e_1)
+\]
+have determinant $1$, preserve the cross product, and terminate with
+$|2e_1\cdot e_2|\le\|e_1\|^2\le\|e_2\|^2$.
+\end{proof}
+
+For completeness, Smith normal form here means applying the Euclidean
+algorithm through integer column operations until the primitive row $p$ is
+changed to $(1,0,0)$; transforming the last two standard basis vectors back
+gives a basis of $p^\perp\cap\Z^3$.  We use nonnegative Euclidean remainders
+and lexicographic tie breaking, choose the corresponding B\'ezout vector, and
+use the nearest-integer Lagrange--Gauss step with ties rounded toward zero;
+if the two reduced vectors have equal norm, the lexicographically smaller
+oriented basis is chosen.  These conventions make the auxiliary frame
+deterministic.  The final ordered list is intrinsic, since its records are
+sorted by the direction key and do not depend on the chosen frame.  These
+standard lattice algorithms are discussed, for example, in
+\cite[Chap.~2]{Cohen}.
+
+Put
+\[
+ \alpha=\|e_1\|^2,
+ \quad
+ \beta=e_1\cdot e_2,
+ \quad
+ \gamma=\|e_2\|^2,
+\]
+\[
+ \delta=z_0\cdot e_1,
+ \quad
+ \varepsilon=z_0\cdot e_2,
+ \quad
+ \zeta=\|z_0\|^2.
+\]
+Then
+\begin{equation}\label{eq:gram-det}
+ \alpha\gamma-\beta^2=n.
+\end{equation}
+Indeed,
+\[
+ \alpha\gamma-\beta^2
+ =\|e_1\times e_2\|^2
+ =\|p\|^2=n.
+\]
+
+\subsection{Affine norm equations}
+
+Suppose an incident representative-level edge has midpoint data
+\[
+ \frac{E+F}{2}=qd,
+ \qquad
+ h=Q(d),
+ \qquad
+ r=\tau(d).
+\]
+Then
+\begin{equation}\label{eq:Pr}
+ \|r\|^2=h,
+ \qquad
+ p\cdot r=qh.
+\end{equation}
+Set $t=qh$.
+
+\begin{lemma}[Parametrization of a lattice coset]\label{lem:affine-coset}
+Every integral solution of $p\cdot r=t$ is uniquely of the form
+\[
+ r=tz_0+\mu e_1+\nu e_2,
+ \qquad \mu,\nu\in\Z.
+\]
+For fixed $h,q,\nu$, the condition $\|r\|^2=h$ is equivalent to
+\begin{equation}\label{eq:quadratic-mu}
+ \alpha\mu^2+2(\beta\nu+t\delta)\mu
+ +\gamma\nu^2+2t\varepsilon\nu+t^2\zeta-h=0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The difference $r-tz_0$ is orthogonal to $p$, and $e_1,e_2$ form an integral
+basis of the orthogonal-complement lattice.  Expanding the squared norm gives
+\eqref{eq:quadratic-mu}.
+\end{proof}
+
+Let
+\[
+ K=\beta\delta-\alpha\varepsilon,
+ \qquad
+ M=h(n-q^2h).
+\]
+The discriminant of \eqref{eq:quadratic-mu}, divided by $4$, is
+\[
+ \Delta_\nu=(\beta\nu+t\delta)^2-
+ \alpha(\gamma\nu^2+2t\varepsilon\nu+t^2\zeta-h).
+\]
+
+\begin{lemma}[Short interval identity]\label{lem:short-interval}
+One has
+\begin{equation}\label{eq:short-identity}
+ n\Delta_\nu=\alpha M-(n\nu-tK)^2.
+\end{equation}
+Put $R=\floor{\sqrt{\alpha M}}$.  By \eqref{eq:short-identity},
+$\Delta_\nu\ge0$ exactly when $\nu$ lies in the interval
+\begin{equation}\label{eq:nu-interval}
+ \ceil{\frac{tK-R}{n}}
+ \le \nu\le
+ \floor{\frac{tK+R}{n}}.
+\end{equation}
+For each such $\nu$, let $s=\floor{\sqrt{\Delta_\nu}}$.  If
+$s^2=\Delta_\nu$, the possible values of $\mu$ form the set
+\begin{equation}\label{eq:mu-roots}
+ \left\{
+ \frac{-(\beta\nu+t\delta)+u}{\alpha}:
+ u\in\{s,-s\},\quad
+ \alpha\mid-(\beta\nu+t\delta)+u
+ \right\}.
+\end{equation}
+If $s^2\ne\Delta_\nu$, there are no roots.  In particular, when
+$\Delta_\nu=0$, the set \eqref{eq:mu-roots} contains at most one integer
+rather than two copies of the same root.
+\end{lemma}
+
+\begin{proof}
+The Gram matrix of the basis $e_1,e_2,z_0$ is
+\[
+ G=\begin{pmatrix}
+ \alpha&\beta&\delta\\
+ \beta&\gamma&\varepsilon\\
+ \delta&\varepsilon&\zeta
+ \end{pmatrix}.
+\]
+Since $\det[e_1\ e_2\ z_0]=1$, one has $\det G=1$.  Expanding gives
+\[
+ n\zeta-\bigl(\alpha\varepsilon^2-2\beta\delta\varepsilon
+ +\gamma\delta^2\bigr)=1,
+\]
+and a direct rearrangement using $n=\alpha\gamma-\beta^2$ gives
+\[
+ K^2+n(\delta^2-\alpha\zeta)=-\alpha.
+\]
+Now expand the discriminant as
+\[
+ \Delta_\nu=-n\nu^2+2tK\nu+t^2(\delta^2-\alpha\zeta)+\alpha h.
+\]
+Multiplying by $n$, applying the preceding identity, and using $t=qh$ gives
+\[
+ n\Delta_\nu
+ =\alpha(nh-t^2)-(n\nu-tK)^2
+ =\alpha h(n-q^2h)-(n\nu-tK)^2,
+\]
+which is \eqref{eq:short-identity}.  Since $n\nu-tK$ is integral, its
+square is at most $\alpha M$ precisely when
+$|n\nu-tK|\le\floor{\sqrt{\alpha M}}$; this is equivalent to
+\eqref{eq:nu-interval}.  The quadratic formula gives
+\eqref{eq:mu-roots}, interpreted as a set.
+\end{proof}
+
+\begin{example}[Recovering one $n=41$ edge arithmetically]
+\label{ex:lattice-41}
+Return to $E=(-2,-5,2)$ and $F=(4,-3,0)$ from
+Example~\ref{ex:midpoint-41}.  The isometry gives
+\[
+ p=\tau(E)=(0,-5,-4).
+\]
+One convenient oriented kernel basis and B\'ezout vector are
+\[
+ e_1=(1,0,0),
+ \qquad
+ e_2=(0,-4,5),
+ \qquad
+ z_0=(0,-1,1).
+\]
+These vectors can be found without treating them as a guess.  The kernel
+equation $p\cdot r=0$ is $-5r_2-4r_3=0$, so
+$r_2=-4k$, $r_3=5k$, while $r_1$ is free; this gives $e_1,e_2$.
+The B\'ezout identity $5-4=1$ gives $z_0$.  Thus
+$e_1\times e_2=p$ and $p\cdot z_0=1$.  For this frame,
+\[
+ \begin{aligned}
+  \alpha&=1,& \beta&=0,& \gamma&=41,\\
+  \delta&=0,& \varepsilon&=9,& \zeta&=2,& K&=-9.
+ \end{aligned}
+\]
+
+The midpoint direction is $d=(1,-4,1)$, so
+\[
+ h=Q(d)=20,\qquad q=1,\qquad t=20,\qquad M=20(41-20)=420.
+\]
+Since $R=\floor{\sqrt{420}}=20$ and $tK=-180$, the interval
+\eqref{eq:nu-interval} becomes
+\[
+ \ceil{\frac{-200}{41}}\le \nu\le
+ \floor{\frac{-160}{41}},
+\]
+which leaves only $\nu=-4$.  The short interval identity then gives
+\[
+ 41\Delta_{-4}=420-\bigl(41(-4)-20(-9)\bigr)^2=164,
+ \qquad \Delta_{-4}=4.
+\]
+Thus \eqref{eq:mu-roots} gives $\mu=\pm2$.  The choice $\mu=2$ produces
+\[
+ r=20z_0+2e_1-4e_2=(2,-4,0),
+ \qquad
+ \tau^{-1}(r)=(1,-4,1)=d.
+\]
+The other root gives a direction with negative first coordinate and is removed
+by the orientation convention.  It is not lost: the outer loop also uses
+negative $q$, and the canonically oriented opposite direction is recovered in
+that loop when it yields a preferred signed edge.  Finally,
+\[
+ -E+2d=(4,-3,0)=F.
+\]
+Since the canonical representative of $[F]$ is $F_0=(-4,3,0)$, the generator
+records
+\[
+ \bigl((20,1,-4,1),[F_0],-1\bigr).
+\]
+This is one complete pass through the arithmetic used to produce an entry of a
+preference list.
+\end{example}
+
+\subsection{The ordered-adjacency generator}
+
+We now package the preceding calculation as a finite generator.
+
+\begin{algorithm}[Ordered-adjacency generator]\label{alg:incident-stream}
+For a fixed residual source orbit $[E]$, with $E=\pc([E])$, perform the
+following finite procedure:
+
+\begin{enumerate}
+\item let $h=1,2,\ldots,(n-1)/2$;
+\item let $q$ range over the nonzero odd integers satisfying $q^2h<n$, and
+put $t=qh$ and $M=h(n-q^2h)$;
+\item let $\nu$ range over the interval \eqref{eq:nu-interval};
+\item compute $\Delta_\nu$ and the set of integral roots
+\eqref{eq:mu-roots}; for each root form
+$r=tz_0+\mu e_1+\nu e_2$;
+\item retain $r$ only if $r_1\equiv r_3\pmod2$ and
+$d=\tau^{-1}(r)$ is primitive, canonically oriented, and has odd third
+coordinate;
+\item form $F=-E+2qd$ and retain it only if $F\in\Tres$; write
+$F=\eta F_0$, where $F_0=\pc([F])$ and $\eta\in\{\pm1\}$;
+\item compare $d$ with the primitive oriented direction of $(E-F)/2$.
+Retain the record
+\[
+ \bigl(\key(d),[F_0],\eta\bigr)
+\]
+precisely when $d$ has the smaller key.
+\end{enumerate}
+
+For each $h$, insert the surviving records into a finite set and sort the set
+by $(d_1,d_2,d_3)$.  Since the outer loop has increasing $h$, the resulting
+list is the strict preference list of $[E]$.  All square roots and divisibility
+tests in the procedure are integer operations; in particular, the two signs
+in the quadratic formula are treated as a set.  Viewed as a stateful generator,
+the procedure stores one sorted $h$-block at a time.  After returning its
+records, it discards the block and advances to the next nonempty block.
+\end{algorithm}
+
+\begin{theorem}[Correctness of the ordered-adjacency generator]
+\label{thm:incident-stream}
+For every residual source orbit $[E]$, Algorithm~\ref{alg:incident-stream}
+terminates and outputs every incident edge exactly once, in strictly increasing
+order of its key.
+\end{theorem}
+
+\begin{proof}
+Every retained record satisfies $Q(d)=h$ and $\Qip{E}{d}=qh$.  Therefore
+\[
+ Q(-E+2qd)=Q(E)-4q\Qip{E}{d}+4q^2Q(d)=n.
+\]
+The condition $F\in\Tres$ supplies the required congruence and exclusion
+conditions.  Thus the record gives a valid edge between the chosen
+representatives.  The final
+comparison keeps exactly the preferred one of the two signs of its target
+orbit, and $\eta$ is exactly the sign required in \eqref{eq:sign-lift}.
+
+Conversely, take an incident edge and choose its preferred signed lift from
+$E$.  Lemma~\ref{lem:projective-half-bound} gives the stated range for
+$h=Q(d)$.  Its vectors $p$ and $r=\tau(d)$ satisfy \eqref{eq:Pr}.  By
+Lemma~\ref{lem:affine-coset}, $r$ has unique integral coordinates $\mu,\nu$, and
+Lemma~\ref{lem:short-interval} shows that the procedure recovers them.  The
+$\tau$-lattice, primitivity, orientation, parity, and residual tests all hold
+for this lift, and the final comparison retains it.
+
+Finally, $h$ and $d$ are intrinsic to a retained edge, while
+$q=\Qip{E}{d}/Q(d)$ is then forced.  The affine coordinates $\mu,\nu$ are
+unique, and \eqref{eq:mu-roots} is a set even when $\Delta_\nu=0$.  Hence no record is emitted
+twice.
+\end{proof}
+
+\begin{example}[A complete generated preference row at $n=41$]
+\label{ex:complete-row-41}
+For $E=(-2,-5,2)$, direct enumeration of the residual target set gives four
+target orbits.  Write their canonical representatives as
+\[
+\begin{aligned}
+ F_1&=(-4,-3,0),&F_2&=(0,-3,4),\\
+ F_3&=(-4,3,0), &F_4&=(0,-3,-4).
+\end{aligned}
+\]
+Running Algorithm~\ref{alg:incident-stream} gives the following surviving
+signed midpoint for each orbit.  The last column records the $Q$-value of the
+discarded midpoint direction obtained from the opposite sign.
+\[
+\begin{array}{c|c|c|c|c}
+\text{orbit}&\eta&(E+\eta F_i)/2&\kappa([E],[F_i])&\text{other }Q\\ \hline
+{[F_1]}&-1&(1,-1,1)&(5,1,-1,1)&36\\
+{[F_2]}&-1&(-1,-1,-1)&(5,1,1,1)&36\\
+{[F_3]}&-1&(1,-4,1)&(20,1,-4,1)&21\\
+{[F_4]}& 1&(-1,-4,-1)&(20,1,4,1)&21
+\end{array}
+\]
+The corresponding affine data $(h,q,\mu,\nu)$, in the same row order, are
+\[
+ (5,1,2,-1),\qquad
+ (5,-1,2,1),\qquad
+ (20,1,2,-4),\qquad
+ (20,-1,2,4).
+\]
+For example, the third row is the full calculation in
+Example~\ref{ex:lattice-41}; its opposite sign gives the direction
+$(3,1,-1)$ of $Q$-value $21$.  In the second and fourth rows the displayed
+midpoint is the negative of its canonically oriented primitive direction,
+which is why the key has positive first coordinate.  Sorting the surviving
+records gives the entire strict preference row
+\[
+ [F_1],\ [F_2],\ [F_3],\ [F_4]
+\]
+with keys in the order displayed.  Thus the example shows one complete list,
+including the four opposite-sign candidates rejected by the final comparison,
+rather than only one successful record.
+\end{example}
+
+\begin{remark}[Reduced-basis search-interval bound]
+\label{rem:size-reduction}
+For a Lagrange--Gauss reduced basis,
+\[
+ |2\beta|\le\alpha\le\gamma.
+\]
+Equation \eqref{eq:gram-det} then gives
+$\alpha\le2\sqrt{n/3}$.  Thus the interval \eqref{eq:nu-interval} is shorter
+than the corresponding unrestricted scan of the orthogonal-complement
+lattice.  This observation is not used in the correctness or matching-phase
+proofs.
+\end{remark}
+
+\section{Deferred acceptance with generated preferences}
+\label{sec:deferred-acceptance}
+
+Proposition~\ref{prop:unique-stable} describes the matching by a conceptual
+global greedy procedure.  Sorting all edge keys at once, however, would defeat
+the purpose of generating preference lists one at a time.  We instead use the
+source-proposing Gale--Shapley algorithm \cite{GaleShapley}.  Here an iterator
+is a stateful generator for a fixed preference list; laziness affects only
+when an entry is computed, not the underlying preference order.
+
+Enumerate the finite residual orbit sets $\Sbar$ and $\Tbar$, and attach to
+each source $s\in\Sbar$ the ordered generator of
+Theorem~\ref{thm:incident-stream}.  A target compares two proposals by their
+global edge rank.
+
+\begin{algorithm}[Source-proposing deferred acceptance with generated
+preferences]\label{alg:lazy-da}
+Initially every source is free and every target tentatively holds no proposal.
+Place the
+sources in a first-in, first-out queue in lexicographic order of their
+canonical representatives.  Repeatedly remove a free source $s$ from the
+front of the queue and request the next record $(k,t,\eta)$ from its ordered
+generator.
+\begin{enumerate}
+\item If $t$ tentatively holds no proposal, it tentatively holds
+$(s,k,\eta)$.
+\item If $t$ tentatively holds $(s',k',\eta')$ and $k<k'$, then $t$ replaces
+that record by $(s,k,\eta)$ and $s'$ is appended to the queue.
+\item Otherwise $t$ rejects $s$, which is appended to the queue.
+\end{enumerate}
+The algorithm ends when the queue is empty.
+\end{algorithm}
+
+\begin{example}[Deferred acceptance on two sources]
+\label{ex:DA-2x2}
+Run Algorithm~\ref{alg:lazy-da} on the ranks in
+Example~\ref{ex:ranked-2x2}, with initial queue $(s_1,s_2)$.  The proposals
+are
+\[
+ s_1\longrightarrow t_1,
+ \qquad
+ s_2\longrightarrow t_1\quad\text{(rejected)},
+ \qquad
+ s_2\longrightarrow t_2.
+\]
+The first proposal is held by $t_1$.  The second has rank $2$, so $t_1$ keeps
+its rank-$1$ proposal from $s_1$ and rejects $s_2$.  The requeued source then
+proposes to $t_2$.  The queue is empty and the output is
+$\{(s_1,t_1),(s_2,t_2)\}$, the unique stable matching found by the greedy
+argument.
+\end{example}
+
+\begin{theorem}[Correctness of deferred acceptance]\label{thm:DA-correct}
+Algorithm~\ref{alg:lazy-da} terminates and returns the unique perfect stable
+matching of Proposition~\ref{prop:unique-stable}.  The stored sign
+$\eta$ lifts every selected edge to a representative-level source-target
+pair.  The inverse at a target is recovered by rerunning the same deterministic global
+computation; no proposal transcript is required.
+\end{theorem}
+
+\begin{proof}
+A source proposes in strict preference order and never proposes to the same
+target twice.  We first check that a free source never exhausts its generator.
+If a free source $s$ had proposed to all $m$ targets, then every target would
+hold a proposal: once a target receives its first proposal, it remains
+occupied thereafter.  The held proposals would come from $m$ distinct
+sources, since a source can be held by at most one target and proposes again
+only after becoming free.  None could come from the free source $s$, leaving
+only $m-1$ possible sources, a contradiction.  Thus every request made by the
+algorithm has a next record.  Since there are only $m^2$ possible proposals,
+the algorithm terminates.
+
+When the queue is empty, every source is held by a target.  There are $m$
+sources and $m$ targets, and no target holds two sources, so the resulting
+matching is perfect.
+
+Suppose $(s,t)$ blocked the final matching.  Since $s$ prefers $t$ to its final
+partner, $s$ proposed to $t$ earlier.  The target either rejected $s$
+immediately or later displaced it for a proposal of smaller key.  A target's
+held key only decreases, so its final edge is smaller than $(s,t)$, a
+contradiction.  The output is stable and hence equals the unique stable
+matching of Proposition~\ref{prop:unique-stable}.
+
+For the inverse, let $F_0$ be the canonical representative of a matched target
+orbit, and suppose its matched record is $(E_0,F_0,\eta)$ with $E_0$ canonical.
+The lifted matching sends $E_0$ to $\eta F_0$.  Hence an actual target
+$\rho F_0$, with $\rho\in\{\pm1\}$, has preimage $\rho\eta E_0$.
+Lemma~\ref{lem:projective-key} makes $\eta$ intrinsic to the two orbits, and
+rerunning the deterministic computation reconstructs the same matching and
+the same sign.  This recovers the inverse at the given target without
+retaining the first run's proposal transcript.
+\end{proof}
+
+\begin{example}[Recovering a residual preimage]
+\label{ex:inverse-41}
+Take the actual lifted target $F=(4,-3,0)$.  Its canonical orbit
+representative is $F_0=(-4,3,0)$, so $F=\rho F_0$ with $\rho=-1$.
+Rerunning the deterministic matching returns the record from
+Example~\ref{ex:complete-row-41} with
+\[
+ E_0=(-2,-5,2),
+ \qquad
+ \eta=-1.
+\]
+The inverse sign formula gives
+\[
+ \rho\eta E_0=(-1)(-1)E_0=E_0.
+\]
+Finally, $\iota_B^{-1}(E_0)=(-2,-5,1)$.  Thus the inverse at the original
+target is
+\[
+ (4,-3,0)\longmapsto(-2,-5,1).
+\]
+The example makes explicit that ``recovering the inverse'' means rerunning the
+global deterministic matching and then applying a local sign calculation; it
+is not a separate pointwise formula.
+\end{example}
+
+\section{The two \texorpdfstring{$n=41$}{n=41} example lanes}
+\label{sec:example}
+
+The direct lane was completed in Examples~\ref{ex:quarter-turn-41} and
+\ref{ex:fiber-41}:
+\[
+ (-4,-1,1)\longmapsto(2,-1,1)
+ \quad\text{with even companion }(2,-1,2).
+\]
+We now complete the distinct residual lane
+\[
+ (-2,-5,1)\longmapsto(4,-3,0)
+ \quad\text{with even companion }(4,-3,0).
+\]
+The two odd-source mechanisms are alternatives on disjoint subsets; they are
+not successive steps in one fiber.
+
+\begin{example}[The residual matching for $n=41$]
+\label{ex:41-residual}
+The residual graph for $n=41$ has four source orbits $s_1,\ldots,s_4$ and
+four target orbits $t_1,\ldots,t_4$.  We index them by the following
+canonical lifted representatives:
+\[
+\begin{array}{ll}
+ \pc(s_1)=(-2,-5,-2),&\pc(s_2)=(-2,-5,2),\\
+ \pc(s_3)=(-2,5,-2), &\pc(s_4)=(-2,5,2),\\[2pt]
+ \pc(t_1)=(-4,-3,0), &\pc(t_2)=(-4,3,0),\\
+ \pc(t_3)=(0,-3,-4), &\pc(t_4)=(0,-3,4).
+\end{array}
+\]
+In the next display, each row is in preference order and the bracketed
+four-tuple is the corresponding edge key:
+\[
+\begin{aligned}
+s_1&:\quad t_1[5,1,-1,-1],\ t_3[5,1,1,-1],
+       \ t_2[20,1,-4,-1],\ t_4[20,1,4,-1],\\
+s_2&:\quad t_1[5,1,-1,1],\ t_4[5,1,1,1],
+       \ t_2[20,1,-4,1],\ t_3[20,1,4,1],\\
+s_3&:\quad t_4[5,1,-1,-1],\ t_2[5,1,1,-1],
+       \ t_3[20,1,-4,-1],\ t_1[20,1,4,-1],\\
+s_4&:\quad t_3[5,1,-1,1],\ t_2[5,1,1,1],
+       \ t_4[20,1,-4,1],\ t_1[20,1,4,1].
+\end{aligned}
+\]
+The complete generated row in Example~\ref{ex:complete-row-41} is exactly the
+$s_2$ row here: its $F_1,F_2,F_3,F_4$ are respectively
+$t_1,t_4,t_2,t_3$.  Thus the abstract generator calculation and this graph
+table describe the same four edges.
+With the queue convention of Algorithm~\ref{alg:lazy-da}, the proposal
+sequence is
+\[
+\begin{aligned}
+s_1&\longrightarrow t_1,&
+s_2&\longrightarrow t_1\quad\text{(rejected)},&
+s_3&\longrightarrow t_4,\\
+s_4&\longrightarrow t_3,&
+s_2&\longrightarrow t_4\quad\text{(rejected)},&
+s_2&\longrightarrow t_2.
+\end{aligned}
+\]
+Thus the algorithm makes six proposals.  Its lifted residual pairs are
+\[
+\begin{aligned}
+ (-2,-5,-2)&\longleftrightarrow(4,3,0),\\
+ (-2,-5,2)&\longleftrightarrow(4,-3,0),\\
+ (-2,5,-2)&\longleftrightarrow(0,-3,4),\\
+ (-2,5,2)&\longleftrightarrow(0,-3,-4).
+\end{aligned}
+\]
+For instance,
+\[
+ (-2,-5,1)\in\mathcal B_{41}^{\mathrm{odd}}
+ \longmapsto
+ (4,-3,0)\in\mathcal A_{41}.
+\]
+Thus
+\[
+\Phi_{41}^{-1}(4,-3,0)
+ =\{(-2,-5,1),(4,-3,0)\}.
+\]
+\end{example}
+
+\section{Parking functions and matching-phase bounds}\label{sec:complexity}
+
+A sequence $(a_1,\ldots,a_m)$ of positive integers is a \emph{parking
+function} if its nondecreasing rearrangement $b_1\le\cdots\le b_m$ satisfies
+$b_i\le i$ for $1\le i\le m$; see \cite{KonheimWeiss,StanleyParking}.
+For $s\in\Sbar$, let $p(s)$ be the number of proposals made by $s$.
+Equivalently, $p(s)$ is the rank of its final target in its preference list.
+In the proof below, $M=\overline M_n$ denotes the final stable matching.
+
+\begin{theorem}[The proposal counts form a parking function]
+\label{thm:parking}
+Order the sources $s_1,\ldots,s_m$ so that the keys of their final matched
+edges are nondecreasing.  Then
+\[
+ p(s_i)\le i
+ \qquad(1\le i\le m).
+\]
+Let $b_1\le\cdots\le b_m$ be the nondecreasing rearrangement of the proposal
+counts.  Then $b_i\le i$, so the proposal-count sequence is a parking
+function.  Moreover,
+\begin{equation}\label{eq:proposal-bound}
+ \sum_{s\in\Sbar}p(s)\le\frac{m(m+1)}2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Fix a source $s$, and let $t$ be a target that $s$ prefers to its final target.
+Stability forces
+\[
+ \kappa(M^{-1}(t),t)<\kappa(s,t)<\kappa(s,M(s));
+\]
+otherwise $(s,t)$ would block.  Distinct preferred targets give distinct
+matched edges of key strictly smaller than the matched edge of $s$.  Hence
+\[
+ p(s)-1\le
+ \#\{e\in M:\kappa(e)<\kappa(s,M(s))\}.
+\]
+For $s=s_i$, the right-hand side is at most $i-1$, proving $p(s_i)\le i$.
+For each $i$, the first $i$ sources in this ordering provide $i$ proposal
+counts, all at most $i$.  Hence the $i$th smallest proposal count is at most
+$i$, which is the parking-function condition.
+Summing the inequalities $p(s_i)\le i$ gives \eqref{eq:proposal-bound}.
+\end{proof}
+
+\begin{example}[The parking function for $n=41$]
+\label{ex:parking-41}
+The residual run makes the six proposals
+\[
+ s_1\to t_1,
+ \quad s_2\to t_1,
+ \quad s_3\to t_4,
+ \quad s_4\to t_3,
+ \quad s_2\to t_4,
+ \quad s_2\to t_2.
+\]
+Thus
+\[
+ p(s_1)=1,\qquad p(s_2)=3,\qquad p(s_3)=1,\qquad p(s_4)=1.
+\]
+Its nondecreasing rearrangement is $(1,1,1,3)$, and
+\[
+ 1\le1,\qquad 1\le2,\qquad 1\le3,\qquad 3\le4.
+\]
+Thus it is a parking function.  The total number of proposals is $6$, while
+Theorem~\ref{thm:parking} gives the bound
+$4\cdot5/2=10$.  In the control layer this means six generator advances and
+six proposal-processing steps, of which exactly two involve a key comparison
+against a held record, illustrating the count used in
+Theorem~\ref{thm:complexity}.
+\end{example}
+
+\begin{proposition}[Sharpness]\label{prop:sharpness}
+The bound \eqref{eq:proposal-bound} is sharp for the class of globally
+ranked-pairs instances, even when every key class consists of a single edge.
+\end{proposition}
+
+\begin{proof}
+Let the sides be $\{s_1,\ldots,s_m\}$ and $\{t_1,\ldots,t_m\}$, and give
+$(s_i,t_j)$ the distinct label $(m+1)i+j$.  Every source orders the targets as
+$t_1,t_2,\ldots,t_m$, and every target orders the sources as
+$s_1,s_2,\ldots,s_m$.  In increasing-label greedy order, $(s_1,t_1)$ is
+selected first; after its endpoints are removed, $(s_2,t_2)$ is selected,
+and induction gives the diagonal stable matching.  The final target $t_i$ has
+rank $i$ in the list of $s_i$, so $s_i$ makes exactly $i$ proposals.  The
+total is $m(m+1)/2$.
+\end{proof}
+
+\begin{example}[Sharpness with three sources]
+For $m=3$, all sources rank the targets as $t_1,t_2,t_3$, and all targets
+rank the sources as $s_1,s_2,s_3$.  Starting with the queue
+$(s_1,s_2,s_3)$, source $s_1$ is held by $t_1$.  Sources $s_2$ and $s_3$ are
+then rejected by $t_1$; next $s_2$ is held by $t_2$, and $s_3$ is rejected by
+$t_2$ before reaching $t_3$.  The proposal counts are therefore
+\[
+ p(s_1)=1,
+ \qquad p(s_2)=2,
+ \qquad p(s_3)=3,
+\]
+whose total $6=3\cdot4/2$ attains the bound.
+\end{example}
+
+\begin{theorem}[Matching-phase operation and auxiliary-storage bound]
+\label{thm:complexity}
+Let
+\[
+ N=\sum_{s\in\Sbar}p(s)
+\]
+be the number of proposals.  Conditional on access to the ordered-adjacency
+generators of Theorem~\ref{thm:incident-stream}, the deferred-acceptance
+control layer makes $N$ generator-advance calls, performs $O(N)$ key
+comparisons and queue or assignment operations, and stores $O(m)$ auxiliary
+records outside generator state.
+In particular,
+\[
+ N\le\frac{m(m+1)}2.
+\]
+The stated bound concerns the deferred-acceptance phase only.  It does not
+include the arithmetic work or storage internal to the generators, the
+enumeration of the residual orbits, or integer bit complexity.
+\end{theorem}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{|p{0.88\textwidth}|}
+\hline
+\textbf{Counted by Theorem~\ref{thm:complexity}:}
+One generator advance for each proposal; key comparisons; queue and
+assignment updates; and source, target, and queue records outside the
+generators.\\ \hline
+\textbf{Not counted by Theorem~\ref{thm:complexity}:}
+Construction of the residual orbit sets; arithmetic used to produce each
+generator record; generator-internal storage; integer bit complexity; and the
+cost of rerunning the computation for an inverse query.\\ \hline
+\end{tabular}
+\end{center}
+
+\begin{proof}
+Every proposal performs at most one key comparison---exactly one when the
+proposed target is already held, and none when it is free---and a constant
+number of queue and matching-array updates.  Apart from the external generators, the retained state
+consists of the source status array, one held record per target, and the queue
+of free sources, all of size $O(m)$.  The bound on $N$ is
+Theorem~\ref{thm:parking}.
+\end{proof}
+
+\begin{remark}[On possible subquadratic bounds]\label{rem:subquadratic}
+Proposition~\ref{prop:sharpness} shows that an $O(m\log m)$ worst-case bound
+on the number of proposals cannot follow from the globally-ranked-pairs
+property alone.  Such a bound for the Tunnell-form instances considered here
+would require additional
+arithmetic information about the distribution of their midpoint directions.
+\end{remark}
+
+\section{Concluding remarks}\label{sec:audit}
+
+The construction brings together a local arithmetic bijection and a global
+combinatorial completion.  Quarter-turns account for congruence-defined
+subsets, while primitive midpoint directions rank the edges between the
+remaining orbits.  This ranking forces both the unique stable matching and the
+parking-function bound.  The examples for $n=41$ give one complete fiber of
+each odd-branch type: one using a quarter-turn and one using the residual
+stable matching.  In both cases the universal even branch supplies the other
+preimage.
+
+The ordered-adjacency generator avoids storing the complete $m\times m$ edge
+table.  It would be interesting to determine whether the arithmetic
+distribution of midpoint directions yields a better complexity bound for
+these Tunnell-form instances, or whether the residual partner admits a direct
+description from one representation.
+
+\section*{Acknowledgments}
+
+This work grew out of the 2026 Research in Industrial Projects for Students
+(RIPS) program at the Institute for Pure \& Applied Mathematics (IPAM) at
+UCLA.  The authors thank IPAM for providing a collaborative research
+environment.
+
+\section*{Funding}
+
+This work was supported by OpenAI through its sponsorship of the RIPS project
+and its provision of access to the computational tools used in the project.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the
+manuscript preparation process}
+
+During the mathematical development and preparation of this work, the authors
+used OpenAI's ChatGPT and Codex through an AI-assisted solver--referee pipeline
+for symbolic experimentation, literature searches, proof organization, and
+language revision.  The authors reviewed and edited the resulting content,
+checked the mathematical arguments and cited sources, and take full
+responsibility for the article.
+
+\begin{thebibliography}{9}
+
+\bibitem{AbrahamEtAl}
+D.~J.~Abraham, A.~Levavi, D.~F.~Manlove, and G.~O'Malley,
+\emph{The stable roommates problem with globally-ranked pairs},
+Internet Math. \textbf{5} (2008), no.~4, 493--515.
+\href{https://doi.org/10.1080/15427951.2008.10129167}
+{doi:10.1080/15427951.2008.10129167}.
+
+\bibitem{BachRyan}
+E.~Bach and N.~C.~Ryan,
+\emph{Efficient verification of Tunnell's criterion},
+Japan J. Indust. Appl. Math. \textbf{24} (2007), no.~3, 229--239.
+
+\bibitem{Cohen}
+H.~Cohen,
+\emph{A Course in Computational Algebraic Number Theory},
+Graduate Texts in Mathematics, vol.~138, Springer-Verlag, Berlin, 1993.
+\href{https://doi.org/10.1007/978-3-662-02945-9}
+{doi:10.1007/978-3-662-02945-9}.
+
+\bibitem{GaleShapley}
+D.~Gale and L.~S.~Shapley,
+\emph{College admissions and the stability of marriage},
+Amer. Math. Monthly \textbf{69} (1962), no.~1, 9--15.
+\href{https://doi.org/10.1080/00029890.1962.11989827}
+{doi:10.1080/00029890.1962.11989827}.
+
+\bibitem{GusfieldIrving}
+D.~Gusfield and R.~W.~Irving,
+\emph{The Stable Marriage Problem: Structure and Algorithms},
+MIT Press, Cambridge, MA, 1989.
+
+\bibitem{Koblitz}
+N.~Koblitz,
+\emph{Introduction to Elliptic Curves and Modular Forms},
+2nd ed., Graduate Texts in Mathematics, vol.~97,
+Springer-Verlag, New York, 1993.
+
+\bibitem{KonheimWeiss}
+A.~G.~Konheim and B.~Weiss,
+\emph{An occupancy discipline and applications},
+SIAM J. Appl. Math. \textbf{14} (1966), no.~6, 1266--1274.
+\href{https://doi.org/10.1137/0114101}{doi:10.1137/0114101}.
+
+\bibitem{StanleyParking}
+R.~P.~Stanley,
+\emph{Parking functions and noncrossing partitions},
+Electron. J. Combin. \textbf{4} (1997), no.~2, Research Paper 20.
+\href{https://doi.org/10.37236/1335}{doi:10.37236/1335}.
+
+\bibitem{Tunnell}
+J.~B.~Tunnell,
+\emph{A classical Diophantine problem and modular forms of weight $3/2$},
+Invent. Math. \textbf{72} (1983), no.~2, 323--334.
+\href{https://doi.org/10.1007/BF01389327}{doi:10.1007/BF01389327}.
+
+\end{thebibliography}
+
+\end{document}

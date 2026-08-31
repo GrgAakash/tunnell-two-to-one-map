@@ -1,0 +1,26 @@
+{
+  "challenge_module": "Palomar.EntryB.Challenge",
+  "solution_module": "Palomar.EntryB.Solution",
+  "theorem_names": [
+    "TunnellN41.card_BRep_41",
+    "TunnellN41.card_ARep_41",
+    "TunnellN41.tunnellMap41_exactly_two",
+    "TunnellN41.residualPairs_41",
+    "TunnellN41.fibre_direct_41",
+    "TunnellN41.fibre_residual_41",
+    "TunnellN41.daTrace41_eq",
+    "TunnellN41.daTrace41_length",
+    "TunnellN41.daTrace41_nonaccepting",
+    "TunnellN41.daTrace41_accepted_image"
+  ],
+  "definition_names": [
+    "TunnellN41.tunnellMap41",
+    "TunnellN41.daTrace41"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

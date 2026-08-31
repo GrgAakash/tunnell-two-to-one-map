@@ -1,0 +1,198 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4 — Palomar ENTRY B (n = 41 executable certificate).
+version: "v0.4"
+
+project:
+  name: "An n = 41 executable certificate for the conditional two-to-one Tunnell map"
+  description: >-
+    A fully machine-checked worked instance, at n = 41, of the conditional
+    two-to-one map between the Tunnell representation sets
+    B(41) = {(x,y,z) : 2x^2 + y^2 + 8z^2 = 41} and
+    A(41) = {(u,v,w) : 2u^2 + v^2 + 32w^2 = 41}. The certificate records:
+    the exhaustively computed cardinalities |B(41)| = 32 and |A(41)| = 16;
+    a literal six-event trace certificate for the source-proposing
+    deferred-acceptance run on the four residual source orbits, with the proposer, target lift,
+    projective edge key, sign and free-target acceptance flag of each event,
+    including exactly two false flags; the underlying machine-level cost theorem separately
+    proves exactly two key comparisons against held records; four canonical
+    residual-orbit representative pairs, stated as values of the assembled
+    executable map;
+    and the two complete fibre equalities
+    Phi_41^{-1}(2,-1,1) = {(2,-1,2), (-4,-1,1)} and
+    Phi_41^{-1}(4,-3,0) = {(4,-3,0), (-2,-5,1)}, each verified against the
+    complete enumeration of all 32 representations. The submitted Solution
+    defines the trace by reading the instrumented run, while the Mathlib-only
+    Comparator contract fixes the resulting literal list and its agreement
+    with the map; it does not independently reconstruct the full generator
+    state. No detached finite model or trusted native evaluation is used.
+  authors:
+    - "Aakash Gurung"
+    - "Kyungyong Lee"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Aakash Gurung"
+
+# `repository` is deliberately omitted: this repository is the substantive proof
+# development, not a thin wrapper around another formalization.
+
+classification:
+  arxiv: ["math.NT", "math.CO"]
+  msc2020: ["05C70", "11E25", "11D85", "68W40", "03B35"]
+
+sources:
+  - title: "Stable Matching and a Conditional Two-to-One Map for Tunnell's Ternary Forms"
+    authors:
+      - "Aakash Gurung"
+      - "Kyungyong Lee"
+    type: "paper"
+    location: "2_to_1_redacted.tex in the submitted repository"
+    relationship: "formalizes"
+    note: >-
+      Entry B registers the manuscript's worked n = 41 balance, residual
+      matching, and direct and residual fibre examples. The supporting library,
+      but not this Comparator entry, also formalizes the parking-function and
+      residual-inverse examples.
+      FORMALIZATION_NOTES.md summarizes the traceability and verification status.
+    author_endorsement: "participated"
+  - title: "A classical Diophantine problem and modular forms of weight 3/2"
+    authors:
+      - "J. B. Tunnell"
+    type: "paper"
+    location: "Inventiones Mathematicae 72 (1983), no. 2, 323-334; https://doi.org/10.1007/BF01389327"
+    relationship: "background"
+    note: >-
+      Tunnell's theorem is not formalized here. At n = 41 the cardinality
+      balance |B(41)| = 2|A(41)| is not assumed: it is proved outright by
+      exhaustive enumeration (TunnellMap.Examples41.balance_41), so the
+      registered n = 41 statements are unconditional.
+
+related_formalizations: []
+
+status:
+  scope: >-
+    FORMALIZED: |B(41)| = 32 and |A(41)| = 16 by exhaustive enumeration; the
+    literal six-event deferred-acceptance trace certificate with its keys,
+    signs and free-target acceptance flags; the count of exactly two false
+    flags;
+    four canonical residual-orbit representative pairs as values of the
+    assembled executable map;
+    the two complete fibre equalities of the assembled executable map, checked
+    against the complete enumeration of all 32 representations; and the link
+    from every free-target acceptance event to the registered map's value.
+    NOT FORMALIZED: Tunnell's theorem, the congruent-number criterion and the
+    elliptic-curve characterisation of congruent numbers. Note that 41 is not a
+    congruent number question here at all: the balance at 41 is proved directly,
+    so nothing in Entry B is conditional on any external input.
+    The literal trace, matching and inverse statements in the underlying
+    TunnellMap development are stated for the residual branch of the map, which
+    is the manuscript's own scope for those examples; the Solution module proves
+    the bridge lemmas that restate the four matched pairs and the accepting
+    trace events as facts about the assembled executable map. See
+    FORMALIZATION_NOTES.md. The Challenge does not independently certify that
+    the literal trace is emitted by the full arithmetic generator; that
+    provenance is established only by the submitted Solution's source-level
+    definition and the supporting TunnellMap development.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: []
+      framework: "OpenAI ChatGPT, OpenAI Codex, and Aristotle (Harmonic)"
+      tool_setup: >-
+        AI-assisted formalization. The Lean 4 development, its documentation and
+        the audit files in this repository were produced with substantial
+        assistance from an automated proof assistant working against the Lean
+        compiler, under human direction. Every statement is machine-checked by
+        the Lean kernel; the n = 41 evaluations use `decide +kernel`, so they are
+        checked by the kernel and not by native compilation (no native_decide,
+        no Lean.ofReduceBool, no Lean.trustCompiler), and the development
+        declares no axioms of its own.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "not tracked"
+        hardware: "local macOS workstation and hosted AI services"
+      prompting_notes: >-
+        The n = 41 certificate was built bottom-up: exhaustive representation
+        lists, then the generated preference rows, then the instrumented run,
+        then the matching and inverse, then the two complete fibres, with each
+        layer re-verified by lake build and by #print axioms.
+  spend_usd: "not tracked"
+  notes: >-
+    Human-directed, AI-assisted. Humans set the specification and reviewed the
+    resulting statements; automated assistants wrote substantial portions of
+    the Lean definitions and proofs and produced the initial traceability audit.
+    The submitted Solution modules and the complete project have been rebuilt
+    locally with the Lean kernel. Palomar's protected Comparator and NanoDa run
+    is intentionally left to the registry's mechanical verification.
+
+fidelity:
+  divergences: >-
+    (1) The manuscript's control-layer sentence for n = 41 was corrected, as
+    mandated and as previously established, to "six generator advances and six
+    proposal-processing steps, of which exactly two involve a key comparison
+    against a held record"; the formal counters
+    TunnellMap.Examples41.costCounters_41 prove 6, 6 and 2. (2) The registered
+    map is the fallback-free public map
+    TunnellMap.Examples41.tunnellMapTotal41. (3) The Boolean `accepted` field
+    in the short Challenge is true exactly for acceptance by a previously free
+    target. Replacement and rejection are false, so
+    TunnellN41.daTrace41_nonaccepting counts only non-free-target-accepting
+    events. The supporting development records the richer outcomes and proves
+    that both are rejections, but that fact is outside this Comparator contract. The distinct
+    machine-level theorem TunnellMap.Examples41.costCounters_41 proves that the
+    run also makes exactly two held-key comparisons. (4) Kernel evaluation is
+    performed on fuelled kernel-reducible mirrors that
+    are proved equal to the real definitions under
+    TunnellMap.Examples41.fuelSuffices_41. (5) The Challenge module restates
+    everything over ℤ × ℤ × ℤ and over a plain integer-tuple DAEvent structure,
+    with explicit bridges in the Solution. See FORMALIZATION_NOTES.md. No other
+    divergence is known.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: >-
+    A complete internal statement audit included an item-by-item comparison of every
+    literal n = 41 datum in the manuscript (slice counts, preference rows, edge
+    keys, proposal sequence, matched pairs, proposal counts, parking sequence,
+    inverse value and both fibres) with the corresponding Lean theorem. No
+    external peer review has taken place.
+
+alignment:
+  namespace: "TunnellN41"
+  statements:
+    - source: "Example: The balance for n = 41"
+      lean: "TunnellN41.card_BRep_41, TunnellN41.card_ARep_41"
+      module: "Palomar.EntryB.Challenge"
+      status: "proved"
+      note: "Nat.card (BRep 41) = 32 and Nat.card (ARep 41) = 16, from the exhaustive enumerations bRepList / aRepList."
+    - source: "Theorem 1.1 specialised to n = 41"
+      lean: "TunnellN41.tunnellMap41, TunnellN41.tunnellMap41_exactly_two"
+      module: "Palomar.EntryB.Challenge"
+      status: "proved"
+      note: "Definition hole filled by the fallback-free TunnellMap.Examples41.tunnellMapTotal41; exactly two distinct and exhaustive preimages for every target."
+    - source: "Example: The residual matching for n = 41 (proposal sequence)"
+      lean: "TunnellN41.daTrace41, TunnellN41.daTrace41_eq, TunnellN41.daTrace41_length, TunnellN41.daTrace41_nonaccepting"
+      module: "Palomar.EntryB.Challenge"
+      status: "proved"
+      note: "The six literal events, their count, and the count of exactly two false free-target-acceptance flags. The supporting development records both richer outcomes as rejections, but this fact is not independently pinned by the Challenge. The submitted Solution reads the events from the executable run; the separate project theorem TunnellMap.Examples41.costCounters_41 proves two held-key comparisons."
+    - source: "Example: The residual matching for n = 41 (lifted residual pairs)"
+      lean: "TunnellN41.residualPairs_41, TunnellN41.daTrace41_accepted_image"
+      module: "Palomar.EntryB.Challenge"
+      status: "proved"
+      note: "Four canonical residual-orbit representative pairs stated as values of the assembled executable map, and the link from every event accepted by a previously free target to that map."
+    - source: "Example: The direct n = 41 fiber; Example: The residual matching for n = 41 (fibre)"
+      lean: "TunnellN41.fibre_direct_41, TunnellN41.fibre_residual_41"
+      module: "Palomar.EntryB.Challenge"
+      status: "proved"
+      note: "Both fibre equalities are biconditionals quantified over all of BRep 41, hence exhaustive."
+
+acknowledgements: >-
+  Built on Lean 4 and Mathlib, with substantial assistance from OpenAI's
+  ChatGPT and Codex and from Aristotle (Harmonic). The work grew out of the
+  2026 IPAM Research in Industrial Projects for Students program at UCLA and
+  was supported by OpenAI's sponsorship of the RIPS project. The authors
+  reviewed the mathematical statements and take responsibility for the work.
