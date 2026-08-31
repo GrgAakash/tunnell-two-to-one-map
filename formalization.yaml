@@ -55,14 +55,13 @@ sources:
       - "Aakash Gurung"
       - "Kyungyong Lee"
     type: "paper"
-    location: "2_to_1_redacted.tex in the submitted repository"
+    location: "2_to_1.tex in the submitted repository"
     relationship: "formalizes"
     note: >-
-      The August 2026 manuscript is included as 2_to_1_redacted.tex, with its
-      identifying front matter redacted from that review copy. Its authors are
-      recorded above. FORMALIZATION_NOTES.md summarizes the claim boundary,
-      manuscript corrections, formalization conventions, and verification
-      status.
+      The August 2026 manuscript is included as 2_to_1.tex. Its authors and
+      affiliations appear in the manuscript and are recorded above.
+      FORMALIZATION_NOTES.md summarizes the claim boundary, manuscript
+      corrections, formalization conventions, and verification status.
     author_endorsement: "participated"
   - title: "A classical Diophantine problem and modular forms of weight 3/2"
     authors:

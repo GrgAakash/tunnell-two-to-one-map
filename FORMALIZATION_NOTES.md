@@ -40,7 +40,7 @@ producer provenance.
 ## Manuscript correspondence
 
 The formalization follows the August 2026 manuscript
-`2_to_1_redacted.tex`. Two cost statements were corrected during the formal
+`2_to_1.tex`. Two cost statements were corrected during the formal
 audit:
 
 1. The `n = 41` run has six generator advances and six proposal-processing

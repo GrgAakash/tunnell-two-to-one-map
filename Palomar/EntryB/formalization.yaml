@@ -45,7 +45,7 @@ sources:
       - "Aakash Gurung"
       - "Kyungyong Lee"
     type: "paper"
-    location: "2_to_1_redacted.tex in the submitted repository"
+    location: "2_to_1.tex in the submitted repository"
     relationship: "formalizes"
     note: >-
       Entry B registers the manuscript's worked n = 41 balance, residual
