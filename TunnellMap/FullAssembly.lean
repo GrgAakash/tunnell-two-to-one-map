@@ -100,7 +100,7 @@ noncomputable def paperOddEquiv {n : ℤ} (hn : Odd n) (hnpos : 0 < n)
     BOddRep n ≃ ARep n :=
   oddEquivOfBalance hn hnpos (odd_card_eq_of_full_balance hbalance)
 
-/-- The map in Theorem 1.1, on the literal full source representation set. -/
+/-- The map in the paper's balanced construction theorem, on the literal full source representation set. -/
 noncomputable def paperTunnellMap {n : ℤ} (hn : Odd n) (hnpos : 0 < n)
     [Fintype (BRep n)] [Fintype (ARep n)]
     (hbalance : Fintype.card (BRep n) = 2 * Fintype.card (ARep n)) :

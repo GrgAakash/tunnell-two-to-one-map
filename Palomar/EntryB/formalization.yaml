@@ -3,10 +3,10 @@
 version: "v0.4"
 
 project:
-  name: "An n = 41 executable certificate for the conditional two-to-one Tunnell map"
+  name: "An n = 41 executable certificate for the two-to-one Tunnell map"
   description: >-
-    A fully machine-checked worked instance, at n = 41, of the conditional
-    two-to-one map between the Tunnell representation sets
+    A fully machine-checked worked instance, at n = 41, of the two-to-one map
+    between the Tunnell representation sets
     B(41) = {(x,y,z) : 2x^2 + y^2 + 8z^2 = 41} and
     A(41) = {(u,v,w) : 2u^2 + v^2 + 32w^2 = 41}. The certificate records:
     the exhaustively computed cardinalities |B(41)| = 32 and |A(41)| = 16;
@@ -40,7 +40,7 @@ classification:
   msc2020: ["05C70", "11E25", "11D85", "68W40", "03B35"]
 
 sources:
-  - title: "Stable Matching and a Conditional Two-to-One Map for Tunnell's Ternary Forms"
+  - title: "Stable Matching and a Two-to-One Map for Tunnell's Ternary Forms"
     authors:
       - "Aakash Gurung"
       - "Kyungyong Lee"
@@ -82,7 +82,7 @@ status:
     NOT FORMALIZED: Tunnell's theorem, the congruent-number criterion and the
     elliptic-curve characterisation of congruent numbers. Note that 41 is not a
     congruent number question here at all: the balance at 41 is proved directly,
-    so nothing in Entry B is conditional on any external input.
+    so Entry B does not rely on any external balance input.
     The literal trace, matching and inverse statements in the underlying
     TunnellMap development are stated for the residual branch of the map, which
     is the manuscript's own scope for those examples; the Solution module proves
@@ -169,7 +169,7 @@ alignment:
       module: "Palomar.EntryB.Challenge"
       status: "proved"
       note: "Nat.card (BRep 41) = 32 and Nat.card (ARep 41) = 16, from the exhaustive enumerations bRepList / aRepList."
-    - source: "Theorem 1.1 specialised to n = 41"
+    - source: "Two-to-one map under the Tunnell balance, specialised to n = 41"
       lean: "TunnellN41.tunnellMap41, TunnellN41.tunnellMap41_exactly_two"
       module: "Palomar.EntryB.Challenge"
       status: "proved"

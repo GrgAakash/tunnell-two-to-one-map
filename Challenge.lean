@@ -1,7 +1,7 @@
 import Mathlib
 
 /-!
-# A conditional two-to-one map for Tunnell's ternary forms
+# A two-to-one map under the Tunnell balance
 
 For odd positive squarefree `n`, assume the explicit balance
 `Nat.card (BRep n) = 2 * Nat.card (ARep n)`.  The registered fallback-free map
@@ -15,8 +15,10 @@ The residual forward map, its inverse, agreement with the assembled map, and
 both inverse identities are also registered.  The submitted Solution computes
 the inverse by rerunning the deterministic generator/deferred-acceptance
 machine; the Challenge fixes its extensional value through the inverse laws.
-Tunnell's theorem is not formalized: the cardinality balance is a hypothesis,
-and no congruent-number criterion is claimed.
+Tunnell's modular-form theorem is not formalized, so the Challenge imports its
+established cardinality balance as a hypothesis.  For odd positive squarefree
+congruent `n`, Tunnell's theorem supplies that hypothesis.  No new
+congruent-number criterion is claimed.
 -/
 
 namespace TunnellChallenge

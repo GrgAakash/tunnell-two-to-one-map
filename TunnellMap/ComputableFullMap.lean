@@ -81,7 +81,7 @@ end Agreement
 
 /-! ## The executable full map -/
 
-/-- **The executable full map of Theorem 1.1.**  An ordinary computable `def`:
+/-- **The executable full map of the balanced construction theorem.**  An ordinary computable `def`:
 the even branch is the explicit reparametrization, the odd branch is the
 executable direct/residual assembly. -/
 def paperTunnellMapExec (hnpos : 0 < n) (hsq : Squarefree n)

@@ -10,7 +10,7 @@ entry unless Palomar confirms that the worked instance meets its independent
 research-interest threshold. If both are submitted, they must be separate
 entries from the same commit.
 
-## Entry A: general conditional map
+## Entry A: general map under the Tunnell balance
 
 - Selected project: repository root
 - Comparator path: `comparator.json`

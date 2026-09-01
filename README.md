@@ -1,15 +1,17 @@
-# A conditional two-to-one map for Tunnell's ternary forms
+# A two-to-one map for Tunnell's ternary forms
 
 This Lean 4 project formalizes the deterministic two-to-one map developed in
-the manuscript *Stable Matching and a Conditional Two-to-One Map for
-Tunnell's Ternary Forms* by Aakash Gurung and Kyungyong Lee.
+the manuscript *Stable Matching and a Two-to-One Map for Tunnell's Ternary
+Forms* by Aakash Gurung and Kyungyong Lee.
 
-For an odd positive squarefree integer `n`, the general theorem assumes the
-cardinality identity `|B(n)| = 2|A(n)|` and constructs an executable map from
-representations by `2x^2 + y^2 + 8z^2` to representations by
-`2x^2 + y^2 + 32z^2`. Every target has exactly two distinct preimages. The
-cardinality identity is an explicit hypothesis; Tunnell's modular-form theorem
-and the congruent-number criterion are not formalized here.
+For every odd positive squarefree congruent number `n`, Tunnell's theorem
+establishes the identity `|B(n)| = 2|A(n)|`. Combining that theorem with the
+formalized construction gives an executable map from representations by
+`2x^2 + y^2 + 8z^2` to representations by
+`2x^2 + y^2 + 32z^2`, with exactly two distinct preimages over every target.
+The Lean interface isolates the established cardinality identity as an
+explicit hypothesis because Tunnell's modular-form argument is outside this
+formalization. This is a formalization boundary, not a conjectural assumption.
 
 The repository also contains an unconditional finite certificate at `n = 41`,
 including the representation counts, residual matching, a literal proposal
@@ -38,7 +40,7 @@ interest:
 
 | Entry | Comparator | Metadata |
 |---|---|---|
-| General conditional map | `comparator.json` | `formalization.yaml` |
+| General map under the Tunnell balance | `comparator.json` | `formalization.yaml` |
 | Executable `n = 41` certificate | `Palomar/EntryB/comparator.json` | `Palomar/EntryB/formalization.yaml` |
 
 Entry A registers the explicit local branches, the residual-target property,

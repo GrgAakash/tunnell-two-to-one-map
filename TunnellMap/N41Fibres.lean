@@ -3,8 +3,8 @@ import TunnellMap.N41Matching
 /-!
 # `n = 41`, part 5: the complete fibres of the assembled executable map
 
-`paperTunnellMapExec` is the assembled executable map of Theorem 1.1: the even
-branch, the direct quarter-turn branch and the residual
+`paperTunnellMapExec` is the assembled executable map of the paper's balanced
+construction theorem: the even branch, the direct quarter-turn branch and the residual
 generator/deferred-acceptance branch.  This file instantiates it at `n = 41`,
 with the cardinality balance supplied by `Examples41.balance_41`, and computes
 two complete fibres.

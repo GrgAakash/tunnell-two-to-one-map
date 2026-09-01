@@ -379,7 +379,7 @@ theorem paperTunnellMapExecOpt_isSome (hn : Odd n) (hnpos : 0 < n)
     (fintype_balance_of_nat_card hbal) p]
   rfl
 
-/-- **The public executable map of Theorem 1.1.**  An ordinary computable
+/-- **The public executable map of the balanced construction theorem.**  An ordinary computable
 `def` requiring exactly the manuscript hypotheses: `n` odd, positive and
 squarefree, and the cardinality balance `|BRep n| = 2 |ARep n|`.  No fallback
 residual target is required, so the definition also makes sense — and is

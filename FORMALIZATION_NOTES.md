@@ -2,17 +2,20 @@
 
 ## Claim boundary
 
-The general result is conditional. For an odd positive squarefree integer
-`n`, it assumes
+The manuscript's principal mathematical result applies to every odd positive
+squarefree congruent integer `n`, because Tunnell's established theorem gives
+the required cardinality identity. The general Lean interface isolates that
+external theorem as the hypothesis
 
 ```text
 Nat.card (BRep n) = 2 * Nat.card (ARep n)
 ```
 
 and constructs an ordinary computable map with exactly two distinct and
-exhaustive preimages over every target. Tunnell's modular-form theorem, the
+exhaustive preimages over every target. Tunnell's modular-form proof, the
 congruent-number criterion, and the elliptic-curve characterization of
-congruent numbers are not formalized.
+congruent numbers are not formalized. This is a boundary of the Lean
+development, not an unproved assumption in the mathematical theorem.
 
 Entry A registers the fallback-free map, the exact two-preimage theorem, the
 even branch, three explicit quarter-turn branches, the residual-target

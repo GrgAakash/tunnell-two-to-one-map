@@ -40,8 +40,8 @@
 \newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
 \newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
 
-\title[A conditional two-to-one map for Tunnell's forms]
-{Stable Matching and a Conditional Two-to-One Map
+\title[A two-to-one map for Tunnell's forms]
+{Stable Matching and a Two-to-One Map
 for Tunnell's Ternary Forms}
 
 \author{Aakash Gurung}
@@ -57,29 +57,29 @@ for Tunnell's Ternary Forms}
 \subjclass[2020]{Primary 05C70; Secondary 11E25, 11D85, 68W40}
 \keywords{globally ranked pairs, stable matching, parking function, ternary quadratic form, arithmetic correspondence}
 \hypersetup{
-  pdftitle={Stable Matching and a Conditional Two-to-One Map for Tunnell's Ternary Forms},
+  pdftitle={Stable Matching and a Two-to-One Map for Tunnell's Ternary Forms},
   pdfauthor={Aakash Gurung and Kyungyong Lee},
-  pdfsubject={A conditional arithmetic map constructed by stable matching},
+  pdfsubject={An arithmetic map constructed by stable matching},
   pdfkeywords={globally ranked pairs, stable matching, parking function, ternary quadratic form, arithmetic correspondence}
 }
 
 \begin{document}
 
 \begin{abstract}
-For an odd positive squarefree integer $n$, let $\Bn$ and $\An$ be the
-representation sets of $n$ by $2x^2+y^2+8z^2$ and
-$2x^2+y^2+32z^2$, respectively.  Assuming $|\Bn|=2|\An|$, we construct a
-deterministic map $\Phi_n:\Bn\to\An$ whose fibers have cardinality two.
-Halving the third coordinate gives the even branch.  On the odd branch,
-three integral quarter-turns define a partial bijection.  We complete it by
-passing the residual points to their antipodal orbits and applying stable
-matching, with preferences determined by primitive midpoint directions.
-Equal-rank edges are disjoint, so the stable matching is unique.  Its
-preference lists can be generated arithmetically from rank-two lattice cosets,
-and the proposal counts form a parking function with total at most
-$m(m+1)/2$, where $m$ is the number of residual orbits on either side.  For
-odd squarefree congruent numbers, Tunnell's theorem supplies the cardinality
-hypothesis.  The construction assumes, rather than proves, this identity.
+For every odd positive squarefree congruent number $n$, we construct a
+deterministic map $\Phi_n:\Bn\to\An$ whose fibers have cardinality two, where
+$\Bn$ and $\An$ are the representation sets of $n$ by
+$2x^2+y^2+8z^2$ and $2x^2+y^2+32z^2$.  Tunnell's theorem supplies the
+established identity $|\Bn|=2|\An|$; more generally, the construction applies
+to every odd positive squarefree $n$ satisfying this identity.  Halving the
+third coordinate gives the even branch.  On the odd branch, three integral
+quarter-turns define a partial bijection.  We complete it by passing the
+residual points to their antipodal orbits and applying stable matching, with
+preferences determined by primitive midpoint directions.  Equal-rank edges
+are disjoint, so the stable matching is unique.  Its preference lists can be
+generated arithmetically from rank-two lattice cosets, and the proposal counts
+form a parking function with total at most $m(m+1)/2$, where $m$ is the number
+of residual orbits on either side.
 \end{abstract}
 
 \maketitle
@@ -142,11 +142,13 @@ and the even-branch map simply halves the last coordinate.
 \end{example}
 
 Methods such as those of Bach and Ryan \cite{BachRyan} compute the
-representation numbers in this identity.  Our purpose is different.  We take
-\eqref{eq:Tunnell-balance} as an explicit hypothesis and seek a structured
-map between the representations that it counts.  The construction therefore
-neither proves Tunnell's identity nor supplies a new congruent-number
-criterion.
+representation numbers in this identity.  Our purpose is different.  We use
+\eqref{eq:Tunnell-balance}, established by Tunnell for the congruent numbers
+under consideration, and seek a structured map between the representations
+that it counts.  Isolating the balance also gives a slightly more general
+construction for any odd positive squarefree $n$ satisfying the same
+identity.  We neither reprove Tunnell's identity nor propose a new
+congruent-number criterion.
 
 Separate $\Bn$ according to the parity of its third coordinate:
 \begin{align*}
@@ -182,7 +184,7 @@ the orientation conventions below have been fixed.  The construction is
 equivariant under the antipodal involution $X\mapsto-X$, and the same edge data
 determine its inverse.
 
-\begin{theorem}[Conditional two-to-one map]\label{thm:main}
+\begin{theorem}[Two-to-one map under the Tunnell balance]\label{thm:main}
 Let $n$ be an odd positive squarefree integer satisfying
 $|\Bn|=2|\An|$.  Fix the orientation and ordering conventions introduced
 below.  Then the construction defines a deterministic map
@@ -220,10 +222,11 @@ The unlabeled arrows pass to antipodal orbits and then lift back with a
 specified sign.  The cardinality hypothesis is used to prove that
 $\overline M_n$ is perfect; it is not used to choose the edge ranks.
 
-\begin{corollary}\label{cor:congruent}
-Theorem~\ref{thm:main} applies to every odd positive squarefree congruent
-number $n$.
-\end{corollary}
+\begin{theorem}[Congruent-number case]\label{thm:congruent}
+For every odd positive squarefree congruent number $n$, the construction
+defines a deterministic map $\Phi_n:\Bn\to\An$ such that every element of
+$\An$ has exactly two preimages.
+\end{theorem}
 
 Section~\ref{sec:coordinates} introduces the two coordinate models, and
 Section~\ref{sec:quarter-turn} constructs the direct branches.
@@ -857,7 +860,7 @@ there are no further preimages on either branch.  Thus every fiber has
 cardinality two.
 \end{proof}
 
-\begin{proof}[Proof of Corollary~\ref{cor:congruent}]
+\begin{proof}[Proof of Theorem~\ref{thm:congruent}]
 For an odd squarefree congruent number $n$, Tunnell's theorem gives
 \eqref{eq:Tunnell-balance}, so Theorem~\ref{thm:main} applies.
 \end{proof}
