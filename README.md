@@ -4,6 +4,10 @@ This Lean 4 project formalizes the deterministic two-to-one map developed in
 the manuscript *Stable Matching and a Two-to-One Map for Tunnell's Ternary
 Forms* by Aakash Gurung and Kyungyong Lee.
 
+The manuscript source is `2_to_1.tex`, with its BibTeX database in
+`references.bib`. The bibliography is formatted with the standard
+`amsplain` style.
+
 For every odd positive squarefree congruent number `n`, Tunnell's theorem
 establishes the identity `|B(n)| = 2|A(n)|`. Combining that theorem with the
 formalized construction gives an executable map from representations by

@@ -3,3 +3,8 @@
 *.ilean
 *.c
 .DS_Store
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
