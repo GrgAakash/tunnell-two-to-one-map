@@ -893,10 +893,11 @@ This is the complete fiber in the direct lane announced in the introduction.
 
 \section{Arithmetic generation of preference lists}\label{sec:affine-stream}
 
-The main theorem is now proved.  The remaining sections make its residual
-matching computable without storing all $m^2$ edges.  We first bound the
-direction search and then generate one source's neighbors in preference order
-from a rank-two affine lattice.
+The main theorem is already proved.  We now explain how to compute the
+residual matching without first constructing all $m^2$ edges.  For a fixed
+source orbit, its preference list can be recovered by searching for the
+primitive midpoint directions of its incident edges.  We first bound this
+search and then write it as a problem in a rank-two affine lattice.
 
 \begin{lemma}[Bound for the preferred midpoint generator]
 \label{lem:projective-half-bound}
@@ -908,14 +909,13 @@ residual orbit edge, then
 \end{lemma}
 
 \begin{proof}
-With notation as in the proof of Lemma~\ref{lem:projective-key}, orthogonality
-and the two midpoint decompositions give
+The two midpoint decompositions from Lemma~\ref{lem:projective-key} give
 \[
  E=qd+ce,
  \qquad
  F=qd-ce.
 \]
-Therefore
+Since $d$ and $e$ are orthogonal, we also have
 \[
  n=q^2Q(d)+c^2Q(e).
 \]
@@ -937,7 +937,7 @@ Thus the bound in Lemma~\ref{lem:projective-half-bound} can be an equality.
 
 \subsection{An orthogonal-complement lattice}
 
-Define the following isometric embedding of lattices:
+We use the isometric embedding
 \[
  \tau(X_1,X_2,X_3)=(X_1+X_3,X_2,X_1-X_3).
 \]
@@ -954,23 +954,22 @@ The image of $\tau$ is the index-two lattice
  \tau^{-1}(r)=
  \left(\frac{r_1+r_3}{2},r_2,\frac{r_1-r_3}{2}\right).
 \end{equation}
-Fix a residual source orbit, let $E$ be its canonical lifted representative,
-and put $p=\tau(E)$.  Since
-$\|p\|^2=n$ and $n$ is squarefree, $p$ is primitive: a common divisor of
-its coordinates would have its square dividing $n$.
+Let us fix a residual source orbit.  We write $E$ for its canonical lifted
+representative and set $p=\tau(E)$.  Since $\|p\|^2=n$ and $n$ is squarefree,
+$p$ is primitive; otherwise the square of a common divisor of its coordinates
+would divide $n$.
 
-The geometric search is simple to state before introducing coordinates.  If
-$h=Q(d)$ and $t=qh$, then $r=\tau(d)$ must be an integer point in
+Before choosing coordinates, the geometric search can be written as follows.
+If $h=Q(d)$ and $t=qh$, then $r=\tau(d)$ is an integer point in
 \begin{equation}\label{eq:plane-sphere}
  \underbrace{\{r:p\cdot r=t\}}_{\text{an affine plane}}
  \ \cap\ 
  \underbrace{\{r:\|r\|^2=h\}}_{\text{a sphere}}
  \ \cap\ \mathcal L_\tau.
 \end{equation}
-The integer points parallel to the plane form the rank-two lattice
-$p^\perp\cap\Z^3$.  The next lemma chooses coordinates on that lattice; the
-following subsection turns the plane-sphere intersection into a quadratic
-equation in two integers.
+The integer points parallel to this plane form the rank-two lattice
+$p^\perp\cap\Z^3$.  We next choose coordinates on this lattice and use them to
+turn the plane-sphere intersection into a quadratic equation in two integers.
 
 \begin{lemma}[Oriented kernel basis and B\'ezout vector]
 \label{lem:orthogonal-frame}
@@ -985,17 +984,18 @@ Lagrange--Gauss reduced while preserving $e_1\times e_2=p$.
 \end{lemma}
 
 \begin{proof}
-Primitivity of $p$ gives a B\'ezout vector $z_0$ with $p\cdot z_0=1$.  A
-Smith-normal-form computation for the row vector $p$ gives an integral basis
-$e_1,e_2$ of its kernel.  Every $x\in\Z^3$ then has the unique decomposition
+Since $p$ is primitive, there is a B\'ezout vector $z_0$ with
+$p\cdot z_0=1$.  Applying Smith normal form to the row vector $p$ gives an
+integral basis $e_1,e_2$ of its kernel.  Every $x\in\Z^3$ has the unique
+decomposition
 \[
  x=\bigl(x-(p\cdot x)z_0\bigr)+(p\cdot x)z_0.
 \]
-Thus $e_1,e_2,z_0$ form a basis of $\Z^3$.  Since $e_1\times e_2$ is an
-integral multiple of the primitive normal vector $p$, its scalar product with
-$z_0$
-shows that this multiple is $\pm1$.  Reversing the kernel basis if necessary
-gives $e_1\times e_2=p$.  The usual integral Lagrange--Gauss steps
+so $e_1,e_2,z_0$ form a basis of $\Z^3$.  The vector $e_1\times e_2$ is an
+integral multiple of the primitive normal vector $p$.  Taking its scalar
+product with $z_0$ shows that the multiple is $\pm1$, and reversing the kernel
+basis if necessary gives $e_1\times e_2=p$.  The usual integral
+Lagrange--Gauss steps
 \[
  (e_1,e_2)\mapsto(e_1,e_2-me_1),
  \qquad
@@ -1005,20 +1005,18 @@ have determinant $1$, preserve the cross product, and terminate with
 $|2e_1\cdot e_2|\le\|e_1\|^2\le\|e_2\|^2$.
 \end{proof}
 
-For completeness, Smith normal form here means applying the Euclidean
-algorithm through integer column operations until the primitive row $p$ is
-changed to $(1,0,0)$; transforming the last two standard basis vectors back
-gives a basis of $p^\perp\cap\Z^3$.  We use nonnegative Euclidean remainders
-and lexicographic tie breaking, choose the corresponding B\'ezout vector, and
-use the nearest-integer Lagrange--Gauss step with ties rounded toward zero;
-if the two reduced vectors have equal norm, the lexicographically smaller
-oriented basis is chosen.  These conventions make the auxiliary frame
-deterministic.  The final ordered list is intrinsic, since its records are
-sorted by the direction key and do not depend on the chosen frame.  These
-standard lattice algorithms are discussed, for example, in
-\cite[Chap.~2]{Cohen}.
+We use Smith normal form in its usual algorithmic form: integer column
+operations, obtained from the Euclidean algorithm, change the primitive row
+$p$ to $(1,0,0)$.  Transforming the last two standard basis vectors back gives
+a basis of $p^\perp\cap\Z^3$.  We take nonnegative Euclidean remainders and use
+lexicographic tie breaking.  For Lagrange--Gauss reduction, we round ties in
+the nearest-integer step toward zero and choose the lexicographically smaller
+oriented basis when the two reduced vectors have the same norm.  These choices
+make the auxiliary frame deterministic.  They do not affect the final
+preference list, which is sorted by the intrinsic direction key.  We refer to
+\cite[Chap.~2]{Cohen} for these standard lattice algorithms.
 
-Put
+We write
 \[
  \alpha=\|e_1\|^2,
  \quad
@@ -1033,11 +1031,11 @@ Put
  \quad
  \zeta=\|z_0\|^2.
 \]
-Then
+The identity $e_1\times e_2=p$ gives
 \begin{equation}\label{eq:gram-det}
  \alpha\gamma-\beta^2=n.
 \end{equation}
-Indeed,
+This follows from
 \[
  \alpha\gamma-\beta^2
  =\|e_1\times e_2\|^2
@@ -1046,7 +1044,7 @@ Indeed,
 
 \subsection{Affine norm equations}
 
-Suppose an incident representative-level edge has midpoint data
+For an edge incident to $E$, write its midpoint data as
 \[
  \frac{E+F}{2}=qd,
  \qquad
@@ -1054,13 +1052,14 @@ Suppose an incident representative-level edge has midpoint data
  \qquad
  r=\tau(d).
 \]
-Then
+We then have
 \begin{equation}\label{eq:Pr}
  \|r\|^2=h,
  \qquad
  p\cdot r=qh.
 \end{equation}
-Set $t=qh$.
+We set $t=qh$.  The frame from the previous subsection now gives coordinates
+on the affine plane $p\cdot r=t$.
 
 \begin{lemma}[Parametrization of a lattice coset]\label{lem:affine-coset}
 Every integral solution of $p\cdot r=t$ is uniquely of the form
@@ -1081,13 +1080,13 @@ basis of the orthogonal-complement lattice.  Expanding the squared norm gives
 \eqref{eq:quadratic-mu}.
 \end{proof}
 
-Let
+To determine the possible values of $\nu$, we write
 \[
  K=\beta\delta-\alpha\varepsilon,
  \qquad
  M=h(n-q^2h).
 \]
-The discriminant of \eqref{eq:quadratic-mu}, divided by $4$, is
+The discriminant of \eqref{eq:quadratic-mu}, after dividing by $4$, is
 \[
  \Delta_\nu=(\beta\nu+t\delta)^2-
  \alpha(\gamma\nu^2+2t\varepsilon\nu+t^2\zeta-h).
@@ -1137,11 +1136,12 @@ and a direct rearrangement using $n=\alpha\gamma-\beta^2$ gives
 \[
  K^2+n(\delta^2-\alpha\zeta)=-\alpha.
 \]
-Now expand the discriminant as
+The discriminant can now be written as
 \[
  \Delta_\nu=-n\nu^2+2tK\nu+t^2(\delta^2-\alpha\zeta)+\alpha h.
 \]
-Multiplying by $n$, applying the preceding identity, and using $t=qh$ gives
+After multiplying by $n$ and using the preceding identity together with
+$t=qh$, we obtain
 \[
  n\Delta_\nu
  =\alpha(nh-t^2)-(n\nu-tK)^2
@@ -1169,10 +1169,10 @@ One convenient oriented kernel basis and B\'ezout vector are
  \qquad
  z_0=(0,-1,1).
 \]
-These vectors can be found without treating them as a guess.  The kernel
-equation $p\cdot r=0$ is $-5r_2-4r_3=0$, so
-$r_2=-4k$, $r_3=5k$, while $r_1$ is free; this gives $e_1,e_2$.
-The B\'ezout identity $5-4=1$ gives $z_0$.  Thus
+These vectors follow directly from the two defining equations.  The kernel
+equation $p\cdot r=0$ is $-5r_2-4r_3=0$, so $r_2=-4k$ and $r_3=5k$, while
+$r_1$ is free.  This gives $e_1,e_2$, and the B\'ezout identity $5-4=1$
+gives $z_0$.  Hence
 $e_1\times e_2=p$ and $p\cdot z_0=1$.  For this frame,
 \[
  \begin{aligned}
@@ -1202,10 +1202,10 @@ Thus \eqref{eq:mu-roots} gives $\mu=\pm2$.  The choice $\mu=2$ produces
  \qquad
  \tau^{-1}(r)=(1,-4,1)=d.
 \]
-The other root gives a direction with negative first coordinate and is removed
-by the orientation convention.  It is not lost: the outer loop also uses
-negative $q$, and the canonically oriented opposite direction is recovered in
-that loop when it yields a preferred signed edge.  Finally,
+The other root has negative first coordinate and is removed by the orientation
+convention.  The outer loop also uses negative $q$, so the canonically oriented
+opposite direction is recovered there whenever it gives the preferred signed
+edge.  Finally,
 \[
  -E+2d=(4,-3,0)=F.
 \]
@@ -1214,17 +1214,18 @@ records
 \[
  \bigl((20,1,-4,1),[F_0],-1\bigr).
 \]
-This is one complete pass through the arithmetic used to produce an entry of a
-preference list.
+This recovers one entry of the preference list directly from the arithmetic
+of the source $E$.
 \end{example}
 
 \subsection{The ordered-adjacency generator}
 
-We now package the preceding calculation as a finite generator.
+The preceding calculation gives a finite procedure for producing the complete
+preference list of a fixed source orbit.
 
 \begin{algorithm}[Ordered-adjacency generator]\label{alg:incident-stream}
-For a fixed residual source orbit $[E]$, with $E=\pc([E])$, perform the
-following finite procedure:
+Fix a residual source orbit $[E]$ and let $E=\pc([E])$.  We perform the
+following steps:
 
 \begin{enumerate}
 \item let $h=1,2,\ldots,(n-1)/2$;
@@ -1247,13 +1248,13 @@ Retain the record
 precisely when $d$ has the smaller key.
 \end{enumerate}
 
-For each $h$, insert the surviving records into a finite set and sort the set
-by $(d_1,d_2,d_3)$.  Since the outer loop has increasing $h$, the resulting
-list is the strict preference list of $[E]$.  All square roots and divisibility
-tests in the procedure are integer operations; in particular, the two signs
-in the quadratic formula are treated as a set.  Viewed as a stateful generator,
-the procedure stores one sorted $h$-block at a time.  After returning its
-records, it discards the block and advances to the next nonempty block.
+For each $h$, we place the surviving records in a finite set and sort them by
+$(d_1,d_2,d_3)$.  Since $h$ increases in the outer loop, these blocks together
+form the strict preference list of $[E]$.  The square roots and divisibility
+tests use only integer arithmetic.  When the discriminant is zero, the two
+signs in the quadratic formula contribute only one root.  The generator keeps one
+sorted $h$-block at a time, returns its records, and then moves to the next
+nonempty block.
 \end{algorithm}
 
 \begin{theorem}[Correctness of the ordered-adjacency generator]
@@ -1264,28 +1265,29 @@ order of its key.
 \end{theorem}
 
 \begin{proof}
-Every retained record satisfies $Q(d)=h$ and $\Qip{E}{d}=qh$.  Therefore
+We first check that every output is an incident edge.  A retained record
+satisfies $Q(d)=h$ and $\Qip{E}{d}=qh$, and hence
 \[
  Q(-E+2qd)=Q(E)-4q\Qip{E}{d}+4q^2Q(d)=n.
 \]
-The condition $F\in\Tres$ supplies the required congruence and exclusion
-conditions.  Thus the record gives a valid edge between the chosen
-representatives.  The final
-comparison keeps exactly the preferred one of the two signs of its target
-orbit, and $\eta$ is exactly the sign required in \eqref{eq:sign-lift}.
+The test $F\in\Tres$ gives the required congruence and exclusion conditions,
+so the record defines a valid edge between the chosen representatives.  The
+last comparison keeps the preferred sign of the target orbit, and $\eta$ is
+the sign used in \eqref{eq:sign-lift}.
 
-Conversely, take an incident edge and choose its preferred signed lift from
-$E$.  Lemma~\ref{lem:projective-half-bound} gives the stated range for
+We next take an incident edge and choose its preferred signed lift from $E$.
+Lemma~\ref{lem:projective-half-bound} gives the stated range for
 $h=Q(d)$.  Its vectors $p$ and $r=\tau(d)$ satisfy \eqref{eq:Pr}.  By
 Lemma~\ref{lem:affine-coset}, $r$ has unique integral coordinates $\mu,\nu$, and
 Lemma~\ref{lem:short-interval} shows that the procedure recovers them.  The
 $\tau$-lattice, primitivity, orientation, parity, and residual tests all hold
 for this lift, and the final comparison retains it.
 
-Finally, $h$ and $d$ are intrinsic to a retained edge, while
+It remains to check that no edge appears twice.  The values $h$ and $d$ are
+intrinsic to a retained edge, while
 $q=\Qip{E}{d}/Q(d)$ is then forced.  The affine coordinates $\mu,\nu$ are
-unique, and \eqref{eq:mu-roots} is a set even when $\Delta_\nu=0$.  Hence no record is emitted
-twice.
+unique, and \eqref{eq:mu-roots} is a set even when $\Delta_\nu=0$.  Hence no
+record is emitted twice.
 \end{proof}
 
 \begin{example}[A complete generated preference row at $n=41$]
@@ -1326,9 +1328,9 @@ records gives the entire strict preference row
 \[
  [F_1],\ [F_2],\ [F_3],\ [F_4]
 \]
-with keys in the order displayed.  Thus the example shows one complete list,
-including the four opposite-sign candidates rejected by the final comparison,
-rather than only one successful record.
+with keys in the order displayed.  This is the complete preference row; the
+table also records the four opposite-sign candidates removed by the last
+comparison.
 \end{example}
 
 \begin{remark}[Reduced-basis search-interval bound]
@@ -1337,22 +1339,21 @@ For a Lagrange--Gauss reduced basis,
 \[
  |2\beta|\le\alpha\le\gamma.
 \]
-Equation \eqref{eq:gram-det} then gives
-$\alpha\le2\sqrt{n/3}$.  Thus the interval \eqref{eq:nu-interval} is shorter
-than the corresponding unrestricted scan of the orthogonal-complement
-lattice.  This observation is not used in the correctness or matching-phase
-proofs.
+Equation \eqref{eq:gram-det} gives $\alpha\le2\sqrt{n/3}$.  The interval
+\eqref{eq:nu-interval} is therefore shorter than the corresponding
+unrestricted scan of the orthogonal-complement lattice.  We will not use this
+observation in the correctness or matching-phase proofs.
 \end{remark}
 
 \section{Deferred acceptance with generated preferences}
 \label{sec:deferred-acceptance}
 
-Proposition~\ref{prop:unique-stable} describes the matching by a conceptual
-global greedy procedure.  Sorting all edge keys at once, however, would defeat
-the purpose of generating preference lists one at a time.  We instead use the
-source-proposing Gale--Shapley algorithm \cite{GaleShapley}.  Here an iterator
-is a stateful generator for a fixed preference list; laziness affects only
-when an entry is computed, not the underlying preference order.
+Proposition~\ref{prop:unique-stable} describes the matching by a global greedy
+procedure.  To avoid sorting all edge keys at once, we use the
+source-proposing Gale--Shapley algorithm \cite{GaleShapley} together with the
+preference generators above.  Here an iterator means a stateful generator for
+one fixed preference list.  It changes when an entry is computed, but not the
+order of the list.
 
 Enumerate the finite residual orbit sets $\Sbar$ and $\Tbar$, and attach to
 each source $s\in\Sbar$ the ordered generator of
