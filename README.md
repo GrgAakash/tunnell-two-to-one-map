@@ -5,8 +5,9 @@ the manuscript *Stable Matching and a Two-to-One Map for Tunnell's Ternary
 Forms* by Aakash Gurung and Kyungyong Lee.
 
 The manuscript source is `2_to_1.tex`, with its BibTeX database in
-`references.bib`. The bibliography is formatted with the standard
-`amsplain` style.
+`references.bib`. Its records follow the MathSciNet BibTeX format and were
+checked with AMS BatchMRef. The bibliography is rendered with the standard
+`amsplain` style, including MR numbers for every matched record.
 
 For every odd positive squarefree congruent number `n`, Tunnell's theorem
 establishes the identity `|B(n)| = 2|A(n)|`. Combining that theorem with the
