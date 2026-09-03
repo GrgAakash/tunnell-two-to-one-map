@@ -85,7 +85,204 @@ Example~8.1.  The four canonical residual pairs in original coordinates are
 \]
 Their negatives give the other four residual pairs.
 
+\section*{How to read a fibre}
+
+For a target \(Y\in\A\), its \emph{fibre} is
+\[
+ \PhiMap^{-1}(Y)=\{X\in\B:\PhiMap(X)=Y\}.
+\]
+The map is designed so that this set has two elements.  One has even third
+coordinate and comes from equation~(4).  The other has odd third coordinate
+and comes either from a quarter-turn or from the residual matching.  In the
+two examples below, we first check that every displayed point satisfies its
+quadratic equation.  We then determine the applicable branch and compute the
+image.
+
 \newpage
+\section*{Worked example 1: a direct quarter-turn fibre}
+
+Take the target
+\[
+ Y=(2,-1,1).
+\]
+
+\noindent\textbf{Step 1: Check that \(Y\) is a target point.}
+The target equation is \(2u^2+v^2+32w^2=41\).  Substitution gives
+\[
+ 2(2)^2+(-1)^2+32(1)^2=8+1+32=41,
+\]
+so \(Y\in\A\).
+
+\medskip
+\noindent\textbf{Step 2: Find the even preimage.}
+Equation~(4) says that the even preimage of \((u,v,w)\) is \((u,v,2w)\).
+Therefore
+\[
+ X_{\mathrm{even}}=(2,-1,2).
+\]
+It really is a source point because
+\[
+ 2(2)^2+(-1)^2+8(2)^2=8+1+32=41.
+\]
+Its third coordinate is even, and equation~(4) gives
+\[
+ \PhiMap(2,-1,2)=(2,-1,1)=Y.
+\]
+
+\medskip
+\noindent\textbf{Step 3: Check the proposed odd preimage.}
+Consider
+\[
+ X_{\mathrm{odd}}=(-4,-1,1).
+\]
+It belongs to \(\B\), since
+\[
+ 2(-4)^2+(-1)^2+8(1)^2=32+1+8=41.
+\]
+Its third coordinate is odd, so the even rule cannot apply.
+
+\medskip
+\noindent\textbf{Step 4: Determine the odd branch.}
+For \(X_{\mathrm{odd}}=(x,y,z)=(-4,-1,1)\), the first two quarter-turn
+tests give
+\[
+ x+2z+y=-4+2-1=-3,
+ \qquad
+ y-x+2z=-1+4+2=5.
+\]
+Neither number is divisible by \(8\).  The third test does hold because
+\(4\mid x\).  Proposition~3.1 shows that the three tests are mutually
+exclusive, so equation~(10) is the applicable rule.
+
+\medskip
+\noindent\textbf{Step 5: Apply the quarter-turn formula.}
+Using Theorem~3.2 and equation~(10),
+\[
+\begin{aligned}
+ \PhiMap(-4,-1,1)
+   &=\Lambda_3(-4,-1,1)\\
+   &=\left(2(1),-1,-\frac{-4}{4}\right)\\
+   &=(2,-1,1)=Y.
+\end{aligned}
+\]
+
+\medskip
+\noindent\textbf{Step 6: Write the complete fibre.}
+The even branch is a bijection, so \(Y\) has only one even preimage.
+Theorem~3.2 makes the direct odd branch a bijection onto its image, so it has
+only one direct odd preimage.  The assembly in Theorem~1.2 shows that there
+are no further preimages.  Hence
+\[
+ \boxed{\PhiMap^{-1}(2,-1,1)
+ =\{(2,-1,2),\,(-4,-1,1)\}.}
+\]
+
+\newpage
+\section*{Worked example 2: a residual matching fibre}
+
+Take the target
+\[
+ Y=(4,-3,0).
+\]
+
+\noindent\textbf{Step 1: Check that \(Y\) is a target point.}
+We have
+\[
+ 2(4)^2+(-3)^2+32(0)^2=32+9=41,
+\]
+so \(Y\in\A\).
+
+\medskip
+\noindent\textbf{Step 2: Find the even preimage.}
+Equation~(4) gives
+\[
+ X_{\mathrm{even}}=(4,-3,0),
+ \qquad
+ \PhiMap(4,-3,0)=(4,-3,0)=Y.
+\]
+The same calculation \(2(4)^2+(-3)^2+8(0)^2=41\) checks that this point
+belongs to \(\B\).
+
+\medskip
+\noindent\textbf{Step 3: Check the proposed odd preimage and its branch.}
+Consider
+\[
+ X_{\mathrm{odd}}=(-2,-5,1).
+\]
+It is a source point because
+\[
+ 2(-2)^2+(-5)^2+8(1)^2=8+25+8=41.
+\]
+The direct tests are
+\[
+\begin{aligned}
+ x+2z+y&=-2+2-5=-5,\\
+ y-x+2z&=-5+2+2=-1,\\
+ x&=-2.
+\end{aligned}
+\]
+The first two values are not divisible by \(8\), and the last is not
+divisible by \(4\).  Thus none of the three quarter-turns applies, and this
+point must enter the residual matching.
+
+\medskip
+\noindent\textbf{Step 4: Follow the residual orbit through the matching.}
+In the lifted coordinates of Example~8.1, \(X_{\mathrm{odd}}\) is the
+canonical representative
+\[
+ E=(-2,-5,2)
+\]
+of the source orbit \(s_2\).  Its preference order is
+\[
+ t_1,\ t_4,\ t_2,\ t_3.
+\]
+During Algorithm~7.1, \(s_2\) first proposes to \(t_1\), but \(t_1\) keeps
+\(s_1\), whose edge has the smaller key.  It next proposes to \(t_4\), which
+keeps \(s_3\) for the same reason.  Its third proposal, to \(t_2\), is
+accepted.  This is the \(s_2\leftrightarrow t_2\) pair in Example~8.1.
+Proposition~4.5 proves that the resulting stable matching is the unique one,
+and Theorem~7.3 proves that the algorithm computes it.
+
+\medskip
+\noindent\textbf{Step 5: Recover the sign of the individual target.}
+The canonical representative of \(t_2\) is
+\[
+ F=(-4,3,0).
+\]
+The accepted signed edge has \(\eta=-1\).  Since \(E\) itself was the
+canonical source representative, \(\sigma=1\), and equation~(12) gives
+\[
+ E\longmapsto \sigma\eta F=(1)(-1)F=-F=(4,-3,0).
+\]
+Returning from the lifted coordinates to the original ones therefore gives
+\[
+ \PhiMap(-2,-5,1)=(4,-3,0)=Y.
+\]
+
+\medskip
+\noindent\textbf{Step 6: Write the complete fibre.}
+Equation~(4) supplies the unique even preimage.  Proposition~4.5 and the sign
+rule~(12) supply the unique residual odd preimage.  Theorem~1.2 excludes any
+additional preimages.  Therefore
+\[
+ \boxed{\PhiMap^{-1}(4,-3,0)
+ =\{(4,-3,0),\,(-2,-5,1)\}.}
+\]
+
+\section*{A quick third example by negation}
+
+The residual construction is equivariant under negation: if
+\(\PhiMap(X)=Y\), then \(\PhiMap(-X)=-Y\).  Negating the odd pair in the
+second example immediately gives
+\[
+ (2,5,-1)\longmapsto(-4,3,0).
+\]
+The even preimage of \((-4,3,0)\) is again \((-4,3,0)\).  Hence
+\[
+ \PhiMap^{-1}(-4,3,0)
+ =\{(-4,3,0),\,(2,5,-1)\}.
+\]
+
 \section*{Direct fibres}
 
 In each row, the middle point is the even preimage supplied by equation~(4),
@@ -119,14 +316,8 @@ $( 2, 1, 1)$ & $( 2, 1, 2)$ & $(-4,1,1)$
 \end{tabular}
 \end{center}
 
-For example,
-\[
- \PhiMap^{-1}(2,-1,1)
- =\{(2,-1,2),(-4,-1,1)\}.
-\]
-The first point maps by equation~(4), while
-$\Lambda_3(-4,-1,1)=(2,-1,1)$ by equation~(10).  This is the direct fibre
-worked out in the paper immediately after the proof of Theorem~1.2.
+The sixth row is the fibre computed step by step in Worked example~1.  The
+other seven rows use the same two formulas.
 
 \newpage
 \section*{Residual fibres}
@@ -180,6 +371,7 @@ It therefore matches the four source orbits as
  s_3\leftrightarrow t_4,\qquad
  s_4\leftrightarrow t_3,
 \]
+\noindent
 after which equation~(12) determines the individual signs displayed in the
 table.
 
