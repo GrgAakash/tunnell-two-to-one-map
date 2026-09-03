@@ -9,6 +9,10 @@ The manuscript source is `2_to_1.tex`, with its BibTeX database in
 checked with AMS BatchMRef. The bibliography is rendered with the standard
 `amsplain` style, including MR numbers for every matched record.
 
+The separate companion `n41_complete_fibre_table.tex` and its PDF give the
+complete execution of the map at `n = 41`: all 16 targets, all 32 sources,
+their two-element fibres, and the manuscript result supporting each branch.
+
 For every odd positive squarefree congruent number `n`, Tunnell's theorem
 establishes the identity `|B(n)| = 2|A(n)|`. Combining that theorem with the
 formalized construction gives an executable map from representations by

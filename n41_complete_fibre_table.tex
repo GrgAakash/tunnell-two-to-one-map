@@ -1,0 +1,202 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{mathtools,amssymb}
+\usepackage{booktabs}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\B}{\mathcal B_{41}}
+\newcommand{\A}{\mathcal A_{41}}
+\newcommand{\PhiMap}{\Phi_{41}}
+
+\title[The complete fibre table at $n=41$]
+{The Complete Fibre Table at $n=41$\\
+for the Two-to-One Tunnell Map}
+
+\author{Aakash Gurung}
+\address{Department of Mathematics, The University of Alabama, Tuscaloosa, AL 35487, USA}
+\email{agurung3@crimson.ua.edu}
+
+\author{Kyungyong Lee}
+\address{Department of Mathematics, The University of Alabama, Tuscaloosa, AL 35487, USA}
+\email{klee94@ua.edu}
+
+\date{September 2026}
+
+\hypersetup{
+  pdftitle={The Complete Fibre Table at n=41 for the Two-to-One Tunnell Map},
+  pdfauthor={Aakash Gurung and Kyungyong Lee}
+}
+
+\begin{document}
+
+\maketitle
+
+\section*{The representation sets}
+
+This note accompanies the manuscript \emph{Stable Matching and a Two-to-One
+Map for Tunnell's Ternary Forms}.  We spell out the complete map at $n=41$ in
+the original ternary coordinates.  Thus
+\[
+ \B=\{(x,y,z)\in\Z^3:2x^2+y^2+8z^2=41\},
+ \qquad
+ \A=\{(u,v,w)\in\Z^3:2u^2+v^2+32w^2=41\}.
+\]
+There are $32$ points in $\B$ and $16$ points in $\A$.  The tables below list
+every target and its two preimages, so all points of both representation sets
+occur.
+
+\section*{The three rules used in the table}
+
+\textbf{Even branch.}
+For every $(u,v,w)\in\A$, the first preimage is
+\[
+ (u,v,2w)\longmapsto(u,v,w).
+\]
+This is equation~(4) of the paper and is the upper bijection in the proof of
+Theorem~1.2.
+
+\textbf{Direct odd branch.}
+All eight direct odd points at $n=41$ lie in the third quarter-turn domain.
+Equation~(10) gives
+\[
+ \Lambda_3(x,y,z)=\left(2z,y,-\frac{x}{4}\right).
+\]
+The domain test is Proposition~3.1, and the fact that this is a bijection onto
+the direct target set is Theorem~3.2.
+
+\textbf{Residual odd branch.}
+The remaining eight odd points are paired by the unique stable matching of
+Proposition~4.5.  Equation~(12) fixes the sign when the orbit matching is
+lifted back to individual points.  Algorithm~7.1 computes the same matching,
+its correctness is Theorem~7.3, and the complete $n=41$ residual run is
+Example~8.1.  The four canonical residual pairs in original coordinates are
+\[
+\begin{aligned}
+ (-2,-5,-1)&\longmapsto(4,3,0),&
+ (-2,-5,1)&\longmapsto(4,-3,0),\\
+ (-2,5,-1)&\longmapsto(0,-3,1),&
+ (-2,5,1)&\longmapsto(0,-3,-1).
+\end{aligned}
+\]
+Their negatives give the other four residual pairs.
+
+\newpage
+\section*{Direct fibres}
+
+In each row, the middle point is the even preimage supplied by equation~(4),
+and the last point is the odd preimage supplied by Theorem~3.2 and
+equation~(10).
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{@{}c c c c@{}}
+\toprule
+target $Y\in\A$ & even preimage & odd preimage & direct computation \\
+\midrule
+$(-2,-1,-1)$ & $(-2,-1,-2)$ & $(4,-1,-1)$
+  & $\Lambda_3(4,-1,-1)=Y$ \\
+$(-2,-1, 1)$ & $(-2,-1, 2)$ & $(-4,-1,-1)$
+  & $\Lambda_3(-4,-1,-1)=Y$ \\
+$(-2, 1,-1)$ & $(-2, 1,-2)$ & $(4, 1,-1)$
+  & $\Lambda_3(4,1,-1)=Y$ \\
+$(-2, 1, 1)$ & $(-2, 1, 2)$ & $(-4,1,-1)$
+  & $\Lambda_3(-4,1,-1)=Y$ \\
+$( 2,-1,-1)$ & $( 2,-1,-2)$ & $(4,-1,1)$
+  & $\Lambda_3(4,-1,1)=Y$ \\
+$( 2,-1, 1)$ & $( 2,-1, 2)$ & $(-4,-1,1)$
+  & $\Lambda_3(-4,-1,1)=Y$ \\
+$( 2, 1,-1)$ & $( 2, 1,-2)$ & $(4,1,1)$
+  & $\Lambda_3(4,1,1)=Y$ \\
+$( 2, 1, 1)$ & $( 2, 1, 2)$ & $(-4,1,1)$
+  & $\Lambda_3(-4,1,1)=Y$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For example,
+\[
+ \PhiMap^{-1}(2,-1,1)
+ =\{(2,-1,2),(-4,-1,1)\}.
+\]
+The first point maps by equation~(4), while
+$\Lambda_3(-4,-1,1)=(2,-1,1)$ by equation~(10).  This is the direct fibre
+worked out in the paper immediately after the proof of Theorem~1.2.
+
+\newpage
+\section*{Residual fibres}
+
+The notation $s_i$ refers to the four canonical source orbits in
+Example~8.1.  A minus sign indicates that equation~(12) applies the
+antipodal lift to the corresponding canonical pair.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{@{}c c c c@{}}
+\toprule
+target $Y\in\A$ & even preimage & odd preimage & residual origin \\
+\midrule
+$(-4,-3,0)$ & $(-4,-3,0)$ & $(2,5,1)$
+  & negative of the $s_1$ pair \\
+$(-4, 3,0)$ & $(-4, 3,0)$ & $(2,5,-1)$
+  & negative of the $s_2$ pair \\
+$(0,-3,-1)$ & $(0,-3,-2)$ & $(-2,5,1)$
+  & $s_4$ pair \\
+$(0,-3, 1)$ & $(0,-3, 2)$ & $(-2,5,-1)$
+  & $s_3$ pair \\
+$(0, 3,-1)$ & $(0, 3,-2)$ & $(2,-5,1)$
+  & negative of the $s_3$ pair \\
+$(0, 3, 1)$ & $(0, 3, 2)$ & $(2,-5,-1)$
+  & negative of the $s_4$ pair \\
+$(4,-3,0)$ & $(4,-3,0)$ & $(-2,-5,1)$
+  & $s_2$ pair \\
+$(4, 3,0)$ & $(4, 3,0)$ & $(-2,-5,-1)$
+  & $s_1$ pair \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The stable matching in Example~8.1 is obtained from the proposal sequence
+\[
+\begin{aligned}
+ s_1&\to t_1,&
+ s_2&\to t_1\ \text{(rejected)},&
+ s_3&\to t_4,\\
+ s_4&\to t_3,&
+ s_2&\to t_4\ \text{(rejected)},&
+ s_2&\to t_2.
+\end{aligned}
+\]
+It therefore matches the four source orbits as
+\[
+ s_1\leftrightarrow t_1,\qquad
+ s_2\leftrightarrow t_2,\qquad
+ s_3\leftrightarrow t_4,\qquad
+ s_4\leftrightarrow t_3,
+\]
+after which equation~(12) determines the individual signs displayed in the
+table.
+
+\section*{Exhaustiveness check}
+
+The direct table contains the eight targets in the image of the quarter-turn
+layer.  The residual table contains the other eight targets.  Their even
+preimages are the $16$ points of $\B$ having even third coordinate; their odd
+preimages consist of the eight direct points and the eight residual points.
+Thus the tables contain $16$ distinct targets and $32$ distinct sources, and
+each target has exactly two preimages, as asserted by Theorem~1.2.
+
+The table was also regenerated from the formalized executable map
+\texttt{tunnellMapTotal41}.  The Lean declarations
+\texttt{card\_BRep\_41}, \texttt{card\_ARep\_41}, and
+\texttt{tunnellMapTotal41\_exactly\_two} verify respectively that the source
+and target cardinalities are $32$ and $16$ and that every displayed target
+has exactly two preimages.
+
+\end{document}
