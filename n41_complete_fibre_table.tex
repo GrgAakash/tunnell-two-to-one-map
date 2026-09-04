@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{mathtools,amssymb}
-\usepackage{booktabs}
+\usepackage{array,booktabs}
 \usepackage[margin=0.85in]{geometry}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
@@ -13,9 +13,12 @@
 \newcommand{\A}{\mathcal A_{41}}
 \newcommand{\PhiMap}{\Phi_{41}}
 
-\title[The complete fibre table at $n=41$]
-{The Complete Fibre Table at $n=41$\\
-for the Two-to-One Tunnell Map}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+\title[The Tunnell map at $n=41$]
+{The Tunnell Map at $n=41$:\\
+A First Walkthrough and the Complete Table}
 
 \author{Aakash Gurung}
 \address{Department of Mathematics, The University of Alabama, Tuscaloosa, AL 35487, USA}
@@ -28,7 +31,7 @@ for the Two-to-One Tunnell Map}
 \date{September 2026}
 
 \hypersetup{
-  pdftitle={The Complete Fibre Table at n=41 for the Two-to-One Tunnell Map},
+  pdftitle={The Tunnell Map at n=41: A First Walkthrough and the Complete Table},
   pdfauthor={Aakash Gurung and Kyungyong Lee}
 }
 
@@ -36,302 +39,583 @@ for the Two-to-One Tunnell Map}
 
 \maketitle
 
-\section*{The representation sets}
+\section*{1. What is the problem?}
 
-This note accompanies the manuscript \emph{Stable Matching and a Two-to-One
-Map for Tunnell's Ternary Forms}.  We spell out the complete map at $n=41$ in
-the original ternary coordinates.  Thus
+No number theory is needed to follow the calculations in this note.  We use
+only integer triples, squares, parity, and divisibility.
+
+An \emph{integer} is a whole number such as
+\(-3,-2,-1,0,1,2,3\).  An \emph{integer triple} is an ordered list of three
+integers, for example \((2,-1,2)\).  We begin with the equation
 \[
- \B=\{(x,y,z)\in\Z^3:2x^2+y^2+8z^2=41\},
- \qquad
- \A=\{(u,v,w)\in\Z^3:2u^2+v^2+32w^2=41\}.
+ 2x^2+y^2+8z^2=41. \tag{source equation}
 \]
-There are $32$ points in $\B$ and $16$ points in $\A$.  The tables below list
-every target and its two preimages, so all points of both representation sets
-occur.
+Every integer triple \((x,y,z)\) satisfying this equation is called a
+\emph{source point}.  We write \(\B\) for the list of all source points.
 
-\section*{The three rules used in the table}
-
-\textbf{Even branch.}
-For every $(u,v,w)\in\A$, the first preimage is
+We also consider the equation
 \[
- (u,v,2w)\longmapsto(u,v,w).
+ 2u^2+v^2+32w^2=41. \tag{target equation}
 \]
-This is equation~(4) of the paper and is the upper bijection in the proof of
-Theorem~1.2.
-
-\textbf{Direct odd branch.}
-All eight direct odd points at $n=41$ lie in the third quarter-turn domain.
-Equation~(10) gives
-\[
- \Lambda_3(x,y,z)=\left(2z,y,-\frac{x}{4}\right).
-\]
-The domain test is Proposition~3.1, and the fact that this is a bijection onto
-the direct target set is Theorem~3.2.
-
-\textbf{Residual odd branch.}
-The remaining eight odd points are paired by the unique stable matching of
-Proposition~4.5.  Equation~(12) fixes the sign when the orbit matching is
-lifted back to individual points.  Algorithm~7.1 computes the same matching,
-its correctness is Theorem~7.3, and the complete $n=41$ residual run is
-Example~8.1.  The four canonical residual pairs in original coordinates are
+Every integer triple \((u,v,w)\) satisfying this equation is called a
+\emph{target point}.  We write \(\A\) for the list of all target points.
+In standard set notation,
 \[
 \begin{aligned}
- (-2,-5,-1)&\longmapsto(4,3,0),&
- (-2,-5,1)&\longmapsto(4,-3,0),\\
- (-2,5,-1)&\longmapsto(0,-3,1),&
- (-2,5,1)&\longmapsto(0,-3,-1).
+ \B&=\{(x,y,z)\in\Z^3:2x^2+y^2+8z^2=41\},\\
+ \A&=\{(u,v,w)\in\Z^3:2u^2+v^2+32w^2=41\}.
 \end{aligned}
 \]
-Their negatives give the other four residual pairs.
+The symbol \(\Z^3\) simply means ``all ordered triples of integers.''
 
-\section*{How to read a fibre}
+A direct finite check gives
+\[
+ |\B|=32,
+ \qquad
+ |\A|=16.
+\]
+Thus there are twice as many source points as target points.  The goal is not
+merely to count them.  We want one fixed rule that sends every source point to
+a target point, with exactly two source points landing on each target point.
 
-For a target \(Y\in\A\), its \emph{fibre} is
+\newpage
+\section*{2. What does the map notation mean?}
+
+The symbol
+\[
+ \PhiMap:\B\longrightarrow\A
+\]
+denotes our rule.  You may think of \(\PhiMap\) as a machine: a source point
+is the input, and a target point is the output.  For example, one calculation
+below will show that
+\[
+ \PhiMap(-4,-1,1)=(2,-1,1).
+\]
+
+If \(Y\) is a target point, a \emph{preimage} of \(Y\) is an input that the
+machine sends to \(Y\).  The collection of all such inputs is called the
+\emph{fibre} over \(Y\):
 \[
  \PhiMap^{-1}(Y)=\{X\in\B:\PhiMap(X)=Y\}.
 \]
-The map is designed so that this set has two elements.  One has even third
-coordinate and comes from equation~(4).  The other has odd third coordinate
-and comes either from a quarter-turn or from the residual matching.  In the
-two examples below, we first check that every displayed point satisfies its
-quadratic equation.  We then determine the applicable branch and compute the
-image.
+The superscript \(-1\) here does not mean the number \(1/\PhiMap\).  It means
+``look backward and collect all inputs that produce this output.''
 
-\newpage
-\section*{Worked example 1: a direct quarter-turn fibre}
-
-Take the target
+The statement that \(\PhiMap\) is \emph{two-to-one} means
 \[
- Y=(2,-1,1).
+ \text{every target point has exactly two preimages.}
 \]
-
-\noindent\textbf{Step 1: Check that \(Y\) is a target point.}
-The target equation is \(2u^2+v^2+32w^2=41\).  Substitution gives
-\[
- 2(2)^2+(-1)^2+32(1)^2=8+1+32=41,
-\]
-so \(Y\in\A\).
-
-\medskip
-\noindent\textbf{Step 2: Find the even preimage.}
-Equation~(4) says that the even preimage of \((u,v,w)\) is \((u,v,2w)\).
-Therefore
-\[
- X_{\mathrm{even}}=(2,-1,2).
-\]
-It really is a source point because
-\[
- 2(2)^2+(-1)^2+8(2)^2=8+1+32=41.
-\]
-Its third coordinate is even, and equation~(4) gives
-\[
- \PhiMap(2,-1,2)=(2,-1,1)=Y.
-\]
-
-\medskip
-\noindent\textbf{Step 3: Check the proposed odd preimage.}
-Consider
-\[
- X_{\mathrm{odd}}=(-4,-1,1).
-\]
-It belongs to \(\B\), since
-\[
- 2(-4)^2+(-1)^2+8(1)^2=32+1+8=41.
-\]
-Its third coordinate is odd, so the even rule cannot apply.
-
-\medskip
-\noindent\textbf{Step 4: Determine the odd branch.}
-For \(X_{\mathrm{odd}}=(x,y,z)=(-4,-1,1)\), the first two quarter-turn
-tests give
-\[
- x+2z+y=-4+2-1=-3,
- \qquad
- y-x+2z=-1+4+2=5.
-\]
-Neither number is divisible by \(8\).  The third test does hold because
-\(4\mid x\).  Proposition~3.1 shows that the three tests are mutually
-exclusive, so equation~(10) is the applicable rule.
-
-\medskip
-\noindent\textbf{Step 5: Apply the quarter-turn formula.}
-Using Theorem~3.2 and equation~(10),
-\[
-\begin{aligned}
- \PhiMap(-4,-1,1)
-   &=\Lambda_3(-4,-1,1)\\
-   &=\left(2(1),-1,-\frac{-4}{4}\right)\\
-   &=(2,-1,1)=Y.
-\end{aligned}
-\]
-
-\medskip
-\noindent\textbf{Step 6: Write the complete fibre.}
-The even branch is a bijection, so \(Y\) has only one even preimage.
-Theorem~3.2 makes the direct odd branch a bijection onto its image, so it has
-only one direct odd preimage.  The assembly in Theorem~1.2 shows that there
-are no further preimages.  Hence
-\[
- \boxed{\PhiMap^{-1}(2,-1,1)
- =\{(2,-1,2),\,(-4,-1,1)\}.}
-\]
-
-\newpage
-\section*{Worked example 2: a residual matching fibre}
-
-Take the target
-\[
- Y=(4,-3,0).
-\]
-
-\noindent\textbf{Step 1: Check that \(Y\) is a target point.}
-We have
-\[
- 2(4)^2+(-3)^2+32(0)^2=32+9=41,
-\]
-so \(Y\in\A\).
-
-\medskip
-\noindent\textbf{Step 2: Find the even preimage.}
-Equation~(4) gives
-\[
- X_{\mathrm{even}}=(4,-3,0),
- \qquad
- \PhiMap(4,-3,0)=(4,-3,0)=Y.
-\]
-The same calculation \(2(4)^2+(-3)^2+8(0)^2=41\) checks that this point
-belongs to \(\B\).
-
-\medskip
-\noindent\textbf{Step 3: Check the proposed odd preimage and its branch.}
-Consider
-\[
- X_{\mathrm{odd}}=(-2,-5,1).
-\]
-It is a source point because
-\[
- 2(-2)^2+(-5)^2+8(1)^2=8+25+8=41.
-\]
-The direct tests are
-\[
-\begin{aligned}
- x+2z+y&=-2+2-5=-5,\\
- y-x+2z&=-5+2+2=-1,\\
- x&=-2.
-\end{aligned}
-\]
-The first two values are not divisible by \(8\), and the last is not
-divisible by \(4\).  Thus none of the three quarter-turns applies, and this
-point must enter the residual matching.
-
-\medskip
-\noindent\textbf{Step 4: Follow the residual orbit through the matching.}
-In the lifted coordinates of Example~8.1, \(X_{\mathrm{odd}}\) is the
-canonical representative
-\[
- E=(-2,-5,2)
-\]
-of the source orbit \(s_2\).  Its preference order is
-\[
- t_1,\ t_4,\ t_2,\ t_3.
-\]
-During Algorithm~7.1, \(s_2\) first proposes to \(t_1\), but \(t_1\) keeps
-\(s_1\), whose edge has the smaller key.  It next proposes to \(t_4\), which
-keeps \(s_3\) for the same reason.  Its third proposal, to \(t_2\), is
-accepted.  This is the \(s_2\leftrightarrow t_2\) pair in Example~8.1.
-Proposition~4.5 proves that the resulting stable matching is the unique one,
-and Theorem~7.3 proves that the algorithm computes it.
-
-\medskip
-\noindent\textbf{Step 5: Recover the sign of the individual target.}
-The canonical representative of \(t_2\) is
-\[
- F=(-4,3,0).
-\]
-The accepted signed edge has \(\eta=-1\).  Since \(E\) itself was the
-canonical source representative, \(\sigma=1\), and equation~(12) gives
-\[
- E\longmapsto \sigma\eta F=(1)(-1)F=-F=(4,-3,0).
-\]
-Returning from the lifted coordinates to the original ones therefore gives
-\[
- \PhiMap(-2,-5,1)=(4,-3,0)=Y.
-\]
-
-\medskip
-\noindent\textbf{Step 6: Write the complete fibre.}
-Equation~(4) supplies the unique even preimage.  Proposition~4.5 and the sign
-rule~(12) supply the unique residual odd preimage.  Theorem~1.2 excludes any
-additional preimages.  Therefore
-\[
- \boxed{\PhiMap^{-1}(4,-3,0)
- =\{(4,-3,0),\,(-2,-5,1)\}.}
-\]
-
-\section*{A quick third example by negation}
-
-The residual construction is equivariant under negation: if
-\(\PhiMap(X)=Y\), then \(\PhiMap(-X)=-Y\).  Negating the odd pair in the
-second example immediately gives
-\[
- (2,5,-1)\longmapsto(-4,3,0).
-\]
-The even preimage of \((-4,3,0)\) is again \((-4,3,0)\).  Hence
-\[
- \PhiMap^{-1}(-4,3,0)
- =\{(-4,3,0),\,(2,5,-1)\}.
-\]
-
-\section*{Direct fibres}
-
-In each row, the middle point is the even preimage supplied by equation~(4),
-and the last point is the odd preimage supplied by Theorem~3.2 and
-equation~(10).
+The two examples below calculate both preimages, not just one of them.
 
 \begin{center}
-\small
-\renewcommand{\arraystretch}{1.22}
-\begin{tabular}{@{}c c c c@{}}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}>{\bfseries}p{0.17\textwidth}p{0.70\textwidth}@{}}
 \toprule
-target $Y\in\A$ & even preimage & odd preimage & direct computation \\
+Word & Meaning in this note \\
 \midrule
-$(-2,-1,-1)$ & $(-2,-1,-2)$ & $(4,-1,-1)$
-  & $\Lambda_3(4,-1,-1)=Y$ \\
-$(-2,-1, 1)$ & $(-2,-1, 2)$ & $(-4,-1,-1)$
-  & $\Lambda_3(-4,-1,-1)=Y$ \\
-$(-2, 1,-1)$ & $(-2, 1,-2)$ & $(4, 1,-1)$
-  & $\Lambda_3(4,1,-1)=Y$ \\
-$(-2, 1, 1)$ & $(-2, 1, 2)$ & $(-4,1,-1)$
-  & $\Lambda_3(-4,1,-1)=Y$ \\
-$( 2,-1,-1)$ & $( 2,-1,-2)$ & $(4,-1,1)$
-  & $\Lambda_3(4,-1,1)=Y$ \\
-$( 2,-1, 1)$ & $( 2,-1, 2)$ & $(-4,-1,1)$
-  & $\Lambda_3(-4,-1,1)=Y$ \\
-$( 2, 1,-1)$ & $( 2, 1,-2)$ & $(4,1,1)$
-  & $\Lambda_3(4,1,1)=Y$ \\
-$( 2, 1, 1)$ & $( 2, 1, 2)$ & $(-4,1,1)$
-  & $\Lambda_3(-4,1,1)=Y$ \\
+source & An integer triple satisfying the source equation. \\
+target & An integer triple satisfying the target equation. \\
+map & A rule assigning one target to each source. \\
+preimage & A source that maps to a specified target. \\
+fibre & The complete collection of preimages of one target. \\
+even/odd & An integer is even if it is divisible by \(2\); otherwise it is odd. \\
+\(a\mid b\) & ``\(a\) divides \(b\)'': there is an integer \(k\) with \(b=ak\). \\
+branch & One case of a rule defined by several different cases. \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The sixth row is the fibre computed step by step in Worked example~1.  The
-other seven rows use the same two formulas.
+\section*{3. The map in plain language}
+
+The rule first looks at the third coordinate \(z\) of a source
+\((x,y,z)\).
+
+\subsection*{Case A: the third coordinate is even}
+
+Write \(z=2w\), and halve the third coordinate:
+\[
+ (x,y,2w)\longmapsto(x,y,w). \tag{even rule}
+\]
+Why does this work?  If the source equation holds, then
+\[
+ 2x^2+y^2+8(2w)^2
+ =2x^2+y^2+32w^2=41,
+\]
+which is exactly the target equation.  Conversely, each target \((u,v,w)\)
+has exactly one even source above it, namely \((u,v,2w)\).
+
+This already gives one preimage of every target.  We still need one more.
+
+\subsection*{Case B: the third coordinate is odd}
+
+For an odd source \((x,y,z)\), we perform three divisibility tests:
+\[
+\begin{array}{c|c|c}
+\text{test}&\text{condition}&\text{rule used if the condition holds}\\ \hline
+1&8\mid(x+2z+y)&\Lambda_1\\
+2&8\mid(y-x+2z)&\Lambda_2\\
+3&4\mid x&\Lambda_3.
+\end{array}
+\]
+The paper proves that at most one test can succeed for the same source
+(Proposition~3.1).  If a test succeeds, the corresponding explicit formula
+is used.  These are the \emph{direct} odd sources.  At \(n=41\), every direct
+odd source uses the third formula
+\[
+ \Lambda_3(x,y,z)=\left(2z,y,-\frac{x}{4}\right). \tag{direct rule at \(n=41\)}
+\]
+The condition \(4\mid x\) ensures that \(-x/4\) is an integer.
+
+If none of the three tests succeeds, the point is called \emph{residual}.
+The residual points are paired with the remaining targets by the matching
+procedure explained before Worked Example~2.
+
+The two odd mechanisms are alternatives:
+\[
+ \boxed{\text{an odd source is either direct or residual, never both.}}
+\]
+The direct formulas pair their sources one-to-one with some targets.  The
+residual matching pairs all remaining odd sources one-to-one with all
+remaining targets.  Therefore every target receives one even preimage and
+one odd preimage.  This is the structure behind the two-to-one result.
+
+\paragraph{Where this appears in the paper.}
+The even rule is equation~(4).  The three direct formulas are equations
+(8)--(10), and their one-to-one property is Theorem~3.2.  The complete map is
+Theorem~1.2.
 
 \newpage
-\section*{Residual fibres}
+\section*{4. Worked Example 1: a direct fibre}
 
-The notation $s_i$ refers to the four canonical source orbits in
-Example~8.1.  A minus sign indicates that equation~(12) applies the
-antipodal lift to the corresponding canonical pair.
+We will find \emph{every} source point sent to
+\[
+ Y=(2,-1,1).
+\]
+
+\subsection*{Step 1: Check the target point}
+
+Insert \(u=2\), \(v=-1\), and \(w=1\) into the target equation:
+\[
+\begin{aligned}
+ 2u^2+v^2+32w^2
+ &=2(2)^2+(-1)^2+32(1)^2\\
+ &=2\cdot4+1+32\\
+ &=8+1+32=41.
+\end{aligned}
+\]
+Therefore \(Y\in\A\).
+
+\subsection*{Step 2: Find the even preimage}
+
+The even rule halves the source's third coordinate.  To run that rule
+backward, we double the target's third coordinate:
+\[
+ (u,v,w)=(2,-1,1)
+ \quad\leadsto\quad
+ X_{\mathrm{even}}=(u,v,2w)=(2,-1,2).
+\]
+Check that this is a source:
+\[
+ 2(2)^2+(-1)^2+8(2)^2=8+1+32=41.
+\]
+Applying the map now gives
+\[
+ \PhiMap(2,-1,2)=(2,-1,1)=Y.
+\]
+
+\subsection*{Step 3: Find the odd preimage}
+
+For the third direct branch, the inverse formula in Theorem~3.2 is
+\[
+ (u,v,w)\longmapsto\left(-4w,v,\frac{u}{2}\right)
+ \quad\text{when }u\equiv2\pmod4.
+\]
+The notation \(u\equiv2\pmod4\) means that \(u-2\) is divisible by \(4\).
+Here \(u=2\), so the condition holds.  Substitution gives
+\[
+ X_{\mathrm{odd}}
+ =\left(-4(1),-1,\frac{2}{2}\right)
+ =(-4,-1,1).
+\]
+Its third coordinate is odd.  Check that it is a source:
+\[
+ 2(-4)^2+(-1)^2+8(1)^2=32+1+8=41.
+\]
+
+\newpage
+\subsection*{Step 4: Check which odd rule applies}
+
+For \((x,y,z)=(-4,-1,1)\), the three tests become
+\[
+\begin{array}{c|c|c}
+\text{test}&\text{value}&\text{does the required number divide it?}\\ \hline
+1&x+2z+y=-4+2-1=-3&8\nmid-3\\
+2&y-x+2z=-1+4+2=5&8\nmid5\\
+3&x=-4&4\mid-4.
+\end{array}
+\]
+Thus only Test~3 succeeds, so \(\Lambda_3\) is the correct branch.
+
+\subsection*{Step 5: Apply the formula}
+
+Substitute \(x=-4\), \(y=-1\), and \(z=1\):
+\[
+\begin{aligned}
+ \PhiMap(-4,-1,1)
+ &=\Lambda_3(-4,-1,1)\\
+ &=\left(2(1),-1,-\frac{-4}{4}\right)\\
+ &=(2,-1,1)=Y.
+\end{aligned}
+\]
+
+\subsection*{Step 6: Collect the complete answer}
+
+We found one even preimage and one odd preimage:
+\[
+ \boxed{\PhiMap^{-1}(2,-1,1)
+ =\{(2,-1,2),\,(-4,-1,1)\}.}
+\]
+There cannot be another even preimage because doubling \(w\) gives only one
+integer.  There cannot be another odd preimage because Theorem~3.2 proves
+that the direct rule is one-to-one onto its target set; residual sources are
+assigned only to targets not already used by the direct rule.  Theorem~1.2
+assembles these facts and states that the displayed list is the whole fibre.
+
+\paragraph{Paper references.}
+Even rule: equation~(4).  Branch test: Proposition~3.1.  Formula:
+equation~(10).  Direct bijection: Theorem~3.2.  Complete fibre:
+Theorem~1.2.
+
+\newpage
+\section*{5. The extra idea needed for a residual source}
+
+Worked Example~1 used a short formula.  Some odd source points fail all three
+direct tests.  The second example shows what happens then.
+
+\subsection*{Why points are first grouped into sign-pairs}
+
+If \((a,b,c)\) satisfies either of our equations, then
+\((-a,-b,-c)\) also satisfies it, because squaring removes every minus sign.
+The residual construction temporarily treats these two points as one
+\emph{sign-pair}:
+\[
+ \{(a,b,c),(-a,-b,-c)\}.
+\]
+The paper calls such a sign-pair an \emph{antipodal orbit}.  In this note,
+``orbit'' means only this two-element pair.
+
+\subsection*{Why the third coordinate is rescaled}
+
+For residual bookkeeping, the paper replaces
+\[
+ (x,y,z)\longmapsto(x,y,2z)
+ \quad\text{and}\quad
+ (u,v,w)\longmapsto(u,v,4w).
+\]
+These are called \emph{lifted coordinates}.  They put both sides into the
+same equation
+\[
+ Q(a,b,c)=2a^2+b^2+2c^2=41.
+\]
+Nothing mysterious happens here: to return to the original coordinates, we
+halve the source's last coordinate or divide the target's last coordinate by
+four.
+
+After the direct points have been removed, the four residual source
+sign-pairs and four residual target sign-pairs at \(n=41\) are represented by
+\[
+\begin{array}{c|c@{\qquad}c|c}
+\text{source label}&\text{listed source}&\text{target label}&\text{listed target}\\
+\midrule
+s_1&(-2,-5,-2)&t_1&(-4,-3,0)\\
+s_2&(-2,-5, 2)&t_2&(-4, 3,0)\\
+s_3&(-2, 5,-2)&t_3&(0,-3,-4)\\
+s_4&(-2, 5, 2)&t_4&(0,-3, 4).
+\end{array}
+\]
+Each listed point stands for itself together with its negative.
+
+\subsection*{Where one of the keys comes from}
+
+The keys are arithmetic data, not arbitrary preference numbers.  Here is one
+complete calculation.  Take the listed points
+\[
+ E=(-2,-5,2)\quad\text{from }s_2,
+ \qquad
+ F=(-4,-3,0)\quad\text{from }t_1.
+\]
+Form the two midpoint vectors
+\[
+ \frac{E+F}{2}=(-3,-4,1),
+ \qquad
+ \frac{E-F}{2}=(1,-1,1).
+\]
+The paper changes a vector's sign, if needed, so that its first nonzero
+coordinate is positive.  Thus the first direction becomes \((3,4,-1)\),
+while the second stays \((1,-1,1)\).  If all three coordinates had a common
+factor, we would first divide by their greatest common divisor.  No division
+is needed here.
+
+For a direction \(d=(d_1,d_2,d_3)\), its key is
+\[
+ \bigl(Q(d),d_1,d_2,d_3\bigr),
+ \qquad
+ Q(d)=2d_1^2+d_2^2+2d_3^2.
+\]
+The two keys in this example begin with
+\[
+ Q(3,4,-1)=36,
+ \qquad
+ Q(1,-1,1)=5.
+\]
+The smaller key is therefore
+\[
+ (5,1,-1,1).
+\]
+This is exactly the key assigned to the pair \(s_2t_1\) below.  The other
+keys are obtained by the same calculation.
+
+\subsection*{The matching procedure}
+
+The construction assigns a four-number \emph{key} to every possible
+source--target sign-pair.  Keys are compared from left to right; at the first
+place where they differ, the smaller number wins.  For example,
+\[
+ (5,1,-1,-1)<(5,1,-1,1)
+\]
+because the first three entries agree and \(-1<1\) in the fourth entry.
+
+Each source proposes to targets in increasing key order.  A target with no
+current proposal holds the proposal.  If a target already holds one, it keeps
+the proposal with the smaller key and rejects the other source.  A rejected
+source tries its next target.  When every source is held by a different
+target, the process stops.  The word \emph{stable} means that there is no
+unmatched source--target pair that would both prefer one another to their
+assigned partners.
+
+For \(s_2\), the target order is
+\[
+ t_1,\quad t_4,\quad t_2,\quad t_3,
+\]
+with keys
+\[
+ (5,1,-1,1),\quad (5,1,1,1),\quad
+ (20,1,-4,1),\quad (20,1,4,1).
+\]
+This is the row of data used in Worked Example~2.
+
+\section*{6. Worked Example 2: a residual fibre}
+
+We will find every source point sent to
+\[
+ Y=(4,-3,0).
+\]
+
+\subsection*{Step 1: Check the target point}
+
+Substitute \(u=4\), \(v=-3\), and \(w=0\):
+\[
+ 2(4)^2+(-3)^2+32(0)^2=32+9+0=41.
+\]
+Therefore \(Y\in\A\).
+
+\subsection*{Step 2: Find the even preimage}
+
+Double the last coordinate of the target:
+\[
+ X_{\mathrm{even}}=(u,v,2w)=(4,-3,0).
+\]
+Because \(w=0\), the triple happens to look unchanged.  It satisfies the
+source equation:
+\[
+ 2(4)^2+(-3)^2+8(0)^2=32+9=41.
+\]
+The even rule gives
+\[
+ \PhiMap(4,-3,0)=(4,-3,0)=Y.
+\]
+
+\subsection*{Step 3: Locate the target sign-pair}
+
+The target lift multiplies the last coordinate by four.  Since our target has
+last coordinate zero, its lift is still
+\[
+ (4,-3,0).
+\]
+The listed representative of \(t_2\) is \(F=(-4,3,0)\).  Its negative is
+\[
+ -F=(4,-3,0)=Y.
+\]
+Therefore our target belongs to the sign-pair \(t_2\).  To find its odd
+preimage, we now determine which source sign-pair the matching assigns to
+\(t_2\).
+
+\subsection*{Step 4: Run the small matching for n=41}
+
+The complete proposal run is shown below.  ``Held'' means tentatively
+accepted; a held proposal can still be replaced by a better one.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.24}
+\begin{tabular}{@{}c p{0.63\textwidth}@{}}
+\toprule
+proposal & what happens \\
+\midrule
+\(s_1\to t_1\) & \(t_1\) is empty, so it holds \(s_1\). \\
+\(s_2\to t_1\) & Rejected.  The key for \(s_1t_1\) is
+\((5,1,-1,-1)\), smaller than the key \((5,1,-1,1)\) for \(s_2t_1\). \\
+\(s_3\to t_4\) & \(t_4\) is empty, so it holds \(s_3\). \\
+\(s_4\to t_3\) & \(t_3\) is empty, so it holds \(s_4\). \\
+\(s_2\to t_4\) & Rejected.  The key for \(s_3t_4\) is
+\((5,1,-1,-1)\), smaller than the key \((5,1,1,1)\) for \(s_2t_4\). \\
+\(s_2\to t_2\) & \(t_2\) is empty, so it holds \(s_2\).  All four sources
+are now held, so the algorithm stops. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The final pairing of sign-pairs is
+\[
+ s_1\leftrightarrow t_1,\qquad
+ s_2\leftrightarrow t_2,\qquad
+ s_3\leftrightarrow t_4,\qquad
+ s_4\leftrightarrow t_3.
+\]
+In particular, \(t_2\) is matched with \(s_2\).  The listed representative of
+\(s_2\) is
+\[
+ E=(-2,-5,2).
+\]
+Undoing the source lift means halving the last coordinate, which gives the
+odd source candidate
+\[
+ X_{\mathrm{odd}}=(-2,-5,1).
+\]
+
+\newpage
+\subsection*{Step 5: Verify the source and decide its target sign}
+
+First check that the candidate is a source:
+\[
+ 2(-2)^2+(-5)^2+8(1)^2=8+25+8=41.
+\]
+Its three direct tests are
+\[
+\begin{array}{c|c|c}
+\text{test}&\text{value}&\text{result}\\ \hline
+1&x+2z+y=-2+2-5=-5&8\nmid-5\\
+2&y-x+2z=-5+2+2=-1&8\nmid-1\\
+3&x=-2&4\nmid-2.
+\end{array}
+\]
+All three tests fail, confirming that this source belongs to the residual
+rather than the direct branch.
+
+Matching the two sign-pairs is not yet enough: the actual source must map to
+either \(F\) or its negative \(-F=(4,-3,0)\).  The construction compares the
+two midpoint directions.
+
+For \(E=(-2,-5,2)\) and \(F=(-4,3,0)\), the two half-sums are
+\[
+ \frac{E+F}{2}=(-3,-1,1),
+ \qquad
+ \frac{E-F}{2}=(1,-4,1).
+\]
+The first vector is the midpoint of \(E\) and \(F\).  The second is the
+midpoint of \(E\) and \(-F\), because
+\[
+ \frac{E+(-F)}{2}=\frac{E-F}{2}.
+\]
+Changing the sign of the first vector gives the oriented direction
+\((3,1,-1)\).  Their \(Q\)-values are
+\[
+ Q(3,1,-1)=2(3)^2+1^2+2(-1)^2=21,
+\]
+and
+\[
+ Q(1,-4,1)=2(1)^2+(-4)^2+2(1)^2=20.
+\]
+Since \(20<21\), the second choice wins.  It corresponds to \(-F\), so
+\[
+ E\longmapsto-F=(4,-3,0).
+\]
+Returning from the lifted source \(E=(-2,-5,2)\) to the original source
+halves the last coordinate and gives \((-2,-5,1)\).  Hence
+\[
+ \PhiMap(-2,-5,1)=(4,-3,0)=Y.
+\]
+
+\subsection*{Step 6: Collect the complete answer}
+
+Together with the even preimage from Step~2, we have
+\[
+ \boxed{\PhiMap^{-1}(4,-3,0)
+ =\{(4,-3,0),\,(-2,-5,1)\}.}
+\]
+The residual algorithm pairs each remaining source sign-pair with exactly one
+remaining target sign-pair.  Proposition~4.5 proves that this matching is the
+unique stable one, equation~(12) supplies the point-level sign, and
+Theorem~7.3 proves that Algorithm~7.1 computes the matching.  Theorem~1.2 then
+shows that no third preimage exists.
+
+\paragraph{Paper references.}
+Sign lift: equation~(12).  Unique matching: Proposition~4.5.  Algorithm:
+Algorithm~7.1.  Correctness of the algorithm: Theorem~7.3.  This complete
+\(n=41\) run: Example~8.1.  Complete fibre: Theorem~1.2.
+
+\newpage
+\section*{7. The complete answer for n=41}
+
+The next two tables contain every point.  Read one row horizontally:
+\[
+ \boxed{\text{target}\quad\longleftarrow\quad
+ \text{its even preimage and its odd preimage}.}
+\]
+The first table contains the eight targets whose odd preimage uses the direct
+formula.  The second contains the eight targets whose odd preimage comes from
+the residual matching.
+
+\subsection*{Direct fibres}
 
 \begin{center}
 \small
 \renewcommand{\arraystretch}{1.22}
 \begin{tabular}{@{}c c c c@{}}
 \toprule
-target $Y\in\A$ & even preimage & odd preimage & residual origin \\
+target & even preimage & odd preimage & odd rule \\
+\midrule
+$(-2,-1,-1)$ & $(-2,-1,-2)$ & $(4,-1,-1)$
+  & $\Lambda_3(4,-1,-1)$ \\
+$(-2,-1, 1)$ & $(-2,-1, 2)$ & $(-4,-1,-1)$
+  & $\Lambda_3(-4,-1,-1)$ \\
+$(-2, 1,-1)$ & $(-2, 1,-2)$ & $(4, 1,-1)$
+  & $\Lambda_3(4,1,-1)$ \\
+$(-2, 1, 1)$ & $(-2, 1, 2)$ & $(-4,1,-1)$
+  & $\Lambda_3(-4,1,-1)$ \\
+$( 2,-1,-1)$ & $( 2,-1,-2)$ & $(4,-1,1)$
+  & $\Lambda_3(4,-1,1)$ \\
+$( 2,-1, 1)$ & $( 2,-1, 2)$ & $(-4,-1,1)$
+  & $\Lambda_3(-4,-1,1)$ \\
+$( 2, 1,-1)$ & $( 2, 1,-2)$ & $(4,1,1)$
+  & $\Lambda_3(4,1,1)$ \\
+$( 2, 1, 1)$ & $( 2, 1, 2)$ & $(-4,1,1)$
+  & $\Lambda_3(-4,1,1)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For each row, applying \(\Lambda_3\) to the odd preimage gives the target in
+the first column.  The sixth row is Worked Example~1.
+
+\subsection*{Residual fibres}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{@{}c c c c@{}}
+\toprule
+target & even preimage & odd preimage & matching origin \\
 \midrule
 $(-4,-3,0)$ & $(-4,-3,0)$ & $(2,5,1)$
   & negative of the $s_1$ pair \\
@@ -353,42 +637,33 @@ $(4, 3,0)$ & $(4, 3,0)$ & $(-2,-5,-1)$
 \end{tabular}
 \end{center}
 
-The stable matching in Example~8.1 is obtained from the proposal sequence
+The seventh row is Worked Example~2.
+
+\newpage
+\section*{8. Why this table is complete}
+
+The direct table has eight different targets, and the residual table has
+eight more.  Thus all \(16\) target points occur exactly once as table rows.
+Each row contains two source points, one even and one odd, giving
+\(16\cdot2=32\) source entries.  These entries are all different, so every
+one of the \(32\) source points occurs exactly once.
+
+Consequently, the tables show concretely that every target has exactly two
+preimages.  They are not evidence from a few selected examples: together the
+two tables are the full finite calculation at \(n=41\).
+
+As a separate machine check, the table was regenerated from the executable
+Lean definition
 \[
-\begin{aligned}
- s_1&\to t_1,&
- s_2&\to t_1\ \text{(rejected)},&
- s_3&\to t_4,\\
- s_4&\to t_3,&
- s_2&\to t_4\ \text{(rejected)},&
- s_2&\to t_2.
-\end{aligned}
+ \texttt{tunnellMapTotal41}.
 \]
-It therefore matches the four source orbits as
+The Lean theorems
+\texttt{card\_BRep\_41} and \texttt{card\_ARep\_41} verify the counts
+\(32\) and \(16\).  The theorem named
 \[
- s_1\leftrightarrow t_1,\qquad
- s_2\leftrightarrow t_2,\qquad
- s_3\leftrightarrow t_4,\qquad
- s_4\leftrightarrow t_3,
+ \texttt{tunnellMapTotal41\_exactly\_two}
 \]
-\noindent
-after which equation~(12) determines the individual signs displayed in the
-table.
-
-\section*{Exhaustiveness check}
-
-The direct table contains the eight targets in the image of the quarter-turn
-layer.  The residual table contains the other eight targets.  Their even
-preimages are the $16$ points of $\B$ having even third coordinate; their odd
-preimages consist of the eight direct points and the eight residual points.
-Thus the tables contain $16$ distinct targets and $32$ distinct sources, and
-each target has exactly two preimages, as asserted by Theorem~1.2.
-
-The table was also regenerated from the formalized executable map
-\texttt{tunnellMapTotal41}.  The Lean declarations
-\texttt{card\_BRep\_41}, \texttt{card\_ARep\_41}, and
-\texttt{tunnellMapTotal41\_exactly\_two} verify respectively that the source
-and target cardinalities are $32$ and $16$ and that every displayed target
-has exactly two preimages.
+verifies that every target has two distinct preimages and that there are no
+others.
 
 \end{document}

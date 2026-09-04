@@ -12,8 +12,10 @@ checked with AMS BatchMRef. The bibliography is rendered with the standard
 The separate companion `n41_complete_fibre_table.tex` and its PDF give the
 complete execution of the map at `n = 41`: all 16 targets, all 32 sources,
 their two-element fibres, and the manuscript result supporting each branch.
-It begins with two fully worked fibres, one from the direct quarter-turn
-branch and one from the residual stable-matching branch.
+It is written as a first-year undergraduate walkthrough requiring no number
+theory background.  It defines the notation first and then gives two fully
+worked fibres, one from the direct quarter-turn branch and one from the
+residual stable-matching branch.
 
 For every odd positive squarefree congruent number `n`, Tunnell's theorem
 establishes the identity `|B(n)| = 2|A(n)|`. Combining that theorem with the
