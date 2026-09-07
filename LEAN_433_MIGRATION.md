@@ -26,18 +26,23 @@ both Comparator configurations.
 
 The toolchain, dependency lockfile, matching exporter, and associated notes
 were updated. The first Linux build identified four proof compatibility
-failures, repaired without changing any theorem statement, assumption,
+failures. Subsequent builds exposed further compatibility issues. The repairs
+do not change any theorem statement, assumption,
 executable definition, Challenge file, theorem selection, permitted-axiom
 list, or manuscript:
 
 - `PartialStableMatching.lean`: explicitly unfold `Blocks` when converting
   perfect stability to partial stability.
-- `ParkingRearrangement.lean`: explicitly convert `List.get` to element
-  indexing before simplifying the `List.ofFn` expression.
+- `ParkingRearrangement.lean`: explicitly rewrite `List.get` of `List.ofFn`
+  with `List.get_ofFn`, then apply the existing index bound.
 - `ResidualTargetTest.lean`: apply `directTargetUsed_iff` to an explicitly
   typed `ARep n` term, avoiding rewrite matching through the subtype.
 - `MidpointBound.lean`: use the existing `DirectionKey.form_le_of_le` lemma
   instead of relying on simplification of the underlying lexicographic order.
+- `OrderedGenerator.lean`: expose the integer-offset embedding application
+  before `omega`; use explicit list-index simplification in the stream-order
+  proof and a bounded, theorem-local heartbeat allowance of 800000. The latter
+  changes elaboration resources, not the statement or the kernel checks.
 
 ## Verification
 
@@ -51,7 +56,11 @@ list, or manuscript:
 - In that run, Entry B stopped at two of those same proof failures. Entry A
   stopped earlier at a Go checksum-service network error while installing
   Landrun. Neither Comparator result passed in the first run.
-- Linux build, Comparator, and NanoDa after these repairs: pending branch CI.
+- Second Linux build: three initial repairs passed; the list-index proof
+  still failed, and the ordered generator exposed the unfolding issue and
+  heartbeat limit recorded above. Run
+  [34125025484](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34125025484).
+- Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run
 would not by itself show that Palomar can render this version; that would

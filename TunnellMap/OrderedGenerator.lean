@@ -85,7 +85,7 @@ def intIcc (lo hi : ℤ) : Finset ℤ :=
             (intOffsetEmbedding lo) := by
         apply Finset.mem_map.mpr
         refine ⟨k, hkMem, ?_⟩
-        dsimp [intOffsetEmbedding]
+        change lo + (k : ℤ) = x
         omega
       simpa [intIcc, hbounds] using hmap
   · constructor
@@ -630,6 +630,7 @@ theorem incidentStream_exactly_once (hn : Odd n) (hnpos : 0 < n)
 
 /-- The emitted incident orbits occur in strictly increasing projective-key
 order. -/
+set_option maxHeartbeats 800000 in
 theorem incidentStream_key_strict (hnpos : 0 < n)
     (s : BResidual n)
     (F : OrthogonalFrame (tau (residualSourceLift s)))
@@ -648,7 +649,7 @@ theorem incidentStream_key_strict (hnpos : 0 < n)
       ((orderedIndexList s F).get i'),
     validIndex_key_eq_orbitEdgeKey hnpos s F
       ((orderedIndexList s F).get j')] at hkey
-  simpa [incidentStream, i', j'] using hkey
+  simpa only [incidentStream, List.get_eq_getElem, List.getElem_map, i', j'] using hkey
 
 end OrderedGenerator
 
