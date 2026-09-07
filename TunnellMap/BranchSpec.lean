@@ -58,7 +58,10 @@ theorem paperTunnellMapTotal_quarterTurn_one (hn : Odd n) (hnpos : 0 < n)
         (p.1.x + 2 * p.1.z + p.1.y) / 8⟩ := by
   refine paperTunnellMapTotal_val_eq hn hnpos hsq hbal ?_
   have hd : SourceUsedTriple p.1 := Or.inl h₁
-  rw [paperTunnellMapExecOpt, dif_neg hz, oddMapExecOpt, dif_pos hd,
+  let q : BOddRep n := ⟨p.1, p.2, Int.odd_iff.mpr (by omega)⟩
+  rw [paperTunnellMapExecOpt, dif_neg hz]
+  change Option.map (fun a : ARep n => a.1) (oddMapExecOpt hnpos hsq q) = _
+  rw [oddMapExecOpt, dif_pos hd,
     directMapExec, directDomainExec, dif_pos h₁]
   rfl
 
@@ -75,7 +78,10 @@ theorem paperTunnellMapTotal_quarterTurn_two (hn : Odd n) (hnpos : 0 < n)
         -p.1.x - 2 * p.1.z, (p.1.y - p.1.x + 2 * p.1.z) / 8⟩ := by
   refine paperTunnellMapTotal_val_eq hn hnpos hsq hbal ?_
   have hd : SourceUsedTriple p.1 := Or.inr (Or.inl h₂)
-  rw [paperTunnellMapExecOpt, dif_neg hz, oddMapExecOpt, dif_pos hd,
+  let q : BOddRep n := ⟨p.1, p.2, Int.odd_iff.mpr (by omega)⟩
+  rw [paperTunnellMapExecOpt, dif_neg hz]
+  change Option.map (fun a : ARep n => a.1) (oddMapExecOpt hnpos hsq q) = _
+  rw [oddMapExecOpt, dif_pos hd,
     directMapExec, directDomainExec, dif_neg h₁, dif_pos h₂]
   rfl
 
@@ -92,7 +98,10 @@ theorem paperTunnellMapTotal_quarterTurn_three (hn : Odd n) (hnpos : 0 < n)
       ⟨2 * p.1.z, p.1.y, -(p.1.x / 4)⟩ := by
   refine paperTunnellMapTotal_val_eq hn hnpos hsq hbal ?_
   have hd : SourceUsedTriple p.1 := Or.inr (Or.inr h₃)
-  rw [paperTunnellMapExecOpt, dif_neg hz, oddMapExecOpt, dif_pos hd,
+  let q : BOddRep n := ⟨p.1, p.2, Int.odd_iff.mpr (by omega)⟩
+  rw [paperTunnellMapExecOpt, dif_neg hz]
+  change Option.map (fun a : ARep n => a.1) (oddMapExecOpt hnpos hsq q) = _
+  rw [oddMapExecOpt, dif_pos hd,
     directMapExec, directDomainExec, dif_neg h₁, dif_neg h₂, dif_pos h₃]
   rfl
 
@@ -115,7 +124,9 @@ theorem paperTunnellMapTotal_residual_target (hn : Odd n) (hnpos : 0 < n)
   have hopt : paperTunnellMapExecOpt hnpos hsq p =
       some (canonicalResidualMapOf hnpos
         (residualOrbitMatching hnpos hcard) x).1 := by
-    rw [paperTunnellMapExecOpt, dif_neg hz, oddMapExecOpt, dif_neg hd, hres]
+    rw [paperTunnellMapExecOpt, dif_neg hz]
+    change oddMapExecOpt hnpos hsq q = _
+    rw [oddMapExecOpt, dif_neg hd, hres]
     rfl
   have hval : paperTunnellMapTotal hn hnpos hsq hbal p =
       (canonicalResidualMapOf hnpos (residualOrbitMatching hnpos hcard) x).1 :=

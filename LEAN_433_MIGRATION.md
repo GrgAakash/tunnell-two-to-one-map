@@ -51,6 +51,8 @@ list, or manuscript:
 - `FallbackFreeMap.lean` and `KernelFullMap.lean`: apply the existing
   odd-branch agreement lemmas directly after splitting on parity, avoiding
   rewrite matching through the representation subtype.
+- `BranchSpec.lean`: give the odd representation an explicit local type
+  before unfolding the three quarter-turn and residual branches.
 
 ## Verification
 
@@ -80,6 +82,10 @@ list, or manuscript:
   passed. Two agreement proofs exposed the same subtype rewrite issue, now
   repaired. Run
   [34127285255](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34127285255).
+- Sixth Linux build: the general map, inverse rerun, empty-case and n=41
+  execution modules compiled, as did the core and n=41 axiom audits. Only
+  `BranchSpec` failed, at four typed-unfolding steps now repaired. Run
+  [34128012848](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34128012848).
 - Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run
