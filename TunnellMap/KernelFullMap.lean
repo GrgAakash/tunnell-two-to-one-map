@@ -109,6 +109,8 @@ theorem paperTunnellMapExecK_eq (hn : 0 ≤ n) (hnpos : 0 < n)
   unfold paperTunnellMapExecK paperTunnellMapExec
   by_cases h : p.1.z % 2 = 0
   · rw [dif_pos h, dif_pos h]
-  · rw [dif_neg h, dif_neg h, oddMapExecK_eq hn hnpos hsq fallback fuel hfuel]
+  · rw [dif_neg h, dif_neg h]
+    exact oddMapExecK_eq hn hnpos hsq fallback fuel hfuel
+      ⟨p.1, p.2, Int.odd_iff.mpr (by omega)⟩
 
 end TunnellMap

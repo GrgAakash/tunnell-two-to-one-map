@@ -48,6 +48,9 @@ list, or manuscript:
   rewriting with explicitly typed applications of the same equivalences.
   These are proof-only fields within computable definitions; all tested
   predicates, branches, coordinate values, and data constructors are unchanged.
+- `FallbackFreeMap.lean` and `KernelFullMap.lean`: apply the existing
+  odd-branch agreement lemmas directly after splitting on parity, avoiding
+  rewrite matching through the representation subtype.
 
 ## Verification
 
@@ -73,6 +76,10 @@ list, or manuscript:
   Compilation reached the executable roster and failed in its subtype
   certificate proof, now repaired along with two matching constructors. Run
   [34126511876](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34126511876).
+- Fifth Linux build: executable frame, reduction, roster, and pipeline tests
+  passed. Two agreement proofs exposed the same subtype rewrite issue, now
+  repaired. Run
+  [34127285255](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34127285255).
 - Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run

@@ -325,7 +325,9 @@ theorem paperTunnellMapExec_eq_getD (hnpos : 0 < n) (hsq : Squarefree n)
   unfold paperTunnellMapExec paperTunnellMapExecOpt
   by_cases h : p.1.z % 2 = 0
   · rw [dif_pos h, dif_pos h, Option.getD_some]
-  · rw [dif_neg h, dif_neg h, oddMapExec_eq_getD]
+  · rw [dif_neg h, dif_neg h]
+    exact oddMapExec_eq_getD hnpos hsq fallback
+      ⟨p.1, p.2, Int.odd_iff.mpr (by omega)⟩
 
 section FullAgreement
 
