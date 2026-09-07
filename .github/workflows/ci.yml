@@ -93,6 +93,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
+      - name: Make room for Lean and Mathlib
+        if: runner.environment == 'github-hosted'
+        run: |
+          df -h .
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
@@ -113,6 +119,12 @@ jobs:
           - entry: Entry B
             config: Palomar/EntryB/comparator.json
     steps:
+      - name: Make room for Lean, Mathlib, and verification toolchains
+        if: runner.environment == 'github-hosted'
+        run: |
+          df -h .
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
