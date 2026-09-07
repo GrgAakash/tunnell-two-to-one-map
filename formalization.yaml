@@ -61,8 +61,9 @@ sources:
     location: "2_to_1.tex in the submitted repository"
     relationship: "formalizes"
     note: >-
-      The August 2026 manuscript is included as 2_to_1.tex. Its authors and
-      affiliations appear in the manuscript and are recorded above.
+      The August 2026 manuscript is included as 2_to_1.tex. The distributed
+      draft omits author names, affiliations, and contact details; its authors
+      remain recorded in the metadata above.
       FORMALIZATION_NOTES.md summarizes the claim boundary, manuscript
       corrections, formalization conventions, and verification status.
     author_endorsement: "participated"
