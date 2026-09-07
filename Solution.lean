@@ -310,7 +310,8 @@ noncomputable def canonicalBOrbitEquiv (n : ℤ) :
     have hslt : TunnellMap.bResidualLexKey (brEquiv n s.1) <
         TunnellMap.bResidualLexKey
           ((TunnellMap.bResidualInvolution n).neg (brEquiv n s.1)) := by
-      simpa using s.2
+      change tripleLexKey s.1.1.1 < tripleLexKey (negBResidual s.1).1.1.1
+      exact s.2
     rw [TunnellMap.FreeInvolution.canonicalPoint, if_pos hslt]
   right_inv := by
     intro q
@@ -338,7 +339,8 @@ noncomputable def canonicalAOrbitEquiv {n : ℤ} (hpos : 0 < n) :
     have htlt : TunnellMap.aResidualLexKey (arEquiv n t.1) <
         TunnellMap.aResidualLexKey
           ((TunnellMap.aResidualInvolution n hpos).neg (arEquiv n t.1)) := by
-      simpa using t.2
+      change tripleLexKey t.1.1 < tripleLexKey (negAResidual t.1).1.1
+      exact t.2
     rw [TunnellMap.FreeInvolution.canonicalPoint, if_pos htlt]
   right_inv := by
     intro q
@@ -350,11 +352,14 @@ noncomputable def canonicalAOrbitEquiv {n : ℤ} (hpos : 0 < n) :
 theorem primitiveDirection_bridge (v : Triple) :
     coreTriple (primitiveDirection v) =
       TunnellMap.primitiveDirection (coreTriple v) := by
-  unfold primitiveDirection TunnellMap.primitiveDirection orientDirection
-    TunnellMap.orientDirection FirstNonzeroPositive TunnellMap.FirstNonzeroPositive
-    TunnellMap.primitivePartTriple polynomialTriple TunnellMap.polynomialTriple triplePolynomial
-    TunnellMap.triplePolynomial coreTriple negTriple TunnellMap.negTriple
-  split <;> rfl
+  let w := polynomialTriple (triplePolynomial v).primPart
+  change coreTriple (orientDirection w) = TunnellMap.orientDirection (coreTriple w)
+  by_cases h : FirstNonzeroPositive w
+  · have hc : TunnellMap.FirstNonzeroPositive (coreTriple w) := h
+    simp only [orientDirection, TunnellMap.orientDirection, if_pos h, if_pos hc]
+  · have hc : ¬ TunnellMap.FirstNonzeroPositive (coreTriple w) := h
+    simp only [orientDirection, TunnellMap.orientDirection, if_neg h, if_neg hc]
+    rfl
 
 theorem directionKey_bridge (v : Triple) :
     directionKey v =
@@ -462,8 +467,8 @@ noncomputable def registeredResidualMatching {n : ℤ} (hodd : Odd n)
         (TunnellMap.residualOrbitMatching hpos
           (coreResidualOrbitCardEq hodd hpos hbalance)
             ((TunnellMap.bResidualInvolution n).orbit (brEquiv n s.1))) := by
-  simp [registeredResidualMatching, canonicalAOrbitEquiv, canonicalAOfOrbit,
-    canonicalBOrbitEquiv]
+  change (arEquiv n) ((arEquiv n).symm _) = _
+  exact (arEquiv n).apply_symm_apply _
 
 theorem registeredResidualMatching_stable {n : ℤ} (hodd : Odd n)
     (hpos : 0 < n) (hbalance : Nat.card (BRep n) = 2 * Nat.card (ARep n)) :
@@ -503,13 +508,15 @@ noncomputable def registeredResidualRanking {n : ℤ} (hpos : 0 < n) :
     apply (canonicalAOrbitEquiv hpos).injective
     apply (TunnellMap.residualOrbitRanking hpos).source_injective
     apply TunnellMap.DirectionKey.toLexKey_injective
-    simpa only [residualEdgeKey_orbit_bridge hpos] using hkey
+    exact (residualEdgeKey_orbit_bridge hpos s.1 t₁.1).symm.trans
+      (hkey.trans (residualEdgeKey_orbit_bridge hpos s.1 t₂.1))
   target_injective := by
     intro t s₁ s₂ hkey
     apply (canonicalBOrbitEquiv n).injective
     apply (TunnellMap.residualOrbitRanking hpos).target_injective
     apply TunnellMap.DirectionKey.toLexKey_injective
-    simpa only [residualEdgeKey_orbit_bridge hpos] using hkey
+    exact (residualEdgeKey_orbit_bridge hpos s₁.1 t.1).symm.trans
+      (hkey.trans (residualEdgeKey_orbit_bridge hpos s₂.1 t.1))
 
 theorem registeredResidualMatching_unique {n : ℤ} (hodd : Odd n)
     (hpos : 0 < n) (hbalance : Nat.card (BRep n) = 2 * Nat.card (ARep n))
@@ -627,7 +634,7 @@ theorem tunnellMap_exactly_two {n : ℤ} (hodd : Odd n) (hpos : 0 < n)
           (bEquiv n p) = aEquiv n a := by
       constructor
       · intro h
-        simpa only [tunnellMap, Equiv.symm_apply_eq] using congrArg (aEquiv n) h
+        exact (Equiv.symm_apply_eq (aEquiv n)).mp h
       · intro h
         simp only [tunnellMap, h, Equiv.symm_apply_apply]
     rw [hiff, hfib (bEquiv n p)]
@@ -725,8 +732,8 @@ theorem tunnellMap_residual_value {n : ℤ} (hodd : Odd n) (hpos : 0 < n)
   let q : TunnellMap.BOddRep n := boEquiv n x.1
   let y : TunnellMap.BResidual n := brEquiv n x
   have hz : ¬ p.1.z % 2 = 0 := by
-    obtain ⟨k, hk⟩ := x.1.2
-    dsimp [p, bEquiv]
+    change ¬ x.1.1.1.2.2 % 2 = 0
+    have hoddz : x.1.1.1.2.2 % 2 = 1 := Int.odd_iff.mp x.1.2
     omega
   have hd : ¬ TunnellMap.SourceUsedTriple p.1 := by
     intro hc
@@ -738,8 +745,9 @@ theorem tunnellMap_residual_value {n : ℤ} (hodd : Odd n) (hpos : 0 < n)
       some (TunnellMap.canonicalResidualMapOf hpos
         (TunnellMap.residualOrbitMatching hpos
           (coreResidualOrbitCardEq hodd hpos hbalance)) y).1 := by
-    rw [TunnellMap.paperTunnellMapExecOpt, dif_neg hz,
-      TunnellMap.oddMapExecOpt, dif_neg hd]
+    rw [TunnellMap.paperTunnellMapExecOpt, dif_neg hz]
+    change TunnellMap.oddMapExecOpt hpos hsq q = _
+    rw [TunnellMap.oddMapExecOpt, dif_neg hd]
     change Option.map Subtype.val
       (TunnellMap.RecordDA.residualMapExecOpt hpos hsq y) = _
     rw [hres]

@@ -51,8 +51,17 @@ list, or manuscript:
 - `FallbackFreeMap.lean` and `KernelFullMap.lean`: apply the existing
   odd-branch agreement lemmas directly after splitting on parity, avoiding
   rewrite matching through the representation subtype.
+- `FallbackFreeMap.lean`: mark the two residual total interfaces
+  `macro_inline`, without changing their bodies or types. This lets Lean 4.33
+  eliminate the finite-set instance arguments that occur only in the proof
+  passed to `Option.get`, before checking the compiled product-coordinate
+  wrappers. A minimal Lean 4.33 reproduction confirmed that ordinary `inline`
+  does not suffice but `macro_inline` does. No wrapper is made noncomputable.
 - `BranchSpec.lean`: give the odd representation an explicit local type
   before unfolding the three quarter-turn and residual branches.
+- `Solution.lean` and `Palomar/EntryB/Solution.lean`: use explicit coordinate
+  bridge equalities, parity facts, and typed odd representations in proof
+  bodies. No registered definition body, statement, or Challenge was changed.
 
 ## Verification
 
@@ -86,6 +95,10 @@ list, or manuscript:
   execution modules compiled, as did the core and n=41 axiom audits. Only
   `BranchSpec` failed, at four typed-unfolding steps now repaired. Run
   [34128012848](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34128012848).
+- Seventh Linux build: the entire `TunnellMap` library passed, including
+  the complete n=41 table. The two Palomar Solution modules then exposed the
+  bridge-proof and erased-instance compilation issues repaired above. Run
+  [34129017424](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34129017424).
 - Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run

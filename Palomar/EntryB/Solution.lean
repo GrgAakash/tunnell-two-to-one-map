@@ -105,7 +105,7 @@ theorem tunnellMap41_exactly_two (a : ARep 41) :
         TunnellMap.Examples41.tunnellMapTotal41 (bEquiv 41 p) = aEquiv 41 a := by
       constructor
       · intro h
-        simpa only [tunnellMap41, Equiv.symm_apply_eq] using congrArg (aEquiv 41) h
+        exact (Equiv.symm_apply_eq (aEquiv 41)).mp h
       · intro h
         simp only [tunnellMap41, h, Equiv.symm_apply_apply]
     rw [hiff, hfib (bEquiv 41 p)]
@@ -143,7 +143,10 @@ theorem exec_residual_apply {n : ℤ} (hnpos : 0 < n) (hsq : Squarefree n)
   have hd : ¬ TunnellMap.SourceUsedTriple q.1 := by
     rw [hq]
     exact fun hc => s.2 ((TunnellMap.directSourceUsed_iff s.1).mpr hc)
-  rw [TunnellMap.paperTunnellMapExec, dif_neg hz, TunnellMap.oddMapExec, dif_neg hd]
+  let qOdd : TunnellMap.BOddRep n := ⟨q.1, q.2, Int.odd_iff.mpr (by omega)⟩
+  rw [TunnellMap.paperTunnellMapExec, dif_neg hz]
+  change TunnellMap.oddMapExec hnpos hsq fb qOdd = _
+  rw [TunnellMap.oddMapExec, dif_neg hd]
   congr 2
   exact Subtype.ext (Subtype.ext hq)
 

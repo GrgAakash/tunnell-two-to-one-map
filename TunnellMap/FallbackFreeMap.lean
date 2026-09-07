@@ -98,6 +98,7 @@ theorem residualMapExecOpt_eq_some (hn : Odd n) (hnpos : 0 < n)
 /-- **The public executable residual map.**  This is the successful value of
 the option-valued residual computation.  The proof argument certifies that the
 lookup cannot fail under the residual balance hypothesis. -/
+@[macro_inline]
 def residualMapExecTotal (hn : Odd n) (hnpos : 0 < n)
     (hsq : Squarefree n)
     (hcard : Fintype.card (bResidualInvolution n).Orbit =
@@ -180,6 +181,7 @@ theorem inverseByRerunExecOpt_isSome (hn : Odd n) (hnpos : 0 < n)
 /-- **The public executable residual inverse.**  This is an ordinary
 computable definition obtained by rerunning the same deterministic machine;
 the proof argument certifies that its lookup cannot fail. -/
+@[macro_inline]
 def inverseByRerunExecTotal (hn : Odd n) (hnpos : 0 < n)
     (hsq : Squarefree n)
     (hcard : Fintype.card (bResidualInvolution n).Orbit =
