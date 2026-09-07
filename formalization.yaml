@@ -5,41 +5,21 @@ version: "v0.4"
 project:
   name: "A two-to-one executable map between Tunnell representation sets under the Tunnell balance"
   description: >-
-    For an odd positive squarefree integer n, let B(n) be the set of integer
-    triples (x,y,z) with 2x^2 + y^2 + 8z^2 = n and let A(n) be the set of
-    integer triples (u,v,w) with 2u^2 + v^2 + 32w^2 = n. Tunnell's theorem
-    establishes the cardinality balance |B(n)| = 2|A(n)| for every odd
-    positive squarefree congruent n. The registered Lean interface isolates
-    that established result as an explicit hypothesis and constructs an
-    ordinary computable total map
-    Phi_n : B(n) -> A(n) - taking exactly those hypotheses, with no auxiliary
-    default value and no inhabitance assumption on any auxiliary set, so that
-    it is instantiable also when the residual sets are empty - and proves that
-    every element of A(n) has exactly two distinct preimages and that the fibre
-    description is exhaustive. The registered statements additionally pin the
-    map branch by branch: the even branch (x,y,2w) |-> (x,y,w) and the three
-    integral quarter-turn branches are given by explicit coordinate formulas,
-    and a source in none of those classes is proved to be sent to a residual
-    target. The residual theorem additionally fixes the family-level output:
-    on canonical antipodal representatives the map is induced by the unique
-    stable perfect matching for the primitive-midpoint projective edge ranking, and both
-    signs obey the registered preferred-sign lift. Thus the registered
-    statements exclude an arbitrary residual permutation. The repository's
-    stateful arithmetic generator and source-proposing deferred-acceptance
-    implementation are proved to compute such a matching. The registered
-    residual forward map and inverse agree with the assembled map and satisfy
-    both inverse identities. The submitted Solution computes the inverse by
-    rerunning the machine; the registered laws determine it extensionally
-    rather than recording that operational provenance. The short Challenge
-    specifies the mathematical output, not every internal machine state. The
-    balance hypothesis is the only input taken from Tunnell's theorem, whose
-    modular-form proof is NOT formalized here. This is a formalization boundary,
-    not a conjectural assumption; no new modular-form or elliptic-curve argument
-    is used or claimed.
+    Let B(n) and A(n) be the integer solution sets of
+    2x^2 + y^2 + 8z^2 = n and 2u^2 + v^2 + 32w^2 = n, respectively.
+    For every odd positive squarefree n satisfying |B(n)| = 2|A(n)|,
+    we construct a deterministic computable map Phi_n : B(n) -> A(n)
+    that sends exactly two source points to each target point. The construction
+    combines an elementary even-coordinate map, three explicit quarter-turn
+    correspondences, and a unique stable matching of the remaining antipodal
+    orbits, with preferences determined by primitive midpoint directions.
+    The map, its two-to-one property, the branch formulas, and the inverse
+    identities for the residual map are formalized in Lean 4. Tunnell's theorem
+    supplies the required counting identity for odd squarefree congruent
+    numbers; its modular-form proof lies outside this formalization.
   # Required nonempty list of name strings or mappings with a nonempty name.
   authors:
     - "Aakash Gurung"
-    - "Kyungyong Lee"
   license: "Apache-2.0"
   # Required nonempty list of name strings or mappings with a nonempty name.
   responsible_maintainers:
