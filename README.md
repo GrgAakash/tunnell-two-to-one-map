@@ -1,5 +1,7 @@
 # A two-to-one map for Tunnell's ternary forms
 
+[![Palomar CI](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/workflows/ci.yml)
+
 This Lean 4 project formalizes the deterministic two-to-one map developed in
 the manuscript *Stable Matching and a Two-to-One Map for Tunnell's Ternary
 Forms* by Aakash Gurung and Kyungyong Lee.
@@ -38,7 +40,33 @@ the statement-only Challenge modules. The project declares no custom axioms;
 the compared results use only `propext`, `Quot.sound`, and
 `Classical.choice` where required by Mathlib constructions.
 
+GitHub Actions checks the metadata and licence, builds the Lean project, and
+runs pinned Comparator and NanoDa checks for both Entry A and Entry B. The
+badge above reports this repository's CI status, not Palomar registration or
+editorial approval.
+
+To run the CI support tests locally:
+
+```text
+ruby test/validate_formalization_test.rb
+ruby scripts/validate-formalization.rb
+ruby scripts/validate-formalization.rb Palomar/EntryB/formalization.yaml
+./test/landrun_wrapper_test.sh
+ruby test/verify_comparator_test.rb
+```
+
+On Linux with Git, Go, Rust/Cargo, Python 3, Lean, and Landlock support, run
+the full statement comparisons with:
+
+```text
+./scripts/verify-comparator.sh
+./scripts/verify-comparator.sh Palomar/EntryB/comparator.json
+```
+
 ## Palomar entries
+
+Submit the public repository at an exact commit through the
+[Palomar submission form](https://submit.palomar-registry.org/).
 
 The root-level Comparator configuration is the principal Palomar submission,
 following the same single-entry layout as the submitted factorial-hypergraph
