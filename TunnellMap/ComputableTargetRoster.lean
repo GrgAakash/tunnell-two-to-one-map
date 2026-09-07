@@ -89,7 +89,8 @@ instance isTargetRosterTripleDecidable (n : ℤ) (w : Triple) :
 def targetRosterUnsorted (n : ℤ) : List (AResidual n) :=
   (targetTriples n).filterMap fun w =>
     if h : IsTargetRosterTriple n w then
-      some ⟨⟨w, h.1⟩, by rw [directTargetUsed_iff]; exact h.2.1⟩
+      some ⟨⟨w, h.1⟩, fun hc =>
+        h.2.1 ((directTargetUsed_iff (⟨w, h.1⟩ : ARep n)).mp hc)⟩
     else none
 
 theorem mem_targetRosterUnsorted_iff {n : ℤ} (x : AResidual n) :

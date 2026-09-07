@@ -28,7 +28,7 @@ The toolchain, dependency lockfile, matching exporter, and associated notes
 were updated. The first Linux build identified four proof compatibility
 failures. Subsequent builds exposed further compatibility issues. The repairs
 do not change any theorem statement, assumption,
-executable definition, Challenge file, theorem selection, permitted-axiom
+data computation, Challenge file, theorem selection, permitted-axiom
 list, or manuscript:
 
 - `PartialStableMatching.lean`: explicitly unfold `Blocks` when converting
@@ -43,6 +43,11 @@ list, or manuscript:
   before `omega`; use explicit `List.getElem_map` equalities in the stream-order
   proof and a bounded, theorem-local heartbeat allowance of 800000. The latter
   changes elaboration resources, not the statement or the kernel checks.
+- `ComputableRoster.lean`, `ComputableTargetRoster.lean`, and
+  `ComputablePipeline.lean`: replace subtype certificate proofs that used
+  rewriting with explicitly typed applications of the same equivalences.
+  These are proof-only fields within computable definitions; all tested
+  predicates, branches, coordinate values, and data constructors are unchanged.
 
 ## Verification
 
@@ -64,6 +69,10 @@ list, or manuscript:
   and stream-order elaboration still failed. This trial also exposed a
   misplaced local option command, now corrected. Run
   [34125732472](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34125732472).
+- Fourth Linux build: both the list-index and stream-order proofs passed.
+  Compilation reached the executable roster and failed in its subtype
+  certificate proof, now repaired along with two matching constructors. Run
+  [34126511876](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34126511876).
 - Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run

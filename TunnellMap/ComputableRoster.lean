@@ -124,7 +124,8 @@ instance isSourceRosterTripleDecidable (n : ℤ) (w : Triple) :
 def sourceRosterUnsorted (n : ℤ) : List (BResidual n) :=
   (sourceTriples n).filterMap fun w =>
     if h : IsSourceRosterTriple n w then
-      some ⟨⟨w, h.1⟩, by rw [directSourceUsed_iff]; exact h.2.1⟩
+      some ⟨⟨w, h.1⟩, fun hc =>
+        h.2.1 ((directSourceUsed_iff (⟨w, h.1⟩ : BOddRep n)).mp hc)⟩
     else none
 
 theorem mem_sourceRosterUnsorted_iff {n : ℤ} (x : BResidual n) :

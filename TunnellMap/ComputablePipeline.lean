@@ -172,7 +172,9 @@ theorem bResidualSignExec_eq (x : BResidual n) :
 /-- The residual target whose lift is the given triple, if there is one. -/
 def aResidualOfTriple (n : ℤ) (v : Triple) : Option (AResidual n) :=
   if h : IsResidualTargetLift n v then
-    some ⟨⟨⟨v.x, v.y, v.z / 4⟩, h.2.1⟩, by rw [directTargetUsed_iff]; exact h.2.2⟩
+    some ⟨⟨⟨v.x, v.y, v.z / 4⟩, h.2.1⟩, fun hc =>
+      h.2.2 ((directTargetUsed_iff
+        (⟨⟨v.x, v.y, v.z / 4⟩, h.2.1⟩ : ARep n)).mp hc)⟩
   else none
 
 theorem aResidualOfTriple_residualTargetLift (t : AResidual n) :
