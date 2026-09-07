@@ -1,5 +1,26 @@
 # Lean 4.33 compatibility trial
 
+## Result
+
+All six GitHub CI jobs passed at
+`bb65e772164fc3cfac10eb123a782d676b78896a` in
+[run 34131152059](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34131152059):
+
+- Full `lake build`: 8799 jobs completed successfully, including the complete
+  n=41 table certificate and the n=5 empty-case regression.
+- Entry A and Entry B: Comparator returned `Your solution is okay!`; both
+  NanoDa and the Lean default kernel accepted each Solution.
+- The real Landrun sandbox was used; NanoDa remained enabled.
+- Metadata/licence, submission-link, and sandbox-policy checks passed.
+- The 166 printed axiom-audit entries used only `propext`, `Classical.choice`,
+  and `Quot.sound`; two entries used no axioms.
+- Both Challenge files, both Comparator configurations, the manuscript, and
+  the CI workflow are unchanged from the submitted Lean 4.28 baseline.
+
+This result verifies Lean 4.33 compatibility. It does not establish that
+Palomar can render the upgraded Challenge. Main and the existing submission
+were not changed by this trial.
+
 ## Purpose
 
 Palomar mechanically verified the Lean 4.28 submission at
@@ -103,8 +124,18 @@ list, or manuscript:
   Solution passed. Entry A retained two projection-depth mistakes from the
   migration edit and one subtype rewrite failure, now corrected. Run
   [34130222351](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34130222351).
-- Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
+- Ninth branch run: all checks passed, as recorded above. Later documentation
+  changes do not alter the tested Lean sources, dependencies, or checks.
 
-The existing Palomar submission remains unchanged. A successful branch CI run
-would not by itself show that Palomar can render this version; that would
-require a new submission of an explicitly selected commit.
+## Existing submission
+
+The existing Palomar submission remains pinned to
+`6c7a660788946203576c0600843525e99072c114`. Its mechanical verification run
+succeeded. At `2026-09-07T13:49:51Z`, its status changed to
+`verification-error`, with the event message `Palomar could not complete the
+Challenge renderability check`. No underlying rendering diagnostic or
+automated review was supplied. This is not a failed Lean proof check.
+
+Testing Palomar's rendering on Lean 4.33 requires a new submission of an
+explicitly approved commit. This branch has not been merged or resubmitted,
+and the existing submission has not been withdrawn.
