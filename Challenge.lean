@@ -1,5 +1,4 @@
 import Mathlib
-
 /-!
 # A two-to-one map under the Tunnell balance
 
@@ -20,12 +19,10 @@ established cardinality balance as a hypothesis.  For odd positive squarefree
 congruent `n`, Tunnell's theorem supplies that hypothesis.  No new
 congruent-number criterion is claimed.
 -/
-
 namespace TunnellChallenge
 /-- `BRep n` — the representations of `n` by `2x² + y² + 8z²`. -/
 def BRep (n : ℤ) : Type :=
   {p : ℤ × ℤ × ℤ // 2 * p.1 ^ 2 + p.2.1 ^ 2 + 8 * p.2.2 ^ 2 = n}
-
 /-- `ARep n` — the representations of `n` by `2u² + v² + 32w² = n`. -/
 def ARep (n : ℤ) : Type :=
   {p : ℤ × ℤ × ℤ // 2 * p.1 ^ 2 + p.2.1 ^ 2 + 32 * p.2.2 ^ 2 = n}

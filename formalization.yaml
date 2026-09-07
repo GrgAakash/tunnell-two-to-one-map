@@ -91,12 +91,16 @@ status:
     strict key ordering, one-block storage bound, and equality with the
     extensional incident stream; record-driven deferred acceptance with
     termination and equality with the structural stable matching; the
+    theorem that every stable partial matching on the finite complete
+    equal-cardinality sides is perfect, and uniqueness among stable partial
+    matchings; the
     fallback-free inverse-by-rerun and its two inverse identities; the
     parking-function bound and its sharpness; the
     matching-phase operation and auxiliary-storage bounds; the assembled
     fallback-free computable map paperTunnellMapTotal and the
     exactly-two-preimages theorem;
-    and a complete n = 41 certificate.
+    and a complete n = 41 certificate, including the literal sixteen-row
+    fibre table and its exhaustive 16-target and 32-edge graph certificates.
     NOT FORMALIZED: Tunnell's theorem itself, the congruent-number criterion,
     and the elliptic-curve characterisation of congruent numbers. The
     cardinality balance |B(n)| = 2|A(n)| is an explicit hypothesis of every
@@ -160,10 +164,10 @@ fidelity:
     through its primitive-midpoint projective ranking and preferred-sign lift,
     and proves uniqueness among stable perfect matchings (equivalences).
     It does not duplicate the generator's internal queue, cursor, or held-table
-    state, or the manuscript's reduction from arbitrary stable partial
-    matchings to perfect matchings; the underlying project separately proves that the executable
-    one-block generator and deferred-acceptance run compute the specified
-    matching. (6) The one-block and auxiliary-record bounds are abstract
+    state. The underlying project separately proves both the manuscript's
+    reduction from arbitrary stable partial matchings to perfect matchings and
+    that the executable one-block generator and deferred-acceptance run compute
+    the specified matching. (6) The one-block and auxiliary-record bounds are abstract
     data-structure bounds, not measurements of compiled process memory. These
     points are described in the Challenge documentation and the audit.
     No other divergence is known.

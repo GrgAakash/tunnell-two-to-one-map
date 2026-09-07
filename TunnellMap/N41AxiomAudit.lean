@@ -1,4 +1,4 @@
-import TunnellMap.N41Fibres
+import TunnellMap.N41TotalMap
 
 /-!
 # Axiom audit of the `n = 41` end-to-end certification
@@ -89,6 +89,9 @@ namespace Examples41
 #print axioms fibre_direct_41_set
 #print axioms fibre_residual_41_set
 #print axioms fibres_41_two_distinct
+#print axioms completeFibreTable41_targets
+#print axioms executableMapGraphK41_complete_table
+#print axioms completeFibreTable41_certificate
 
 end Examples41
 end TunnellMap

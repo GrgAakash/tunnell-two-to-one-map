@@ -28,7 +28,10 @@ formalization. This is a formalization boundary, not a conjectural assumption.
 
 The repository also contains an unconditional finite certificate at `n = 41`,
 including the representation counts, residual matching, a literal proposal
-trace certificate, and two complete fibres.
+trace certificate, and two complete fibres. The supporting Lean library also
+certifies the companion note's full sixteen-row table: its target column is the
+exhaustive 16-point target roster, and its 32 flattened entries are exactly the
+graph of the public map on the exhaustive source roster.
 
 ## Verification
 
@@ -62,6 +65,10 @@ preferred-sign lift and uniqueness among stable perfect equivalences, in additio
 two-preimage theorem. The Challenge specifies
 the mathematical output; the full generator and deferred-acceptance machine
 implementation and correctness proofs remain in the supporting library.
+The supporting library also proves the manuscript's partial-matching
+convention is equivalent here: on finite complete bipartite sides of equal
+size, every stable partial matching is perfect, and the stable partial matching
+is unique.
 
 Both public maps are fallback-free. Entry A also registers a fallback-free
 residual map and inverse, agreement with the assembled map, and both inverse

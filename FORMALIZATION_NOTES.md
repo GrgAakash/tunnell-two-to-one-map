@@ -26,6 +26,14 @@ family-level mathematical output; the supporting library contains the
 stateful generator, deferred-acceptance implementation, and proof that the
 implementation computes that output.
 
+The supporting library also formalizes the manuscript's convention that a
+stable matching may initially be partial. It uses Mathlib's standard
+`PartialEquiv`: on finite complete bipartite sides of equal cardinality,
+stability rules out an unmatched source and an unmatched target, hence every
+stable partial matching is perfect. It then proves uniqueness among all stable
+partial matchings by reduction to the registered uniqueness theorem for stable
+equivalences.
+
 The residual map and inverse are separately registered and fallback-free. The
 submitted inverse reruns the same executable machine through an `Option`
 interface; the registered statements prove agreement with the assembled map
@@ -33,9 +41,13 @@ and both inverse identities, determining the inverse extensionally rather than
 its operational provenance.
 
 Entry B is an unconditional finite certificate at `n = 41`: it proves the two
-representation counts by exhaustive kernel computation and records the
+representation counts by exhaustive kernel computation and registers the
 assembled map, four residual pairs, two complete fibres, and a literal
-six-event deferred-acceptance trace certificate. The submitted Solution
+six-event deferred-acceptance trace certificate. In addition, the supporting
+library contains the literal sixteen-row table from the companion note and a
+kernel-checked certificate that its target column exhausts all 16 targets and
+that its 32 source-target edges are exactly the full graph of the public map.
+The submitted Solution
 defines that list from the instrumented run, but the finite Challenge does not
 independently reconstruct the full generator and therefore does not pin that
 producer provenance.
@@ -60,9 +72,16 @@ both are rejections. A separate machine-level counter theorem proves that the
 same run performs two key comparisons against held records; neither fact is
 inferred from the registered Boolean count.
 
+The complete companion table is certified in
+`TunnellMap/N41TotalMap.lean` by `completeFibreTable41_targets` and
+`completeFibreTable41_certificate`. The first theorem checks that the sixteen
+rows list the exhaustive target roster. The second identifies the flattened
+thirty-two table entries, up to order, with the graph obtained by applying the
+public fallback-free map to the exhaustive source roster.
+
 ## Verification performed before publication
 
-The returned proof development was rebuilt from source with Lean 4.28.0 and
+The proof development was rebuilt from source with Lean 4.28.0 and
 the Mathlib revision pinned in `lake-manifest.json`. The full build and both
 Solution-module builds succeeded. Executable regressions at `n = 5` and
 `n = 41` passed.

@@ -76,7 +76,82 @@ theorem tunnellMapTotal41_fibre_residual_set :
       {sourceResidual41a, sourceResidual41b} := by
   ext p
   simpa [Set.mem_insert_iff, Set.mem_singleton_iff] using
-    tunnellMapTotal41_fibre_residual p
+      tunnellMapTotal41_fibre_residual p
+
+/-! ## Complete sixteen-row fibre table
+
+The rows below are in the same order as the companion table: the eight direct
+targets first, followed by the eight residual targets.  Each row is
+`(target, even preimage, odd preimage)` in the original Tunnell coordinates.
+-/
+
+/-- The literal sixteen-row fibre table printed in the companion note. -/
+def completeFibreTable41 : List (Triple × Triple × Triple) :=
+  [ (⟨-2, -1, -1⟩, ⟨-2, -1, -2⟩, ⟨4, -1, -1⟩),
+    (⟨-2, -1,  1⟩, ⟨-2, -1,  2⟩, ⟨-4, -1, -1⟩),
+    (⟨-2,  1, -1⟩, ⟨-2,  1, -2⟩, ⟨4, 1, -1⟩),
+    (⟨-2,  1,  1⟩, ⟨-2,  1,  2⟩, ⟨-4, 1, -1⟩),
+    (⟨ 2, -1, -1⟩, ⟨ 2, -1, -2⟩, ⟨4, -1, 1⟩),
+    (⟨ 2, -1,  1⟩, ⟨ 2, -1,  2⟩, ⟨-4, -1, 1⟩),
+    (⟨ 2,  1, -1⟩, ⟨ 2,  1, -2⟩, ⟨4, 1, 1⟩),
+    (⟨ 2,  1,  1⟩, ⟨ 2,  1,  2⟩, ⟨-4, 1, 1⟩),
+    (⟨-4, -3, 0⟩, ⟨-4, -3, 0⟩, ⟨2, 5, 1⟩),
+    (⟨-4,  3, 0⟩, ⟨-4,  3, 0⟩, ⟨2, 5, -1⟩),
+    (⟨0, -3, -1⟩, ⟨0, -3, -2⟩, ⟨-2, 5, 1⟩),
+    (⟨0, -3,  1⟩, ⟨0, -3,  2⟩, ⟨-2, 5, -1⟩),
+    (⟨0,  3, -1⟩, ⟨0,  3, -2⟩, ⟨2, -5, 1⟩),
+    (⟨0,  3,  1⟩, ⟨0,  3,  2⟩, ⟨2, -5, -1⟩),
+    (⟨4, -3, 0⟩, ⟨4, -3, 0⟩, ⟨-2, -5, 1⟩),
+    (⟨4,  3, 0⟩, ⟨4,  3, 0⟩, ⟨-2, -5, -1⟩) ]
+
+/-- Flatten the fibre table to the thirty-two graph edges
+`(source, target)`. -/
+def completeFibreTableEdges41 : List (Triple × Triple) :=
+  completeFibreTable41.flatMap fun row =>
+    [(row.2.1, row.1), (row.2.2, row.1)]
+
+/-- The target column of the printed fibre table. -/
+def completeFibreTableTargets41 : List Triple :=
+  completeFibreTable41.map Prod.fst
+
+/-- The sixteen target rows are exactly the exhaustive `A_41` roster. -/
+theorem completeFibreTable41_targets :
+    completeFibreTableTargets41.Perm ((aRepList 41).map Subtype.val) := by
+  decide +kernel
+
+/-- The graph of the kernel-reducible executable map on the exhaustive source
+roster. -/
+def executableMapGraphK41 : List (Triple × Triple) :=
+  (bRepList 41).map fun p =>
+    (p.1, (paperTunnellMapExecK pos41 squarefree41 t1 8 p).1)
+
+/-- Kernel computation certifies that the executable map graph is exactly the
+thirty-two edges obtained by flattening the printed sixteen-row table. -/
+theorem executableMapGraphK41_complete_table :
+    executableMapGraphK41.Perm completeFibreTableEdges41 := by
+  decide +kernel
+
+/-- The graph of the public fallback-free map on the exhaustive source
+roster. -/
+def publicMapGraph41 : List (Triple × Triple) :=
+  (bRepList 41).map fun p => (p.1, (tunnellMapTotal41 p).1)
+
+/-- **Complete `n = 41` fibre-table certificate.**  The literal sixteen rows
+in `completeFibreTable41` give the entire graph of the public map: all thirty-two
+sources occur, and each row records its target's even and odd preimages. -/
+theorem completeFibreTable41_certificate :
+    publicMapGraph41.Perm completeFibreTableEdges41 := by
+  have hfun :
+      (fun p : BRep 41 => (p.1, (tunnellMapTotal41 p).1)) =
+        (fun p : BRep 41 =>
+          (p.1, (paperTunnellMapExecK pos41 squarefree41 t1 8 p).1)) := by
+    funext p
+    congr 1
+    rw [tunnellMapTotal41_eq,
+      ← paperTunnellMapExecK_eq (by norm_num) pos41 squarefree41 t1 8
+        fuelSuffices_41]
+  rw [publicMapGraph41, hfun]
+  exact executableMapGraphK41_complete_table
 
 /-! ## Executable regression run of the public map -/
 
@@ -94,6 +169,10 @@ def runTotalMapTests : IO Unit := do
   runCheck "public map agrees with the fallback version on all 32 sources"
     ((bRepList 41).all fun p =>
       decide (tunnellMapTotal41 p = paperTunnellMapExec pos41 squarefree41 t1 p))
+  runCheck "complete sixteen-row fibre table"
+    (decide (publicMapGraph41.Perm completeFibreTableEdges41))
+  runCheck "sixteen table targets exhaust A_41"
+    (decide (completeFibreTableTargets41.Perm ((aRepList 41).map Subtype.val)))
   IO.println "fallback-free public map at n = 41: all executable tests passed"
 
 #eval runTotalMapTests

@@ -20,7 +20,12 @@ project:
     and the two complete fibre equalities
     Phi_41^{-1}(2,-1,1) = {(2,-1,2), (-4,-1,1)} and
     Phi_41^{-1}(4,-3,0) = {(4,-3,0), (-2,-5,1)}, each verified against the
-    complete enumeration of all 32 representations. The submitted Solution
+    complete enumeration of all 32 representations. The supporting library
+    additionally certifies the companion note's literal sixteen-row table:
+    its target column exhausts A(41), and its 32 flattened entries are exactly
+    the graph of the public map on the exhaustive B(41) roster. This full table
+    certificate is not separately registered by this short Comparator entry.
+    The submitted Solution
     defines the trace by reading the instrumented run, while the Mathlib-only
     Comparator contract fixes the resulting literal list and its agreement
     with the map; it does not independently reconstruct the full generator
@@ -79,6 +84,10 @@ status:
     the two complete fibre equalities of the assembled executable map, checked
     against the complete enumeration of all 32 representations; and the link
     from every free-target acceptance event to the registered map's value.
+    The supporting library also formalizes the full sixteen-row companion
+    table and certifies both target-roster exhaustion and equality with the
+    complete 32-edge map graph; those two supporting theorems are outside this
+    finite Comparator contract.
     NOT FORMALIZED: Tunnell's theorem, the congruent-number criterion and the
     elliptic-curve characterisation of congruent numbers. Note that 41 is not a
     congruent number question here at all: the balance at 41 is proved directly,

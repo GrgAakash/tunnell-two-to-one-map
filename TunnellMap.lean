@@ -4,6 +4,7 @@ import TunnellMap.Assembly
 import TunnellMap.GloballyRanked
 import TunnellMap.PreferenceList
 import TunnellMap.GloballyRankedExistence
+import TunnellMap.PartialStableMatching
 import TunnellMap.DeferredAcceptance
 import TunnellMap.Parking
 import TunnellMap.ParkingTotal

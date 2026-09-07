@@ -1,5 +1,6 @@
 import TunnellMap.Examples41Deterministic
 import TunnellMap.FallbackFreeMap
+import TunnellMap.PartialStableMatching
 
 /-!
 # Axiom audit of the deterministic frame, reduction, roster and pipeline
@@ -10,6 +11,12 @@ axiom list of each declaration.
 -/
 
 namespace TunnellMap
+
+/-! ## Stable partial matchings -/
+
+#print axioms GloballyRanked.partialStable_isPerfect
+#print axioms GloballyRanked.partialStable_unique
+#print axioms GloballyRanked.existsUnique_partialStable
 
 /-! ## A. Deterministic orthogonal frame -/
 
