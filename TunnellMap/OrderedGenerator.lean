@@ -628,9 +628,9 @@ theorem incidentStream_exactly_once (hn : Odd n) (hnpos : 0 < n)
   intro j hj
   exact (incidentStream_nodup hnpos s F).injective_get (hj.trans hi.symm)
 
+set_option maxHeartbeats 800000 in
 /-- The emitted incident orbits occur in strictly increasing projective-key
 order. -/
-set_option maxHeartbeats 800000 in
 theorem incidentStream_key_strict (hnpos : 0 < n)
     (s : BResidual n)
     (F : OrthogonalFrame (tau (residualSourceLift s)))
@@ -649,7 +649,17 @@ theorem incidentStream_key_strict (hnpos : 0 < n)
       ((orderedIndexList s F).get i'),
     validIndex_key_eq_orbitEdgeKey hnpos s F
       ((orderedIndexList s F).get j')] at hkey
-  simpa only [incidentStream, List.get_eq_getElem, List.getElem_map, i', j'] using hkey
+  have hiMap : (incidentStream hnpos s F).get i =
+      targetOrbitOfValid hnpos s F ((orderedIndexList s F).get i') :=
+    List.getElem_map (targetOrbitOfValid hnpos s F)
+      (l := orderedIndexList s F) (i := i.1) (h := i.2)
+  have hjMap : (incidentStream hnpos s F).get j =
+      targetOrbitOfValid hnpos s F ((orderedIndexList s F).get j') :=
+    List.getElem_map (targetOrbitOfValid hnpos s F)
+      (l := orderedIndexList s F) (i := j.1) (h := j.2)
+  exact (congrArg (orbitEdgeKey hnpos ((bResidualInvolution n).orbit s)) hiMap).trans_lt
+    (hkey.trans_eq
+      (congrArg (orbitEdgeKey hnpos ((bResidualInvolution n).orbit s)) hjMap.symm))
 
 end OrderedGenerator
 

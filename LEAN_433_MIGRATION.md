@@ -33,14 +33,14 @@ list, or manuscript:
 
 - `PartialStableMatching.lean`: explicitly unfold `Blocks` when converting
   perfect stability to partial stability.
-- `ParkingRearrangement.lean`: explicitly rewrite `List.get` of `List.ofFn`
-  with `List.get_ofFn`, then apply the existing index bound.
+- `ParkingRearrangement.lean`: obtain the indexing equality directly from
+  `List.get_ofFn`, then apply the existing index bound.
 - `ResidualTargetTest.lean`: apply `directTargetUsed_iff` to an explicitly
   typed `ARep n` term, avoiding rewrite matching through the subtype.
 - `MidpointBound.lean`: use the existing `DirectionKey.form_le_of_le` lemma
   instead of relying on simplification of the underlying lexicographic order.
 - `OrderedGenerator.lean`: expose the integer-offset embedding application
-  before `omega`; use explicit list-index simplification in the stream-order
+  before `omega`; use explicit `List.getElem_map` equalities in the stream-order
   proof and a bounded, theorem-local heartbeat allowance of 800000. The latter
   changes elaboration resources, not the statement or the kernel checks.
 
@@ -60,6 +60,10 @@ list, or manuscript:
   still failed, and the ordered generator exposed the unfolding issue and
   heartbeat limit recorded above. Run
   [34125025484](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34125025484).
+- Third Linux build: the interval proof passed, but the list simplification
+  and stream-order elaboration still failed. This trial also exposed a
+  misplaced local option command, now corrected. Run
+  [34125732472](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34125732472).
 - Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run
