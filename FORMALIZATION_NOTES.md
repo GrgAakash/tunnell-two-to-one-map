@@ -56,8 +56,9 @@ producer provenance.
 
 The formalization follows manuscript version v1 in
 `Papers/v1/2_to_1.tex`. Its PDF, bibliography, and companion example note are
-kept in the same folder. The README records manuscript versions and their
-Palomar correspondence; registration of the prepared v1 submission is pending.
+kept in the same folder. [Papers/README.md](Papers/README.md) records manuscript
+versions and their Palomar correspondence; registration of the prepared v1
+submission is pending.
 Two cost statements were corrected during the formal
 audit:
 

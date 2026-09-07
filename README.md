@@ -1,41 +1,11 @@
 # A two-to-one map for Tunnell's ternary forms
 
-> When the manuscript has been fully edited and revised by its human authors,
-> it will be marked **Final Version**.
-
 This Lean 4 project formalizes the deterministic two-to-one map developed in
 the manuscript *Stable Matching and a Two-to-One Map for Tunnell's Ternary
 Forms* by Aakash Gurung and Kyungyong Lee.
 
-## Manuscript versions
-
-Paper versions are kept under `Papers/`, with the TeX sources, bibliography,
-and PDFs together in each version folder.
-
-| Version | Manuscript | Worked examples | Palomar correspondence |
-|---|---|---|---|
-| [v1](Papers/v1/) | [PDF](Papers/v1/2_to_1.pdf) / [TeX](Papers/v1/2_to_1.tex) | [PDF](Papers/v1/n41_complete_fibre_table.pdf) / [TeX](Papers/v1/n41_complete_fibre_table.tex) | Manuscript for the prepared Entry A submission; registration pending |
-
-**v1** accompanies the current Lean formalization and the prepared Palomar
-submission. The exact correspondence is fixed by the submitted Git commit and
-the declarations selected in `comparator.json`. The registration identifier
-and checked commit will be recorded here after registration.
-
-Later manuscript revisions will be added as `Papers/v2/`, `Papers/v3/`, and
-so on, preserving the version used for the Palomar submission. Later revisions
-do not change the scope of an earlier Palomar record.
-
-The [BibTeX database](Papers/v1/references.bib) follows the MathSciNet format
-and was checked with AMS BatchMRef. The bibliography uses the standard
-`amsplain` style, including MR numbers for every matched record.
-
-The separate companion note in `Papers/v1/` gives the
-complete execution of the map at `n = 41`: all 16 targets, all 32 sources,
-their two-element fibres, and the manuscript result supporting each branch.
-It is written as a first-year undergraduate walkthrough requiring no number
-theory background.  It defines the notation first and then gives two fully
-worked fibres, one from the direct quarter-turn branch and one from the
-residual stable-matching branch.
+Manuscript versions, PDFs, TeX sources, and worked examples are listed in
+[Papers/README.md](Papers/README.md).
 
 ## Mathematical scope
 

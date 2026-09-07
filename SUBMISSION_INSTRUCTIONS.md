@@ -9,7 +9,7 @@ its PDF, bibliography, and companion example note in `Papers/v1/`. Keep the
 Lean project and the principal submission files at the repository root.
 Preserve v1 once submitted; put subsequent manuscript revisions in
 `Papers/v2/`, `Papers/v3/`, and so on. After registration, record the Palomar
-identifier and checked commit in the README's manuscript-version section.
+identifier and checked commit in [Papers/README.md](Papers/README.md).
 
 Entry A is the principal research submission. Entry B is retained as a finite
 regression certificate, but should not be submitted as a standalone Palomar
