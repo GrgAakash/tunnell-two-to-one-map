@@ -24,11 +24,20 @@ both Comparator configurations.
 
 ## Scope
 
-At the start of the trial, no Lean source, Challenge statement, theorem
-selection, permitted-axiom list, or manuscript was changed. The changes are
-the toolchain, dependency lockfile, matching exporter, and associated notes.
-Any proof compatibility repairs will be documented here before the migration
-is admitted.
+The toolchain, dependency lockfile, matching exporter, and associated notes
+were updated. The first Linux build identified four proof compatibility
+failures, repaired without changing any theorem statement, assumption,
+executable definition, Challenge file, theorem selection, permitted-axiom
+list, or manuscript:
+
+- `PartialStableMatching.lean`: explicitly unfold `Blocks` when converting
+  perfect stability to partial stability.
+- `ParkingRearrangement.lean`: explicitly convert `List.get` to element
+  indexing before simplifying the `List.ofFn` expression.
+- `ResidualTargetTest.lean`: apply `directTargetUsed_iff` to an explicitly
+  typed `ARep n` term, avoiding rewrite matching through the subtype.
+- `MidpointBound.lean`: use the existing `DirectionKey.form_le_of_le` lemma
+  instead of relying on simplification of the underlying lexicographic order.
 
 ## Verification
 
@@ -37,7 +46,12 @@ is admitted.
 - Both metadata files and the Landrun wrapper tests: passed.
 - Local Lean build: stopped during Mathlib imports under heavy machine memory
   pressure; no completed proof-build result is claimed.
-- Linux build, Comparator, and NanoDa: pending the branch CI run.
+- First Linux build: failed in the four proof bodies listed above; run
+  [34124042487](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34124042487).
+- In that run, Entry B stopped at two of those same proof failures. Entry A
+  stopped earlier at a Go checksum-service network error while installing
+  Landrun. Neither Comparator result passed in the first run.
+- Linux build, Comparator, and NanoDa after these repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run
 would not by itself show that Palomar can render this version; that would

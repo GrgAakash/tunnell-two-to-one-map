@@ -70,8 +70,9 @@ theorem isResidualTargetLift_iff (n : ℤ) (v : Triple) :
   · rintro ⟨⟨k, hk⟩, hform, hused⟩
     have hzdiv : v.z / 4 = k := by omega
     refine ⟨⟨⟨⟨v.x, v.y, v.z / 4⟩, hform⟩, ?_⟩, ?_⟩
-    · rw [directTargetUsed_iff]
-      exact hused
+    · intro h
+      exact hused ((directTargetUsed_iff
+        (⟨⟨v.x, v.y, v.z / 4⟩, hform⟩ : ARep n)).mp h)
     · show aLift (⟨⟨v.x, v.y, v.z / 4⟩, hform⟩ : ARep n) = v
       apply Triple.ext <;> (simp [aLift]; try omega)
   · rintro ⟨t, rfl⟩

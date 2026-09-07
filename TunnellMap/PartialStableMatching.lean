@@ -43,7 +43,7 @@ theorem stable_to_partialStable [LT K] (I : GloballyRanked K S T) (M : S ≃ T)
     (hM : I.Stable M) : I.PartialStable M.toPartialEquiv := by
   intro s t hblock
   apply hM s t
-  simpa [PartialBlocks] using hblock
+  simpa [PartialBlocks, Blocks] using hblock
 
 /-- On finite sides of equal size, stability forces a partial matching to be
 perfect.  Completeness of the bipartite graph is encoded by the fact that

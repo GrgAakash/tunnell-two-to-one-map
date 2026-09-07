@@ -121,7 +121,7 @@ theorem proposalCounts_isParkingFunction (I : GloballyRanked K S T)
       ⟨i.1, by simpa using i.2⟩
     have hle := I.proposalCount_le_position M hM
       (I.matchedKeyOrderEquiv M) (I.matchedKeyOrderEquiv_spec M) j
-    simpa [matchedProposalCounts, j] using hle
+    simpa [matchedProposalCounts, List.get_eq_getElem, j] using hle
 
 end GloballyRanked
 

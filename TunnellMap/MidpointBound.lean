@@ -109,13 +109,13 @@ theorem preferred_midpoint_generator_bound {n : ℤ} (hn : Odd n)
     omega
   by_cases hlt : directionKey (plusVector s t) < directionKey (minusVector s t)
   · have hde : qForm d ≤ qForm e := by
-      have hfirst := Prod.Lex.monotone_fst_ofLex hlt.le
+      have hfirst := DirectionKey.form_le_of_le hlt.le
       simpa [directionKey, d, e] using hfirst
     simpa [preferredVector, hlt, d] using boundPlus hde
   · have hrev : directionKey (minusVector s t) < directionKey (plusVector s t) :=
       lt_of_le_of_ne (le_of_not_gt hlt) (Ne.symm (plus_minus_keys_ne s t))
     have hed : qForm e ≤ qForm d := by
-      have hfirst := Prod.Lex.monotone_fst_ofLex hrev.le
+      have hfirst := DirectionKey.form_le_of_le hrev.le
       simpa [directionKey, d, e] using hfirst
     simpa [preferredVector, hlt, e] using boundMinus hed
 
