@@ -13,11 +13,11 @@ that does not enable NanoDa. It uses these fixed revisions:
 | Tool | Commit |
 |---|---|
 | Comparator | `68a064109f01c08f47c8edc9f51d6a2bbffaa188` |
-| lean4export | `d065b0009aed0520e9e99752847a33b337661690` |
+| lean4export | `15f6055e299ad5b89345e533cc2192f4cc00f659` |
 | Landrun | `811cfff51ceaf3d9843708aa6d22e9b84ccac8b4` |
 | NanoDa | `68d5ca9db226849b41a6fff59d796ff19d0a8840` |
 
-The exporter targets Lean 4.28.0, matching this project's `lean-toolchain`.
+The exporter targets Lean 4.33.0, matching this project's `lean-toolchain`.
 Do not replace its revision with a newer template pin without checking Lean
 and export-format compatibility. GitHub Actions installs the build tools on
 Linux; a full replay downloads these repositories and writes generated files

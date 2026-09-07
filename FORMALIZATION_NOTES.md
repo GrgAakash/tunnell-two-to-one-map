@@ -85,8 +85,9 @@ public fallback-free map to the exhaustive source roster.
 
 ## Verification performed before publication
 
-The proof development was rebuilt from source with Lean 4.28.0 and
-the Mathlib revision pinned in `lake-manifest.json`. The full build and both
+At commit `6c7a660788946203576c0600843525e99072c114`, the proof development was
+rebuilt from source with Lean 4.28.0 and the Mathlib revision pinned at that
+commit. The full build and both
 Solution-module builds succeeded. Executable regressions at `n = 5` and
 `n = 41` passed.
 
@@ -100,3 +101,7 @@ found only subsets of `propext`, `Classical.choice`, and `Quot.sound`.
 Palomar's protected Comparator, Landrun, and NanoDa checks are not claimed as
 local results. They are performed by Palomar's mechanical verifier against the
 exact public commit selected at submission.
+
+The Lean 4.33 compatibility trial is recorded in
+[LEAN_433_MIGRATION.md](LEAN_433_MIGRATION.md). Its verification is separate
+from the accepted Lean 4.28 mechanical check above.
