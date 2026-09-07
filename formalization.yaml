@@ -58,10 +58,11 @@ sources:
       - "Aakash Gurung"
       - "Kyungyong Lee"
     type: "paper"
-    location: "2_to_1.tex in the submitted repository"
+    location: "Papers/v1/2_to_1.tex in the submitted repository"
     relationship: "formalizes"
     note: >-
-      The August 2026 manuscript is included as 2_to_1.tex. The distributed
+      Manuscript version v1 is included as Papers/v1/2_to_1.tex and accompanies
+      the prepared Palomar submission; registration is pending. The distributed
       draft omits author names, affiliations, and contact details; its authors
       remain recorded in the metadata above.
       FORMALIZATION_NOTES.md summarizes the claim boundary, manuscript
@@ -140,9 +141,11 @@ automation:
   spend_usd: "not tracked"
   notes: >-
     Human-directed, AI-assisted. Humans set the specification (the source
-    manuscript and the required shape of each statement) and reviewed the
-    resulting statements; automated assistants wrote substantial portions of
+    manuscript and the required shape of each statement) and directed the
+    development; automated assistants wrote substantial portions of
     the Lean definitions and proofs and produced the initial traceability audit.
+    Human review of the mathematical arguments, cited sources, exposition,
+    and manuscript-to-Lean correspondence is ongoing.
     The submitted Solution modules and the complete project have been rebuilt
     locally with the Lean kernel. Palomar's protected Comparator and NanoDa run
     is intentionally left to the registry's mechanical verification.
@@ -174,16 +177,18 @@ fidelity:
     No other divergence is known.
 
 review:
-  status: "self-assessed"
+  status: "agent-reviewed"
   reviewers: []
   notes: >-
-    A complete internal statement audit matched the manuscript's definitions,
+    An AI-assisted internal statement audit matched the manuscript's definitions,
     theorems, algorithms, complexity claims, and worked examples to Lean
     declarations. The whole source was scanned for sorry,
     admit, sorryAx, axiom declarations, unsafe, opaque, extern, implemented_by,
     Lean.ofReduceBool, Lean.trustCompiler and native_decide; and #print axioms
     was run on the registered statements and the listed principal supporting
-    declarations. No external peer review has taken place.
+    declarations. Human review of the mathematical arguments, cited sources,
+    exposition, and manuscript-to-Lean correspondence is ongoing. No external
+    peer review has taken place.
 
 alignment:
   namespace: "TunnellChallenge"
@@ -266,5 +271,5 @@ acknowledgements: >-
   Built on Lean 4 and Mathlib, with substantial assistance from OpenAI's
   ChatGPT and Codex and from Aristotle (Harmonic). The work grew out of the
   2026 IPAM Research in Industrial Projects for Students program at UCLA and
-  was supported by OpenAI's sponsorship of the RIPS project. The authors
-  reviewed the mathematical statements and take responsibility for the work.
+  was supported by OpenAI's sponsorship of the RIPS project. Human review of
+  the mathematical arguments, cited sources, and exposition is ongoing.

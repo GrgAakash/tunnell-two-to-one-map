@@ -50,9 +50,10 @@ sources:
       - "Aakash Gurung"
       - "Kyungyong Lee"
     type: "paper"
-    location: "2_to_1.tex in the submitted repository"
+    location: "Papers/v1/2_to_1.tex in the submitted repository"
     relationship: "formalizes"
     note: >-
+      Manuscript version v1 and its companion example note are in Papers/v1/.
       Entry B registers the manuscript's worked n = 41 balance, residual
       matching, and direct and residual fibre examples. The supporting library,
       but not this Comparator entry, also formalizes the parking-function and
@@ -130,9 +131,11 @@ automation:
         layer re-verified by lake build and by #print axioms.
   spend_usd: "not tracked"
   notes: >-
-    Human-directed, AI-assisted. Humans set the specification and reviewed the
-    resulting statements; automated assistants wrote substantial portions of
+    Human-directed, AI-assisted. Humans set the specification and directed the
+    development; automated assistants wrote substantial portions of
     the Lean definitions and proofs and produced the initial traceability audit.
+    Human review of the mathematical arguments, cited sources, exposition,
+    and manuscript-to-Lean correspondence is ongoing.
     The submitted Solution modules and the complete project have been rebuilt
     locally with the Lean kernel. Palomar's protected Comparator and NanoDa run
     is intentionally left to the registry's mechanical verification.
@@ -161,13 +164,15 @@ fidelity:
     divergence is known.
 
 review:
-  status: "self-assessed"
+  status: "agent-reviewed"
   reviewers: []
   notes: >-
-    A complete internal statement audit included an item-by-item comparison of every
+    An AI-assisted internal statement audit included an item-by-item comparison of every
     literal n = 41 datum in the manuscript (slice counts, preference rows, edge
     keys, proposal sequence, matched pairs, proposal counts, parking sequence,
-    inverse value and both fibres) with the corresponding Lean theorem. No
+    inverse value and both fibres) with the corresponding Lean theorem. Human
+    review of the mathematical arguments, cited sources, exposition, and
+    manuscript-to-Lean correspondence is ongoing. No
     external peer review has taken place.
 
 alignment:
@@ -203,5 +208,5 @@ acknowledgements: >-
   Built on Lean 4 and Mathlib, with substantial assistance from OpenAI's
   ChatGPT and Codex and from Aristotle (Harmonic). The work grew out of the
   2026 IPAM Research in Industrial Projects for Students program at UCLA and
-  was supported by OpenAI's sponsorship of the RIPS project. The authors
-  reviewed the mathematical statements and take responsibility for the work.
+  was supported by OpenAI's sponsorship of the RIPS project. Human review of
+  the mathematical arguments, cited sources, and exposition is ongoing.

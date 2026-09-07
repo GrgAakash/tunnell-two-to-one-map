@@ -1,21 +1,43 @@
 # A two-to-one map for Tunnell's ternary forms
 
+> When the manuscript has been fully edited and revised by its human authors,
+> it will be marked **Final Version**.
+
 This Lean 4 project formalizes the deterministic two-to-one map developed in
 the manuscript *Stable Matching and a Two-to-One Map for Tunnell's Ternary
 Forms* by Aakash Gurung and Kyungyong Lee.
 
-The manuscript source is `2_to_1.tex`, with its BibTeX database in
-`references.bib`. Its records follow the MathSciNet BibTeX format and were
-checked with AMS BatchMRef. The bibliography is rendered with the standard
+## Manuscript versions
+
+Paper versions are kept under `Papers/`, with the TeX sources, bibliography,
+and PDFs together in each version folder.
+
+| Version | Manuscript | Worked examples | Palomar correspondence |
+|---|---|---|---|
+| [v1](Papers/v1/) | [PDF](Papers/v1/2_to_1.pdf) / [TeX](Papers/v1/2_to_1.tex) | [PDF](Papers/v1/n41_complete_fibre_table.pdf) / [TeX](Papers/v1/n41_complete_fibre_table.tex) | Manuscript for the prepared Entry A submission; registration pending |
+
+**v1** accompanies the current Lean formalization and the prepared Palomar
+submission. The exact correspondence is fixed by the submitted Git commit and
+the declarations selected in `comparator.json`. The registration identifier
+and checked commit will be recorded here after registration.
+
+Later manuscript revisions will be added as `Papers/v2/`, `Papers/v3/`, and
+so on, preserving the version used for the Palomar submission. Later revisions
+do not change the scope of an earlier Palomar record.
+
+The [BibTeX database](Papers/v1/references.bib) follows the MathSciNet format
+and was checked with AMS BatchMRef. The bibliography uses the standard
 `amsplain` style, including MR numbers for every matched record.
 
-The separate companion `n41_complete_fibre_table.tex` and its PDF give the
+The separate companion note in `Papers/v1/` gives the
 complete execution of the map at `n = 41`: all 16 targets, all 32 sources,
 their two-element fibres, and the manuscript result supporting each branch.
 It is written as a first-year undergraduate walkthrough requiring no number
 theory background.  It defines the notation first and then gives two fully
 worked fibres, one from the direct quarter-turn branch and one from the
 residual stable-matching branch.
+
+## Mathematical scope
 
 For every odd positive squarefree congruent number `n`, Tunnell's theorem
 establishes the identity `|B(n)| = 2|A(n)|`. Combining that theorem with the
@@ -83,9 +105,10 @@ independently reconstructed by Entry B's Mathlib-only Challenge.
 
 The development used OpenAI ChatGPT and Codex through a human-directed
 solver-referee workflow, and Aristotle (Harmonic) for substantial Lean proof
-development. The authors reviewed the mathematical statements and the
-manuscript-to-Lean correspondence. The work grew out of the 2026 IPAM RIPS
-program at UCLA and was supported by OpenAI's sponsorship of the RIPS project.
+development. Human review of the mathematical arguments, cited sources,
+exposition, and manuscript-to-Lean correspondence is ongoing. The work grew
+out of the 2026 IPAM RIPS program at UCLA and was supported by OpenAI's
+sponsorship of the RIPS project.
 
 The Lean repository snapshot is licensed under Apache-2.0. The cited
 mathematical literature and external dependencies retain their own licences.
