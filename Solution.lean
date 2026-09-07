@@ -310,7 +310,7 @@ noncomputable def canonicalBOrbitEquiv (n : ℤ) :
     have hslt : TunnellMap.bResidualLexKey (brEquiv n s.1) <
         TunnellMap.bResidualLexKey
           ((TunnellMap.bResidualInvolution n).neg (brEquiv n s.1)) := by
-      change tripleLexKey s.1.1.1 < tripleLexKey (negBResidual s.1).1.1.1
+      change tripleLexKey s.1.1.1.1 < tripleLexKey (negBResidual s.1).1.1.1
       exact s.2
     rw [TunnellMap.FreeInvolution.canonicalPoint, if_pos hslt]
   right_inv := by
@@ -339,7 +339,7 @@ noncomputable def canonicalAOrbitEquiv {n : ℤ} (hpos : 0 < n) :
     have htlt : TunnellMap.aResidualLexKey (arEquiv n t.1) <
         TunnellMap.aResidualLexKey
           ((TunnellMap.aResidualInvolution n hpos).neg (arEquiv n t.1)) := by
-      change tripleLexKey t.1.1 < tripleLexKey (negAResidual t.1).1.1
+      change tripleLexKey t.1.1.1 < tripleLexKey (negAResidual t.1).1.1
       exact t.2
     rw [TunnellMap.FreeInvolution.canonicalPoint, if_pos htlt]
   right_inv := by
@@ -739,6 +739,7 @@ theorem tunnellMap_residual_value {n : ℤ} (hodd : Odd n) (hpos : 0 < n)
     intro hc
     apply x.2
     exact (directSourceUsed_iff x.1).mpr hc
+  have hdq : ¬ TunnellMap.SourceUsedTriple q.1 := hd
   have hres := TunnellMap.RecordDA.residualMapExecOpt_eq_some hodd hpos hsq
     (coreResidualOrbitCardEq hodd hpos hbalance) y
   have hopt : TunnellMap.paperTunnellMapExecOpt hpos hsq p =
@@ -747,11 +748,10 @@ theorem tunnellMap_residual_value {n : ℤ} (hodd : Odd n) (hpos : 0 < n)
           (coreResidualOrbitCardEq hodd hpos hbalance)) y).1 := by
     rw [TunnellMap.paperTunnellMapExecOpt, dif_neg hz]
     change TunnellMap.oddMapExecOpt hpos hsq q = _
-    rw [TunnellMap.oddMapExecOpt, dif_neg hd]
-    change Option.map Subtype.val
-      (TunnellMap.RecordDA.residualMapExecOpt hpos hsq y) = _
-    rw [hres]
-    rfl
+    calc
+      TunnellMap.oddMapExecOpt hpos hsq q = Option.map Subtype.val
+          (TunnellMap.RecordDA.residualMapExecOpt hpos hsq y) := dif_neg hdq
+      _ = _ := congrArg (Option.map Subtype.val) hres
   rw [tunnellMap_apply]
   exact Option.some.inj
     ((TunnellMap.some_paperTunnellMapTotal hodd hpos hsq

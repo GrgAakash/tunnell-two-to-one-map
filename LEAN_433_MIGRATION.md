@@ -99,6 +99,10 @@ list, or manuscript:
   the complete n=41 table. The two Palomar Solution modules then exposed the
   bridge-proof and erased-instance compilation issues repaired above. Run
   [34129017424](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34129017424).
+- Eighth Linux build: the executable wrappers compiled and Entry B's
+  Solution passed. Entry A retained two projection-depth mistakes from the
+  migration edit and one subtype rewrite failure, now corrected. Run
+  [34130222351](https://github.com/GrgAakash/tunnell-two-to-one-map/actions/runs/34130222351).
 - Linux build, Comparator, and NanoDa after the next repairs: pending branch CI.
 
 The existing Palomar submission remains unchanged. A successful branch CI run
