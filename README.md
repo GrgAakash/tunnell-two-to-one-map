@@ -31,17 +31,10 @@ graph of the public map on the exhaustive source roster.
 
 This formalization is registered in the Palomar Registry as
 [PALOMAR-2026-09-07-000010 v2](https://palomar-registry.org/entry.html?id=PALOMAR-2026-09-07-000010&version=2).
-The registered record pins commit
-`d888a7c73c0ef1695dab8c48ccde629fbebb2d46`; its Comparator, Lean kernel, and
-NanoDa checks succeeded. The
-[verification run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34149784151)
-records those checks.
+Its Comparator, Lean kernel, and NanoDa checks succeeded.
 
-Registration covers the declarations selected by the root `comparator.json`
-at that commit. Later repository edits do not change the registered snapshot.
 Palomar is a registry of machine-checked results, not a journal or a substitute
-for expert mathematical peer review. New formalizations can be submitted
-through the [Palomar submission form](https://submit.palomar-registry.org/).
+for expert mathematical peer review.
 
 ## Local verification
 
