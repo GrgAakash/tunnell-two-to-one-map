@@ -20,12 +20,9 @@ The Lean interface isolates the established cardinality identity as an
 explicit hypothesis because Tunnell's modular-form argument is outside this
 formalization. This is a formalization boundary, not a conjectural assumption.
 
-The repository also contains an unconditional finite certificate at `n = 41`,
-including the representation counts, residual matching, a literal proposal
-trace certificate, and two complete fibres. The supporting Lean library also
-certifies the companion note's full sixteen-row table: its target column is the
-exhaustive 16-point target roster, and its 32 flattened entries are exactly the
-graph of the public map on the exhaustive source roster.
+Worked-out example (`n = 41`):
+[PDF](Papers/v1/n41_complete_fibre_table.pdf) /
+[TeX](Papers/v1/n41_complete_fibre_table.tex).
 
 ## Formal verification
 
