@@ -9,13 +9,18 @@ Each version folder contains the TeX sources, bibliography, and PDFs.
 
 | Version | Manuscript | Worked examples | Palomar correspondence |
 |---|---|---|---|
-| [v1](v1/) | [PDF](v1/2_to_1.pdf) / [TeX](v1/2_to_1.tex) | [PDF](v1/n41_complete_fibre_table.pdf) / [TeX](v1/n41_complete_fibre_table.tex) | Manuscript for the prepared Entry A submission; registration pending |
+| [v1](v1/) | [PDF](v1/2_to_1.pdf) / [TeX](v1/2_to_1.tex) | [PDF](v1/n41_complete_fibre_table.pdf) / [TeX](v1/n41_complete_fibre_table.tex) | Source manuscript for [PALOMAR-2026-09-07-000010 v2](https://palomar-registry.org/entry.html?id=PALOMAR-2026-09-07-000010&version=2) (Entry A) |
 
-**v1** accompanies the current Lean formalization and the prepared Palomar
-submission. The exact correspondence is fixed by the submitted Git commit and
-the declarations selected in [comparator.json](../comparator.json). The
-registration identifier and checked commit will be recorded here after
-registration.
+**Manuscript v1** accompanies the formalization registered as
+**PALOMAR-2026-09-07-000010 v2**. The registered commit is
+[`d888a7c73c0ef1695dab8c48ccde629fbebb2d46`](https://github.com/GrgAakash/tunnell-two-to-one-map/tree/d888a7c73c0ef1695dab8c48ccde629fbebb2d46);
+the compared declarations are selected in
+[comparator.json at that commit](https://github.com/GrgAakash/tunnell-two-to-one-map/blob/d888a7c73c0ef1695dab8c48ccde629fbebb2d46/comparator.json).
+
+Manuscript and registry version numbers are separate. Registry v2 shortens
+the description and corrects the formalization-author attribution from
+[registry v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-09-07-000010&version=1);
+the manuscript and Lean proofs are unchanged between those registered commits.
 
 Later manuscript revisions will be added as `v2/`, `v3/`, and so on,
 preserving the version used for the Palomar submission. Later revisions do

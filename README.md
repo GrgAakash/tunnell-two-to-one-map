@@ -27,7 +27,23 @@ certifies the companion note's full sixteen-row table: its target column is the
 exhaustive 16-point target roster, and its 32 flattened entries are exactly the
 graph of the public map on the exhaustive source roster.
 
-## Verification
+## Formal verification
+
+This formalization is registered in the Palomar Registry as
+[PALOMAR-2026-09-07-000010 v2](https://palomar-registry.org/entry.html?id=PALOMAR-2026-09-07-000010&version=2).
+The registered record pins commit
+`d888a7c73c0ef1695dab8c48ccde629fbebb2d46`; its Comparator, Lean kernel, and
+NanoDa checks succeeded. The
+[verification run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34149784151)
+records those checks.
+
+Registration covers the declarations selected by the root `comparator.json`
+at that commit. Later repository edits do not change the registered snapshot.
+Palomar is a registry of machine-checked results, not a journal or a substitute
+for expert mathematical peer review. New formalizations can be submitted
+through the [Palomar submission form](https://submit.palomar-registry.org/).
+
+## Local verification
 
 ```text
 lake build
@@ -65,14 +81,10 @@ the full statement comparisons with:
 
 ## Palomar entries
 
-Submit the public repository at an exact commit through the
-[Palomar submission form](https://submit.palomar-registry.org/).
-
-The root-level Comparator configuration is the principal Palomar submission,
-following the same single-entry layout as the submitted factorial-hypergraph
-repository. Entry B remains an optional finite regression entry and should be
-submitted separately only if Palomar confirms that it has independent research
-interest:
+The general map (Entry A) is registered under the record linked above, using
+the root-level Comparator configuration. Entry B remains an optional finite
+regression entry; it is not separately registered and should be submitted
+separately only if Palomar confirms that it has independent research interest:
 
 | Entry | Comparator | Metadata |
 |---|---|---|
